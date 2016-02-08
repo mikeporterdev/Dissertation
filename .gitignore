@@ -1,0 +1,10 @@
+main.aux
+main.bbl
+main.lof
+main.pdf
+main.toc
+*.pdf
+main.log
+*.blg
+main.pdf
+main.synctex.gz
