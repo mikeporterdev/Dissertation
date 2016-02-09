@@ -1,7 +1,9 @@
 %!TEX root = ../main.tex
 \chapter{Design}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis.
+This was primarily for more ease-of-use purposes than any performance reasons. 
+I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
+However, ultimately I decided to go with GreenDAO due to more community support and better documentation.
+
+To safely store and version control the code, I used a GitHub private repository to host my code in cloud storage and allow for me to better manage changes to the codebase.
