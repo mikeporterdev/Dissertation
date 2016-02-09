@@ -27,8 +27,7 @@
 				"*.mtc1",
 				"*.out",
 				"*.synctex.gz",
-				"main.pdf",
-				"buHarvard.bst"
+				"main.pdf"
 			],
 			"path": "."
 		}
