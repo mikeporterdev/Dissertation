@@ -3,7 +3,8 @@
 \label{chap:methodology}
 
 There are two main users for KidQuest, the child and the parent. 
-It is important that the requirements of both users are analysed separately to insure that the application is suitable for both.
+Both users have different objectives in using the application and it is important that the requirements of each user are analysed separately to insure that the application is suitable.
+In this section we will break down the various use cases of each user.
 
 \section{The Child}
 The child will open the application and be met with a character screen, which will display the relevant information about their character, including the XP/Gold they currently have, the XP needed until the next level and the recent rewards they have earned.
@@ -15,13 +16,30 @@ The child can visit the rewards section to spend their gold on in-game items whi
 Alternatively, they can spend their gold on rewards that have been set by the parents. 
 i.e. 400 gold will be able to purchase a visit to the cinema.
 
+As an incentive to collect the rewards offered in-game, the child will be able to add friends in the game and challenge them to in-game battles. 
+The result of the battle will be generated via the current level and equipment that the character has equipped. 
+For the purposes of safety, friend requests must be confirmed by the parent before the friend request is confirmed.
+
 The application controls must be kept simple and uniform so that they are able to be learned and used by children.
 Children will not be able to access any parent functions as they will require the parent's pin code. 
 
 \section{The Parent}
-The parent can then either use the child's application (with a pin code) or use their own parent edition of the application to approve the completion.
+The parent can either access the parent functions on the child's application using a pin code, or use their own `parent edition' of the application. 
+When designing the use case of the parents, it is important to minimize the level of interaction required from the parent to ensure they do not become tired of managing the game for the child.
 
-The parent can create a quest with 5 different difficulty levels ranging from very hard to very easy, which the game will automatically generate a reward based on the difficulty. 
-This is to minimize the level of interaction required from the parent.
+The parent can create quests through a simple interface, entering in the task's name, an optional description and a difficulty level. 
+The quest can have one of 5 difficulty levels, ranging from very hard to very easy.
+The game will generate the rewards for the child based on their current level and the difficulty of the quest.
+Alternatively, the parent can choose from a range of quests from three selected categories:
+\begin{itemize}
+	\item 
+		Staff Pick - A list of common tasks chosen by the me to help populate the list with easily selectable quests. 
+		This will contain obvious choices for tasks such as ``Clean your room'' or ``Wash the dishes''
+	\item
+		Trending in Your Area - A list of tasks that have been recently trending in the users location. 
+		This will be used to suggest tasks that many users have been inputting into the app, including recently relevant tasks like ``Rake the leaves in the garden'' at the start of Autumn.
+	\item 
+		Trending Amongst Friends - Tasks that have been trending amongst the users friends list, not including quests counted in the previous 	trending category. 
+		This may include friends added both within the app and/or friends from Facebook integration.  
+\end{itemize}
 
-Don't do punishments. only successes. not my place.
