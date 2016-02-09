@@ -23,3 +23,5 @@
 *.synctex.gz
 main.pdf
 dissertation.sublime-workspace
+main.fdb_latexmk
+main.fls
