@@ -29,7 +29,8 @@
 				"*.synctex.gz",
 				"main.pdf",
 				"main.fdb_latexmk",
-				"main.fls"
+				"main.fls",
+				"cover.pdf"
 			],
 			"path": "."
 		}
