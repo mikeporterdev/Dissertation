@@ -11,19 +11,22 @@ I created an entity relationship to map out the various tables needed and the re
 	\label{fig:ERD}
 \end{figure}
 
+I have chosen to create the application in the Android SDK largely due to my previous experience with Java and Android. 
+Furthermore, I believe Android is more applicable to the target audience of the app, as Android owns 82.8\% of the smartphone market share as of 2015.
+%http://www.idc.com/prodserv/smartphone-os-market-share.jsp
+I believe that parents are also more likely to buy their children Android phones than other brands due to the lower price point, making them more appealing when considering the likelihood of them being lost or broken by a child.
+
 I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis.
 This was primarily for more ease-of-use purposes than any performance reasons. 
 I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
+
 However, ultimately I decided to go with GreenDAO \citep{greendao} due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
-
 GreenDAO allowed for me generate my MySQL tables, the Java objects and data access object (DAO) patterns by writing out the names of the tables, their properties and their relationships. 
-
-For example, the following code creates a UserDetails object that I can interact with, a DAO that I can perform CRUD operations on, and manages the creation of the tables themselves without my input.
+For example, the following code creates a UserDetails object that I can interact with, a DAO that I can perform CRUD operations on, and manages the creation of the tables themselves without my input:
 \lstinputlisting[language=java]{codesnippets/daogenerator.java}
 
-For the data analytics, I have opted to use web services written in Flask microframework for python, hosted on my server running Ubuntu 14.04. 
+For the data analytics, I have opted to use web services written in Flask microframework for python, hosted on a server running Ubuntu Server 14.04. 
 I have chosen python due to it's strong backing and community support in data analytics, and is one of the main languages of choice for scientists and statisticians.
 The flask framework was chosen specifically as it is very simple to write and host RESTful APIs over the web.
 
-To safely store and version control the code, I used a GitHub private repository to host my code in cloud storage and allow for me to better manage changes to the code-base.
-
+To safely store and version control the code, I used a GitHub private repository to host my code in cloud storage and allow for me to better manage changes to the code-base. 
