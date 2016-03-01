@@ -6,7 +6,9 @@ There are two main users for KidQuest, the child and the parent.
 Both users have different objectives in using the application and it is important that the requirements of each user are analysed separately to insure that the application is suitable.
 In this section we will break down the various use cases of each user.
 
-\section{The Child}
+\section{User Requirements}
+
+\subsection{The Child}
 The child will open the application and be met with a character screen, which will display the relevant information about their character, including the XP/Gold they currently have, the XP needed until the next level and the recent rewards they have earned.
 The child can then check their quests and mark any that they have finished as complete.
 The quest will then move into the pending quest log, ready for a parent to confirm.
@@ -23,14 +25,14 @@ For the purposes of safety, friend requests must be confirmed by the parent befo
 The application controls must be kept simple and uniform so that they are able to be learned and used by children.
 Children will not be able to access any parent functions as they will require the parent's pin code. 
 
-\section{The Parent}
+\subsection{The Parent}
 The parent can either access the parent functions on the child's application using a pin code, or use their own `parent edition' of the application. 
 When designing the use case of the parents, it is important to minimize the level of interaction required from the parent to ensure they do not become tired of managing the game for the child.
 
 The parent can create quests through a simple interface, entering in the task's name, an optional description and a difficulty level. 
 The quest can have one of 5 difficulty levels, ranging from very hard to very easy.
 The game will generate the rewards for the child based on their current level and the difficulty of the quest.
-Alternatively, the parent can choose from a range of quests from three selected categories:
+Alternatively, the parent can choose from a range of preset quests from three selected categories:
 \begin{itemize}
 	\item 
 		Staff Pick - A list of common tasks chosen by the me to help populate the list with easily selectable quests. 
@@ -43,3 +45,38 @@ Alternatively, the parent can choose from a range of quests from three selected 
 		This may include friends added both within the app and/or friends from Facebook integration.  
 \end{itemize}
 
+\section{MoSCoW}
+Must have
+- Parent control app
+Should have
+- Full REST backend
+Could have
+- Graph friend selection 
+- Friend battles
+- Website
+Won't have
+- Sound effects
+- Full character graphics
+- Leaderboards
+
+\section{Technical Requirements}
+\subsection{Android App}
+
+\subsection{Server}
+When parents choose to set up the parent edition of the app
+
+\subsubsection{REST Endpoints}
+1. user - POST
+Creating an account
+Login required
+
+2. user/<id> - GET, PUT
+Get details about a child's own account.
+Login required
+
+3. users/<id>/quests/ - GET, POST
+Add a quest for a child.
+Login required
+
+4. users/<id>/quests/<id>/ - GET, PUT
+Login required
