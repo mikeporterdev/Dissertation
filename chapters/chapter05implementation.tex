@@ -5,3 +5,11 @@ As the project began it was clear that my initial database/class diagrams were d
 Previously, I have mostly worked on systems that handle many users logging into a web application and designed databases as such. 
 However, I did not account for the fact that with an android application, the database only needs to handle one user, which allowed me to use a simpler - less relationship heavy - database design.
 
+\section{Server Rewrite}
+When it came to be time to implement the parent app, it was realized that the initial designs for the server were not suitable for KidQuest.
+I had initially tried to implement all workflows into the app and store the quests on the client end. 
+The plan was then to send the quests to the parent phone and have this
+
+GCM not suitable for moving quests
+
+Separating child and parent users was a mistake.
