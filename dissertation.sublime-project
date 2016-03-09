@@ -28,8 +28,8 @@
 				"*.out",
 				"*.synctex.gz",
 				"main.pdf",
-				"main.fdb_latexmk",
-				"main.fls",
+				"*.fdb_latexmk",
+				"*.fls",
 				"cover.pdf"
 			],
 			"path": "."

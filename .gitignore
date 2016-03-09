@@ -25,3 +25,5 @@ main.pdf
 dissertation.sublime-workspace
 main.fdb_latexmk
 main.fls
+*.fls
+*.fdb_latexmk

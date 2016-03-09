@@ -8,8 +8,19 @@ However, I did not account for the fact that with an android application, the da
 \section{Server Rewrite}
 When it came to be time to implement the parent app, it was realized that the initial designs for the server were not suitable for KidQuest.
 I had initially tried to implement all workflows into the app and store the quests on the client end. 
-The plan was then to send the quests to the parent phone and have this
+The plan was then to send the quests to the parent phone using Google Cloud Messaging (GCM) and have them send back which quests were completed.
+However, GCM was not suitable for moving the quests reliably and I found that it was too likely that information would be lost or become out of sync between parent and child devices.
 
-GCM not suitable for moving quests
+Therefore, I decided to push most of the data and functionality to the server-side and have the app interact with the server to perform actions.
+I still chose to use GCM for communicating from the server to a client in order to push notifications when tasks are confirmed or completed.
+
+However, making this move did have two main consequences. 
+Firstly, users would now require an internet connection to use the app.
+Data implications.
+Security requirements.
+Queueing messages to server for low connectivity.
+
+Secondly, all users were now required to create an account with the server in order to use the app.
+I believe this is 
 
 Separating child and parent users was a mistake.
