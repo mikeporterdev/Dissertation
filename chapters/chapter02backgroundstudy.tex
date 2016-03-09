@@ -13,7 +13,7 @@ Deterding seperated game design elements into five different levels.
 The key elements I will focus on in my application are `Game interface design patterns', which are common components in games that are not specifically `played with' themselves, but run alongside a game to increase offer more feedback or fun in the application.
 This includes elements such as badges/acheivements, leaderboards, levels and experience points.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.45]{images/DeterdingsLevelsOfGameDesignElements.jpg}
 	\caption{Levels of Game Design Elements}
@@ -26,8 +26,6 @@ However, in return it could be said that my application - at it's core - is a ta
 
 \cite{huotari2011gamification} have provided an alternative definition for gamification, stating that it is ``service packaging where a core service is enhanced by a rules-based service system that provides feedback and interaction mechanisms to the user with an aim to facilitate and support the users’ overall value creation.''
 
-\subsection{Psychological Aspects}
-
 \subsection{Rewards and Punishments}
 In an experiment by \cite{Filsecker2014136}, children were separated into two groups - a public recognition (PR) group where the childs `badges' were recorded on a leaderboard placed prominently in a room where others can see, and a non-public recognition (NPR) group.
 The children were then given an educational game called Taiga which would ask them to pose a hypothesis as to why the number of fish in a pond had been decreasing over time, and then perform experiments to justify or disprove the hypothesis.
@@ -36,11 +34,9 @@ Taiga had a variety of educational content embedded within the game that the use
 It was then found that the PR group did not access any more of these educational materials than the NPR group, which was unexpected given the previous findings. 
 The badges awarded by Taiga are synonymous with the common game design element of `Achievements', which are awarded to the user after a certain set of requirements have been met - e.g. Achievement Unlocked - Complete 10 Quests.
 
-A common issue with rewards in education is that ``extrinsic'' rewards (rewards not relating to the activity they are awarded for) ultimately end up undermining the child's attention and motivation from the intrinsic learning activity once the rewards are removed \citep{deci2001extrinsic}\citep{ACP:ACP2350090502}.
+A common issue with rewards in education is that ``extrinsic'' rewards (rewards not relating to the activity they are awarded for) ultimately end up undermining the child's attention and motivation from the intrinsic learning activity once the rewards are removed \citep{deci2001extrinsic,ACP:ACP2350090502}.
 This diminishes the usefulness of rewards as a long-term motivation for children.
-
-In a meta-analysis by \cite{deci2001extrinsic} 
-
+I believe this issue affects parents
 
 
 \section{Game Design}
@@ -48,14 +44,33 @@ In a meta-analysis by \cite{deci2001extrinsic}
 \subsection{Game Design Elements}
 As previously mentioned, it is important to specify what game design elements I will choose to use in my application.
 In the book `100 Elements of Game Design' \citep{despain2012100}, it mentions several useful elements to use.
-The book mentions the common problem in RPGs of `Feedback Loops'.
+
+\subsubsection{Achievements}
+
+Achievements are defined by \cite{Montola:2009:AGA:1621841.1621859} as ``optional sub-goals in a secondary reward system''. 
+They are also described as being separate to the core game system and do not affect the progress of the player, and should be seen as more of a meta-game. Achievement features are one of the most commonly implemented game design patterns in gamification \citep{hamari2011framework}.
+
+\cite{Montola:2009:AGA:1621841.1621859} raised concerns in regards to applying achievements to non-game applications that they would create unproductive or unintended behaviours by users. 
+For example, an achievement on a forum for making 1000 posts may inadvertently motivate users to make a large amount of low-effort or spam posts, reducing the quality of the forum.
+However, Montola also noted that some users appreciated the changes and found the achievements to be motivating. 
+
+\subsubsection{Character Development}
+
+\subsubsection{Short-term Rewards}
+
+\subsubsection{Feedback Loops}
 A positive feedback loop involves the player becoming more powerful throughout the game, which in turn makes things easier to complete, which means they can complete more quests and become more powerful even quicker.
 Whilst this sounds like a good element to the game, it is important that developers avoid allowing this to destabilise the game, by making quests - and therefore the game - trivial.
 As in my application, quests are completed in the real world and are not tied into the in-game character's power, I will be largely unaffected by this.
-However, if I seek to include an element of competitiveness into the game by allowing users to `battle' eachother, it is important to take steps to avoid players becoming too powerful that the battles are no longer enjoyable.
+However, if I seek to include an element of competitiveness into the game by allowing users to `battle' each other, it is important to take steps to avoid players becoming too powerful that the battles are no longer enjoyable.
+
+\subsubsection{Competitiveness}
 
 \subsection{Educational Games}
+\cite{Denis:2005:MEG:1178477.1178581} draws a stark contrast between the motivation levels in education and video games, highlighting how 
 
+\subsubsection{Self-Determination Theory}
+A key goal in educational games is to give children motivation to perform better.
 
 
 \section{Smartphone Applications}

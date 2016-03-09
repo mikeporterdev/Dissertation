@@ -3,6 +3,8 @@
 
 \section{Android}
 
+\subsection{Material Design}
+
 \subsection{Google Cloud Messaging}
 
 \section{Facebook SDK}
@@ -14,7 +16,7 @@ I chose to use a pre-built Object Relational Mapping library to interface with t
 This was primarily for more ease-of-use purposes than any performance reasons. 
 I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
 
-However, ultimately I decided to go with GreenDAO \citep{greendao} due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
+However, ultimately I decided to go with GreenDAO due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
 GreenDAO allowed for me generate my MySQL tables, the Java objects and data access object (DAO) patterns by writing out the names of the tables, their properties and their relationships. 
 For example, the following code creates a UserDetails object that I can interact with, a DAO that I can perform CRUD operations on, and manages the creation of the tables themselves without my input:
 \lstinputlisting[language=java]{codesnippets/daogenerator.java}
