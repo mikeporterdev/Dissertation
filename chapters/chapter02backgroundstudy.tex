@@ -9,7 +9,8 @@
 Gamification is attempted to be defined by \cite{Deterding:2011:GDE:2181037.2181040} as ``The use of design elements for games in non-game contexts''. 
 A game design element is referred to as the characteristics of a game that appear in most games, readily associated with games and are found to play a significant role in games.
 With this definition, it is necessary to identify what the game design elements that will be included in the application will be. 
-Deterding seperated game design elements into five different levels. 
+
+Deterding seperated game design elements into five different levels as shown in figure \ref{fig:GameDesignElements}. 
 The key elements I will focus on in my application are `Game interface design patterns', which are common components in games that are not specifically `played with' themselves, but run alongside a game to increase offer more feedback or fun in the application.
 This includes elements such as badges/acheivements, leaderboards, levels and experience points.
 
@@ -75,4 +76,51 @@ A key goal in educational games is to give children motivation to perform better
 
 \section{Smartphone Applications}
 
+
 \subsection{Android vs. iOS}
+When planning the development of a mobile application, it must be considered which platform is best to target. 
+
+\subsubsection{Market Share}
+Figure \ref{fig:PhoneMarketShare} clearly shows Android's strong hold over the global market share, holding over 70\% of units shipped since Q3 of 2012. 
+Meanwhile, figure \ref{fig:UKPhoneMarketShare} also shows an Android dominance in the UK market specifically, however the hold over the market is less strong at 57\% in 2014 and 52\% in 2015, and shows a downward trend in the market share of Android.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.65]{images/phoneMarketShare.png}
+	\caption{Worldwide Smartphone OS Market Share \citep{idcsmartphonereport}}
+	\label{fig:PhoneMarketShare}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/UKSmartphoneSales.png}
+	\caption{Great Britain Smartphone OS Market Share \citep{kantargbsmartphonereport}}
+	\label{fig:UKPhoneMarketShare}
+\end{figure}
+
+\subsubsection{Fragmentation}
+A common issue with developing for mobiles is that many people do not (or cannot) update their devices to the latest versions.
+Android in particular is problematic for this, as shown in figure \ref{fig:AndroidVersions}.
+This problem is referred to as `Fragmentation'.
+Despite being released in October of 2015, the latest Android version Marshmallow is still at less than 2.5\% adoption rate. 
+This is primarily due to software updates being held back by network carrier locked phones and phones falling out of support.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{images/AndroidSDKMarketShare.jpg}
+	\caption{Android SDK Market Share \citep{appbrainsdkversions}}
+	\label{fig:AndroidVersions}
+\end{figure}
+
+As Android phones are manufactured by a variety of different companies, there is less standardization between available handsets. 
+\cite{uniqueandroiddevices} reported that it detected nearly 24,100 distinct devices that downloaded its app in 2015.
+This shows just how much of a problem fragmentation could pose to Android development.
+
+This also leads to concerns about the variety of screen sizes in these devices, as apps will have to be designed and maintained to support a myriad phones. 
+However, \cite{androidscreenfragmentation} shows that due to the similarities of resolutions between these phones, there are only four key resolutions that need to be managed within Android.
+
+\section{Conclusion}
+
+\subsection{Game Features}
+
+\subsection{Mobile}
