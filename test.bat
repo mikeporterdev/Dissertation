@@ -1,2 +1,2 @@
-cd C:\Users\m_por\Documents\Github\Dissertation\
+cd C:\Users\m_por\Documents\Dissertation\
 texcount.pl main.tex -inc
