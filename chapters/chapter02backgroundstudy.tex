@@ -68,30 +68,33 @@ For example, if a quest returns 100 XP points and you require 300 XP to level up
 However, the XP if quests still offer 100 XP and you require 6000 XP to level up from level 30 to 31, the reward from the same quest is now worth 1/60th of a level, despite being the same difficulty to the user.
 Therefore, some scaling of the rewards is required in the app to allow XP rewards to scale suitably with the XP required to level.
 This scaling is referred to as `increasing cost' \citep{1_anderson_2016}.
+Anderson also shows that it is important to determine reasonable caps for numerical relationships in video-games, to stop the increasing cost becoming out of proportion.
 
 \cite{1_anderson_2016} poses that a useful pattern for these kinds of relationships is a classic triangular pattern, in which the first level requires 1 XP to level up, the second level requires 3 XP, the third requires 6. To allow for more meaningful numbers to the user, I have multiplied the results of the formula by 100.
 
-\begin{equation}
+\begin{equation} \label{eq:xprequiredfornextlevel}
 	T_n= \frac{n(n+1)}{2} \times 100
 \end{equation}
 
 Initially, the scaling formula for XP rewards involved using 60XP as a base reward for a medium difficulty quest, then using the player's current level, it would derive a multiplier that would be used to scale the XP reward.
 \begin{equation} \label{eq:xpgainedlinear}
-	\textrm{XP Gained} = 60 \times \frac{(\textrm{Character Level} - 1) \times k}{100} + 1
+	\textrm{XP Gained} = 60 \times \frac{(n - 1) \times k}{100} + 1
 \end{equation}
 Where k can be adjusted to specify the strength of the multiplier against the XP rewards, so that if k = 10, a character at level 31 would have a 3x multiplier on quests, meaning the same quest that gave them 60XP at level 1, now gives them 180XP.
 However, when modelling this equation, the number of quests completed quickly becomes out of hand. 
 At level 1, the player must complete 2 medium quests to level up - a reasonable starting point.
 However by level 25 the player must complete 22 quests to level up and by level 99 (One before the level cap) the player must complete an extraordinary 84 medium difficulty quests to level up.
 
-Therefore, triangular numbers can also be useful for calculating the XP gained per quest. By adjusting the triangular numbers formula somewhat, I found a 
+Therefore, triangular numbers can also be useful for calculating the XP gained per quest. By adjusting the triangular numbers formula somewhat, I found a suitable middle ground which still gives the new user the feeling of progressing quickly, but the rate of quests per level quickly slows down to a limit of approximately 10 quests per level by level 100.
+This will ensure that the player will still feel like they are progressing at a reasonable speed throughout.
 
 \begin{equation} \label{eq:xpgainedtriangular}
 	\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10
 \end{equation}
 
+
 %TODO: Work out wtf you are doing with this chart
-\begin{tikzpicture}
+\begin{tikzpicture}	
 	\begin{axis}[
 		xlabel=Level,
 		ylabel=Quests to level up,
