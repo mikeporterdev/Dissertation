@@ -3,29 +3,17 @@
 \label{chap:litReview}
 
 \section{Gamification}
-
-
 \subsection{Defining Gamifaction}
 Gamification is attempted to be defined by \cite{Deterding:2011:GDE:2181037.2181040} as ``The use of design elements for games in non-game contexts''. 
 A game design element is referred to as the characteristics of a game that appear in most games, readily associated with games and are found to play a significant role in games.
 With this definition, it is necessary to identify what the game design elements that will be included in the application will be. 
-
-\cite{Deterding:2011:GDE:2181037.2181040} separated game design elements into five different levels as shown in figure \ref{fig:GameDesignElements}. 
-The key elements I will focus on in my application are `Game interface design patterns', which are common components in games that are not specifically `played with' themselves, but run alongside a game to increase offer more feedback or fun in the application.
-This includes elements such as badges/acheivements, leaderboards, levels and experience points.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=0.45]{images/DeterdingsLevelsOfGameDesignElements.jpg}
-	\caption{Levels of Game Design Elements}
-	\label{fig:GameDesignElements}
-\end{figure}
 
 In this paper, Deterding also highlights the fact that Gamification refers specifically to using game elements in a non-game application, rather than using full-fledged games.
 It could be argued by this strict definition that my application is not true gamification as it is built as a full game.
 However, in return it could be said that my application - at it's core - is a task management application that incorporates RPG game elements.
 
 \cite{huotari2011gamification} have provided an alternative definition for gamification, stating that it is ``service packaging where a core service is enhanced by a rules-based service system that provides feedback and interaction mechanisms to the user with an aim to facilitate and support the users’ overall value creation.''
+
 
 \subsection{Rewards and Punishments}
 In an experiment by \cite{Filsecker2014136}, children were separated into two groups - a public recognition (PR) group where the childs `badges' were recorded on a leaderboard placed prominently in a room where others can see, and a non-public recognition (NPR) group.
@@ -44,40 +32,119 @@ For example, rewarding a child for performing in his favourite sport only serves
 This could mean that it would be beneficial to include an element of randomness to the rewards for completing a task, such as a random chance of earning an item for each quest.
 
 
-
 \section{Game Design}
-
 \subsection{Game Design Elements}
+\cite{Deterding:2011:GDE:2181037.2181040} separated game design elements into five different levels as shown in figure \ref{fig:GameDesignElements}. 
+The key elements I will focus on in my application are `Game interface design patterns', which are common components in games that are not specifically `played with' themselves, but run alongside a game to increase offer more feedback or fun in the application.
+This includes elements such as badges/acheivements, leaderboards, levels and experience points.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.45]{images/DeterdingsLevelsOfGameDesignElements.jpg}
+	\caption{Levels of Game Design Elements}
+	\label{fig:GameDesignElements}
+\end{figure}
+
 As previously mentioned, it is important to specify what game design elements I will choose to use in my application.
 In the book `100 Elements of Game Design' \citep{despain2012100}, it mentions several useful elements to use.
 
 \subsubsection{Achievements}
-
 Achievements are defined by \cite{Montola:2009:AGA:1621841.1621859} as ``optional sub-goals in a secondary reward system''. 
 They are also described as being separate to the core game system and do not affect the progress of the player, and should be seen as more of a meta-game. Achievement features are one of the most commonly implemented game design patterns in gamification \citep{hamari2011framework}.
 
 \cite{Montola:2009:AGA:1621841.1621859} raised concerns in regards to applying achievements to non-game applications that they would create unproductive or unintended behaviours by users. 
 For example, an achievement on a forum for making 1000 posts may inadvertently motivate users to make a large amount of low-effort or spam posts, reducing the quality of the forum.
-However, Montola also noted that some users appreciated the changes and found the achievements to be motivating. 
+However, \cite{Montola:2009:AGA:1621841.1621859} also noted that some users appreciated the changes and found the achievements to be motivating. 
 
 \subsubsection{Character Development}
 
 \subsubsection{Rewards}
-Hi
+\cite{king2010video} lists a variety of different reward structures in video games, such as in-game currency, experience points, levelling up and `rare-item' rewards. 
+As the tasks in KidQuest are structured as Role-Playing Game (RPG) quests, there already exists well established methods of rewarding the user. 
+In RPGs, quests often have these key reward structures and therefore are established to work suitably well for KidQuest.
 
+The rate at which these rewards are earned must be examined to ensure they still feel rewarding throughout. 
+For example, if a quest returns 100 XP points and you require 300 XP to level up from level 1 to 2, this only requires you to complete three quests to level up, meaning these three quests feel rewarding as each quest is offering 1/3rd of a level.
+However, the XP if quests still offer 100 XP and you require 6000 XP to level up from level 30 to 31, the reward from the same quest is now worth 1/60th of a level, despite being the same difficulty to the user.
+Therefore, some scaling of the rewards is required in the app to allow XP rewards to scale suitably with the XP required to level.
+This scaling is referred to as `increasing cost' \citep{1_anderson_2016}.
+
+\cite{1_anderson_2016} poses that a useful pattern for these kinds of relationships is a classic triangular pattern, in which the first level requires 1 XP to level up, the second level requires 3 XP, the third requires 6. To allow for more meaningful numbers to the user, I have multiplied the results of the formula by 100.
+
+\begin{equation}
+	T_n= \frac{n(n+1)}{2} \times 100
+\end{equation}
+
+Initially, the scaling formula for XP rewards involved using 60XP as a base reward for a medium difficulty quest, then using the player's current level, it would derive a multiplier that would be used to scale the XP reward.
+\begin{equation} \label{eq:xpgainedlinear}
+	\textrm{XP Gained} = 60 \times \frac{(\textrm{Character Level} - 1) \times k}{100} + 1
+\end{equation}
+Where k can be adjusted to specify the strength of the multiplier against the XP rewards, so that if k = 10, a character at level 31 would have a 3x multiplier on quests, meaning the same quest that gave them 60XP at level 1, now gives them 180XP.
+However, when modelling this equation, the number of quests completed quickly becomes out of hand. 
+At level 1, the player must complete 2 medium quests to level up - a reasonable starting point.
+However by level 25 the player must complete 22 quests to level up and by level 99 (One before the level cap) the player must complete an extraordinary 84 medium difficulty quests to level up.
+
+Therefore, triangular numbers can also be useful for calculating the XP gained per quest. By adjusting the triangular numbers formula somewhat, I found a 
+
+\begin{equation} \label{eq:xpgainedtriangular}
+	\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10
+\end{equation}
+
+%TODO: Work out wtf you are doing with this chart
 \begin{tikzpicture}
 	\begin{axis}[
 		xlabel=Level,
-		ylabel=Experience Required,
+		ylabel=Quests to level up,
 		xmin=0,
 		ymin=0,
-		xtick={0, 1, 2, 3, 4, 5}
 	]
-		\addplot {(x*(x+1))/2*100};
+		\addplot coordinates {
+			(1, 1.7)
+			(2, 3)
+			(3, 4)
+			(4, 4.8)
+			(5, 5.4)
+			(6, 5.9)
+			(7, 6.3)
+			(8, 6.6)
+			(9, 6.9)
+			(10,7.1)
+			(11,7.3)
+			(12,7.5)
+			(13,7.6)
+			(14,7.8)
+			(15,7.9)
+			(16,8)
+			(17,8.1)
+			(18,8.2)
+			(19,8.3)
+		};
+		\addlegendentry{Equation \ref{eq:xpgainedtriangular}}
+		\addplot coordinates{
+			(1, 1.7)
+			(2, 2.5)
+			(3, 3.4)
+			(4, 4.2)
+			(5, 5)
+			(6, 5.9)
+			(7, 6.7)
+			(8, 7.5)
+			(9, 8.4)
+			(10, 9.2)
+			(11, 10)
+			(12, 10.9)
+			(13, 11.7)
+			(14, 12.5)
+			(15, 13.4)
+			(16, 14.2)
+			(17, 15)
+			(18, 15.9)
+			(19, 16.7)
+		};
+		\addlegendentry{Equation \ref{eq:xpgainedlinear}}
 	\end{axis}
 \end{tikzpicture}
 
-Hello
 
 \subsubsection{Feedback Loops}
 A positive feedback loop involves the player becoming more powerful throughout the game, which in turn makes things easier to complete, which means they can complete more quests and become more powerful even quicker.
