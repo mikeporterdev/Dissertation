@@ -12,6 +12,8 @@ Older versions than this will not be targeted, as development and testing time i
 In order to keep up with a modern and usable design for KidQuest, I have chosen to adhere to the most current standards set by Google for material design.
 
 \subsection{Google Cloud Messaging}
+The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
+
 
 \section{Facebook SDK}
 
@@ -24,10 +26,12 @@ I considered a variety of options for which library to use, initially deciding u
 
 However, ultimately I decided to go with GreenDAO due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
 GreenDAO allowed for me generate my MySQL tables, the Java objects and data access object (DAO) patterns by writing out the names of the tables, their properties and their relationships. 
-For example, the following code creates a UserDetails object that I can interact with, a DAO that I can perform CRUD operations on, and manages the creation of the tables themselves without my input:
-\lstinputlisting[language=java]{codesnippets/daogenerator.java}
 
 \section{Flask}
+For the server-side implementation, I will need tools that allow me to easily create a Web-Service API and provide controlled access to these over the web.
+For this task, I have chosen to use Flask as it is well established within the Python community and is incredibly low-effort to set up. 
+Flask is suitable for both quick prototyping of web-services and reliable deployment/hosting of functionality over the internet.
+By setting up 
 
 \subsection{REST}
 
