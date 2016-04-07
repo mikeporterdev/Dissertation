@@ -1,5 +1,60 @@
 %!TEX root = ../main.tex
+
+% 1000-2000 words
+
 \chapter{Design}
+
+\section{Development Methodologies}
+
+\subsection{Waterfall}
+
+\subsection{Agile}
+I have opted to follow an Agile methodology in my development of KidQuest.
+
+One of the key principles of agile development is regular and iterative testing throughout the software development lifecycle.
+As I am a single developer working on this project, this is beneficial to me as it helps give early sight of potential design issues early in the project.
+
+Agile is also very adaptable.
+It allows for more flexibility to the software when design issues undoubtedly arise by not setting the spec for the whole project in stone too early.
+By iteratively planning the design of the project, it allows
+
+The agile methodology also extends to the testing of the project.
+By iteratively testing the software at various stages in the life cycle, it gives more chances to catch bugs early.
+Under agile, defects discovered in software should be fixed as soon as possible after discovery \citep{beck2001agile}.
+
+In a study by \cite{talby2006}, it was found that by following this practice, defects took less time to fix than without.
+This may be due to the fact that the developed features are still fresh in the mind of the developer, and is therefore more easily able to see the problem area and fix.
+The study also found that by keeping the bugs fixed and the code base stable throughout the project, it actually made the development phases of the project faster.
+Furthermore, agile testing helps minimize the risks of bugs making it into the final artefact. 
+If I were to have a single testing phase at the end of the project, it is possible that there would be more bugs than I had anticipated and that I would run out of time to properly fix them all. 
+By using agile testing, this risk is minimized by allowing me to better manage the time of testing, as I will be able to delay or cancel the development of certain low priority features earlier in the project to allow me time to ensure a quality project.
+
+\section{Development Processes}
+
+\subsection{Feature-Driven Development}
+Feature-driven development (FDD) is an lightweight and iterative software development process which 
+
+\subsection{Test-Driven Development}
+A key factor of test-driven development is planning out the testing phases of the project before the development of that phase begins.
+The key workflow of TDD is as follows \citep{Beck:2002:TDD:579193}
+\begin{enumerate}
+	\item Add a test that tests the new feature works.
+	\item Run all tests and see the new one fail.
+	\item Write the code that makes the test pass.
+	\item Run all tests and see them all succeed.
+	\item Refactor the code and tests to remove duplication.
+	\item Repeat.
+\end{enumerate}
+
+Under this process, a feature is complete when the tests show that it works.
+
+A study by \cite{George:2003:IIT:952532.952753} developers following TDD produced higher quality code which passed 18\% more functional tests.
+
+
+
+\subsection{Behaviour-Driven Development}
+
+
 
 After planning out the requirements, the next step in the design of KidQuest was to plan out the database structure.
 I created an entity relationship to map out the various tables needed and the relationships between them.

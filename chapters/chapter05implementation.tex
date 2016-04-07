@@ -1,5 +1,47 @@
 %!TEX root = ../main.tex
+
+% 1000-2000 Words
+
 \chapter{Implementation}
+
+
+\section{Android}
+Android has been chosen for this application due to the large success and market hold of the operating system.
+
+Primarily I will be targeting to support Android versions down to API level 16 (Jelly Bean 4.1).
+This decision has been made as figure \ref{fig:AndroidVersions} shows that by supporting this far back, my application will be compatible with over 95\% of current phones. 
+Older versions than this will not be targeted, as development and testing time is limited and many features will have to be limited due to lacking functionality within these older versions.
+
+\subsection{Material Design}
+In order to keep up with a modern and usable design for KidQuest, I have chosen to adhere to the most current standards set by Google for material design.
+
+\subsection{Google Cloud Messaging}
+The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
+
+
+\section{Facebook SDK}
+
+\section{SQLite}
+
+\subsection{Object-Relational Mapper}
+I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis.
+This was primarily for more ease-of-use purposes than any performance reasons. 
+I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
+
+However, ultimately I decided to go with GreenDAO due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
+GreenDAO allowed for me generate my MySQL tables, the Java objects and data access object (DAO) patterns by writing out the names of the tables, their properties and their relationships. 
+
+\section{Flask}
+For the server-side implementation, I will need tools that allow me to easily create a Web-Service API and provide controlled access to these over the web.
+For this task, I have chosen to use Flask as it is well established within the Python community and is incredibly low-effort to set up. 
+Flask is suitable for both quick prototyping of web-services and reliable deployment/hosting of functionality over the internet.
+By setting up 
+
+\subsection{REST}
+
+\subsection{JSON}
+
+
 
 As the project began it was clear that my initial database/class diagrams were drawn with incorrect assumptions about the project. 
 Previously, I have mostly worked on systems that handle many users logging into a web application and designed databases as such. 
@@ -37,3 +79,16 @@ The password is only stored within the server, which has securely encrypted it w
 
 
 Separating child and parent users was a mistake.
+
+Interestingly, \cite{4597151} also states that testing a program tells us `little about its quality', arguing that the quality of a test case far outweighs sheer quantiy of tests.
+
+\section{Test-Driven Development}
+In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. From the server's point of view, there are only a handful of requests that a user can make, and only a handful of tests for those requests. Before writing each endpoint of the server, I 
+
+\section{Functional Testing}
+
+\section{Unit Testing}
+
+\section{Usability Testing}
+
+\section{Beta Testing}
