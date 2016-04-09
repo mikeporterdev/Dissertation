@@ -4,26 +4,31 @@
 
 \chapter{Implementation}
 
-
-\section{Android}
+\section{Application}
+\subsubection{Android}
 Android has been chosen for this application due to the large success and market hold of the operating system.
 
 Primarily I will be targeting to support Android versions down to API level 16 (Jelly Bean 4.1).
 This decision has been made as figure \ref{fig:AndroidVersions} shows that by supporting this far back, my application will be compatible with over 95\% of current phones. 
 Older versions than this will not be targeted, as development and testing time is limited and many features will have to be limited due to lacking functionality within these older versions.
 
-\subsection{Material Design}
+\subsubsection{Material Design}
 In order to keep up with a modern and usable design for KidQuest, I have chosen to adhere to the most current standards set by Google for material design.
 
-\subsection{Google Cloud Messaging}
+\subsubsection{Google Cloud Messaging}
 The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
 
 
-\section{Facebook SDK}
+\subsection{Facebook SDK}
+In order to achieve better functionality in the social media features within the app, I will need to gather access to certain information about the user with their strict and explicit permission. 
+Tying in the Facebook SDK into the app is the easiest way to gather this information in a secure manner that does not supercede the users wishes.
+For example, using the Facebook SDK, I can prompt the user to allow the app permission to gather the users friends list, detect which of them also have used the app and have connected it to facebook and connect the two users as friends within my app.
+%TODO: Reword this shit
+This technology has strict ethical concerns however, as gathering this information on children has a potential risk for privacy and security concerns, therefore
 
-\section{SQLite}
+\subsection{SQLite}
 
-\subsection{Object-Relational Mapper}
+\subsubsection{Object-Relational Mapper}
 I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis.
 This was primarily for more ease-of-use purposes than any performance reasons. 
 I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
@@ -31,15 +36,18 @@ I considered a variety of options for which library to use, initially deciding u
 However, ultimately I decided to go with GreenDAO due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
 GreenDAO allowed for me generate my MySQL tables, the Java objects and data access object (DAO) patterns by writing out the names of the tables, their properties and their relationships. 
 
-\section{Flask}
+\section{Server}
+\subsection{Flask}
 For the server-side implementation, I will need tools that allow me to easily create a Web-Service API and provide controlled access to these over the web.
 For this task, I have chosen to use Flask as it is well established within the Python community and is incredibly low-effort to set up. 
 Flask is suitable for both quick prototyping of web-services and reliable deployment/hosting of functionality over the internet.
 By setting up 
 
-\subsection{REST}
+\subsubsection{REST vs. SOAP}
 
-\subsection{JSON}
+\subsubsection{JSON vs. XML}
+In order to communicate to the servers web services, I will need to decide upon a message format. 
+REST is capable of using both XML and JSON to communicate over the web, 
 
 
 
