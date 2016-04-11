@@ -5,7 +5,7 @@
 \chapter{Implementation}
 
 \section{Application}
-\subsubection{Android}
+\subsubsection{Android}
 Android has been chosen for this application due to the large success and market hold of the operating system.
 
 Primarily I will be targeting to support Android versions down to API level 16 (Jelly Bean 4.1).
@@ -36,7 +36,7 @@ I considered a variety of options for which library to use, initially deciding u
 However, ultimately I decided to go with GreenDAO due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
 GreenDAO allowed for me generate my MySQL tables, the Java objects and data access object (DAO) patterns by writing out the names of the tables, their properties and their relationships. 
 
-\section{Server}
+\section{Server Web-Services}
 \subsection{Flask}
 For the server-side implementation, I will need tools that allow me to easily create a Web-Service API and provide controlled access to these over the web.
 For this task, I have chosen to use Flask as it is well established within the Python community and is incredibly low-effort to set up. 
@@ -44,11 +44,22 @@ Flask is suitable for both quick prototyping of web-services and reliable deploy
 By setting up 
 
 \subsubsection{REST vs. SOAP}
+Flask will give me the tools to create the web-services but I must consider the structure in which I choose to build them. 
+
+SOAP and REST are both well established web service protocols that offer a wide range of benefits making them suitable for use for the remote API.
+
 
 \subsubsection{JSON vs. XML}
 In order to communicate to the servers web services, I will need to decide upon a message format. 
-REST is capable of using both XML and JSON to communicate over the web, 
+REST is capable of using both XML and JSON to communicate over the web and neither is a more reliable form of transferring data, but there are minor advantages/disadvantages to each.
 
+%TODO: Source the shit out of this
+JSON is better supported by numerous libraries and or
+
+
+
+
+%Reconsider this writing
 
 
 As the project began it was clear that my initial database/class diagrams were drawn with incorrect assumptions about the project. 
@@ -88,7 +99,7 @@ The password is only stored within the server, which has securely encrypted it w
 
 Separating child and parent users was a mistake.
 
-Interestingly, \cite{4597151} also states that testing a program tells us `little about its quality', arguing that the quality of a test case far outweighs sheer quantiy of tests.
+Interestingly, \cite{4597151} also states that testing a program tells us `little about its quality', arguing that the quality of a test case far outweighs sheer quantity of tests.
 
 \section{Test-Driven Development}
 In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. From the server's point of view, there are only a handful of requests that a user can make, and only a handful of tests for those requests. Before writing each endpoint of the server, I 
@@ -96,6 +107,26 @@ In the creation of a REST API, it is much easier to develop a test plan due to t
 \section{Functional Testing}
 
 \section{Unit Testing}
+%UT explanation
+
+As a part of Test-Driven Development, unit testing is a integral part of the development process.
+
+%Server
+For the server, I utilized an extension library of Flask called Flask-Testing, which streamlined the process of writing and running unit tests.
+Flask-Testing allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
+Then, as each separate test case is run, I used the library to delete the test database and regenerate it to ensure that previous unit tests would not interfere with new tests.
+
+Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
+Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
+Furthermore as a main principle of REST is to plan out the specific endpoints that can be messaged, it makes it easier 
+
+%%Results
+
+
+%App
+As the app is written in Java, 
+
+%%Results
 
 \section{Usability Testing}
 
