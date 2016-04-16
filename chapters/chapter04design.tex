@@ -6,6 +6,7 @@
 
 \section{Development Methodologies}
 
+%TODO: Move to background study
 \subsection{Waterfall}
 The waterfall design methodology is a sequential design processed focused on the project progressing to each stage of development one at a time, for example, the design stage of the software would not take place until all requirements have been gathered and finalised.
 Waterfall is considered to be a very structured methodology and is particularly useful when the requirements are well known and are fixed before the project begins and when the project and the technologies are well understood.
@@ -57,7 +58,10 @@ Under this process, a feature is complete when the tests show that it works.
 
 A study by \cite{George:2003:IIT:952532.952753} developers following TDD produced higher quality code which passed 18\% more functional tests.
 
-
+Furthermore, a software group at IBM made a drastic change to a TDD based workflow over their previously used ad-hoc testing approach and found that at the cost of a small drop in productivity, their defect rate was reduced by 50\%, the code quality was generally increased and was more flexible to changes and that morale was generally higher \citep{IBMTDD}. 
+The paper also considered that the drop in productivity experienced may well have been down to the change to an unfamiliar system rather than an inherent flaw in TDD, but is not unusual that TDD would have this effect due to the increased time writing, preparing and running tests.
+However, it must also be considered that if the practice offers a higher quality of code it is inherently likely to produce less errors and therefore the productivity/time trade-off may be worth it.
+It is also noted that I must be prepared as I am unfamiliar with TDD myself, and will likely experience a similar drop in productivity as I begin to practice the methodology, however the paper offered several useful tips for developers/teams who are new to the practice.
 
 \subsection{Behaviour-Driven Development}
 
@@ -90,12 +94,44 @@ This allows me to better manage changes to the code-base.
 \subsection{Wireframes}
 
 \subsection{Android Developer Guidelines}
-
-\section{Usability}
-
 \section{Use Cases}	
 
 \section{Development Style}
 
-\section{Service-Oriented Architecture}
-Service-Oriented Architecture (SOA) is a set of design principles that concentrates the design of the software as a whole around web services.
+\section{Testing}
+
+%TODO: Move these paragraphs to Design.
+Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
+Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
+As a main principle of REST is to plan out the specific endpoints that can be messaged, it becomes rather simple to plan out tests in the form of sending an example of a valid and invalid request of each request type to each endpoint.
+For example, the endpoint of `/api/users/<userId>/' allows two request types, GET and PUT, which generates four test cases.
+\begin{itemize}
+	\item{Valid GET}
+	\item{Invalid GET}
+	\item{Valid PUT}
+	\item{Invalid put}
+\end{itemize}  
+%TODO: Research what test generation this is
+However, this raises issues when considering that a request could be invalid for multiple reasons, and simply testing for invalid/valid may not reach adequate code coverage.
+An example of this could be that a PUT request may be invalid due to an email address already existing within the database or because they have not included a valid did not include any new data about the user, which are two separate sections of the code that arguably each require their own tests.
+Because of this, it must be analysed whether or not the test cases achieve sufficient code coverage, rather than just relying on the entry points into the software.
+Luckily, the python package `coverage.py' allows for simple analysis of unit tests to determine the current code coverage for tests, which will provide a higher rate of confidence.
+
+\subsection{Unit Testing} 
+Unit Testing is integral to the workflow of test-driven development
+
+\subsection{Integration Testing}
+Integration testing encompasses tests that specifically test that the various parts of the project work together correctly.
+For example, integration tests for KidQuest would test that the server and mobile app are able to correctly function together, by ensuring that the app can correctly send requests and that the server receives those requests as they were sent.
+
+
+\subsection{Black Box Testing}
+
+\subsection{White Box Testing}
+
+
+\subsection{Regression Testing}
+Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
+This is made significantly easier by the implementation of strong automated unit tests, which allow me to quickly retest the majority of the code by rerunning the test suite.
+I also intend to follow a common development practice where a unit test is added for each defect that is found within the code, a new unit test is added to detect the presence of that bug specifically. 
+This will allow me to easily spot any recurrences of legacy bugs that would otherwise go unnoticed.

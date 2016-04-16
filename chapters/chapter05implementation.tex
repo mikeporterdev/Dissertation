@@ -1,6 +1,9 @@
 %!TEX root = ../main.tex
 
 % 1000-2000 Words
+% For clarity, we present the implementation and evaluation together and split the presentation by the natural split in the code which is the server and application
+% Merge with evalutation
+
 
 \chapter{Implementation}
 
@@ -18,10 +21,9 @@ In order to keep up with a modern and usable design for KidQuest, I have chosen 
 \subsubsection{Google Cloud Messaging}
 The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
 
-
 \subsection{Facebook SDK}
 In order to achieve better functionality in the social media features within the app, I will need to gather access to certain information about the user with their strict and explicit permission. 
-Tying in the Facebook SDK into the app is the easiest way to gather this information in a secure manner that does not supercede the users wishes.
+Tying in the Facebook SDK into the app is the easiest way to gather this information in a secure manner that does not supersede the users wishes.
 For example, using the Facebook SDK, I can prompt the user to allow the app permission to gather the users friends list, detect which of them also have used the app and have connected it to facebook and connect the two users as friends within my app.
 %TODO: Reword this shit
 This technology has strict ethical concerns however, as gathering this information on children has a potential risk for privacy and security concerns, therefore
@@ -29,12 +31,18 @@ This technology has strict ethical concerns however, as gathering this informati
 \subsection{SQLite}
 
 \subsubsection{Object-Relational Mapper}
-I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis.
+I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis. 
 This was primarily for more ease-of-use purposes than any performance reasons. 
 I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
 
+%TODO Remove
 However, ultimately I decided to go with GreenDAO due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
 GreenDAO allowed for me generate my MySQL tables, the Java objects and data access object (DAO) patterns by writing out the names of the tables, their properties and their relationships. 
+
+%SQLAlchemy
+
+Implementing an ORM also allows me to more easily protect the application against malicious SQL injection attacks as both GreenDAO and SQLAlchemy provide sufficient protection against this. 
+
 
 \section{Server Web-Services}
 \subsection{Flask}
@@ -112,22 +120,22 @@ In the creation of a REST API, it is much easier to develop a test plan due to t
 As a part of Test-Driven Development, unit testing is a integral part of the development process.
 
 %Server
-For the server, I utilized an extension library of Flask called Flask-Testing, which streamlined the process of writing and running unit tests.
+
+For the server, I will an extension library of Flask called Flask-Testing, which streamlined the process of writing and running unit tests.
 Flask-Testing allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
 Then, as each separate test case is run, I used the library to delete the test database and regenerate it to ensure that previous unit tests would not interfere with new tests.
 
-Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
-Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
-Furthermore as a main principle of REST is to plan out the specific endpoints that can be messaged, it makes it easier 
+
 
 %%Results
 
-
 %App
-As the app is written in Java, 
+As the app is written in Java, there is already strong backing for the use of tools like JUnit to perform easily unit tests.
+Google have also allowed for support with Mockito to help simulate any missing dependencies during the tests.
 
 %%Results
 
 \section{Usability Testing}
+In order to perform Usability testing, 
 
 \section{Beta Testing}

@@ -55,8 +55,13 @@ Parent Screens
 - Manage rewards
 - Add quest
 
-\section{Technical Requirements}
-\subsection{Android App}
+\section{Security Requirements}
+
+\subsection{Data Security}
+Legislation in the UK upholds high expectations for the privacy and security of the data of it's citizens. 
+The key piece of legislation is the Data Protection Act \citep{britain_data_1984}
+
+The server application must also be sufficiently protected against malicious attacks such as SQL Injection.
 
 \subsection{Server}
 When parents choose to set up the parent edition of the app
@@ -77,3 +82,27 @@ Login required
 
 4. users/<id>/quests/<id>/ - GET, PUT
 Login required
+
+\section{MoSCoW}
+Developing a software project is a complicated procedure with many potential roadblocks that can be faced.
+As identified in my risk analysis, there are several risks that can cause significant delays to the project, which in turn could be disastrous to the project due to it's tight deadline.
+Research by \cite{requirementsprioritization} has shown that only 16\% of all software projects are delivered on time and within budget, which has harrowing implications for the schedule of KidQuest.
+
+Therefore, it is vital to analyse my priorities when it comes to the requirements of KidQuest, to determine which features are most vital to the project and should have more time and urgency dedicated to them.
+MoSCoW is an easy method of dividing requirements into a clear hierarchy of four categories that establish a priority for the features or requirements of a software project \citep[p.517]{hatton2008choosing}.
+The four groups are as follows:
+
+\subsection{Must Have}
+Features that vital to the success of the project and can cause delays to the release of the software if they are not finished on time.
+These should be the first features developed in the software and be thoroughly tested to ensure high quality.
+
+\subsection{Should Have}
+These are features that are important to have, but will not necessarily be disastrous if they are not completed.
+
+\subsection{Could Have}
+This describes features that would be nice to have in the project and could be looked at if there is excess time at the end of the project.
+However it is important to be wary of scope creep and recognise that any feature added will not only add development time, but testing and documentation time too.
+
+\subsection{Won't Have}
+Features that have been suggested that have been agreed are not feasible for this release.
+These could potentially be reraised for a future update to the software.
