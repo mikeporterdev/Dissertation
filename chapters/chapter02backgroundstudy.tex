@@ -1,45 +1,52 @@
 %!TEX root = ../main.tex
-
 %2000-3000 words
 
 \chapter{Literature Review}
 \label{chap:litReview}
 
+For this project I will need to research three key areas: The psychological aspects of motivation - particularly in children, gamification, video game development and mobile application development.
+Research will need to be made specifically into how I can not only encourage children to use the app, but how I can best ensure that the app is both fun to continue playing and beneficial to the child's motivation skills.
+Other important research areas will be into what software development methodology will be most beneficial to me as a lone developer on a project and what methods of testing are best suited towards ensuring a high quality deliverable.
+
 \section{Gamification}
 \subsection{Defining Gamifaction}
-Gamification is attempted to be defined by \cite{Deterding:2011:GDE:2181037.2181040} as ``The use of design elements for games in non-game contexts''. 
-A game design element is referred to as the characteristics of a game that appear in most games, readily associated with games and are found to play a significant role in games.
+A definition of gamification is offered by \cite{Deterding:2011:GDE:2181037.2181040} as ``The use of design elements for games in non-game contexts''. 
+A game design element in this case is referred to as the characteristics of a game that appear in most games, are readily associated with games and are found to play a significant role in games.
 With this definition, it is necessary to identify what the game design elements that will be included in the application will be. 
 
 In this paper, Deterding also highlights the fact that Gamification refers specifically to using game elements in a non-game application, rather than using full-fledged games.
-It could be argued by this strict definition that my application is not true gamification as it is built as a full game.
-However, in return it could be said that my application - at it's core - is a task management application that incorporates RPG game elements.
+Therefore by this strict definition, it is important to draw the distinction between a game application built to incorporate real-life rewards and a motivational application built to incorporate game based elements.
 
-\cite{huotari2011gamification} have provided an alternative definition for gamification, stating that it is ``service packaging where a core service is enhanced by a rules-based service system that provides feedback and interaction mechanisms to the user with an aim to facilitate and support the users’ overall value creation.''
-
+\cite{huotari2011gamification} has also provided an alternative definition for gamification, stating that it is ``service packaging where a core service is enhanced by a rules-based service system that provides feedback and interaction mechanisms to the user with an aim to facilitate and support the users’ overall value creation.''
 
 \subsection{Rewards and Punishments}
 In an experiment by \cite{Filsecker2014136}, children were separated into two groups - a public recognition (PR) group where the childs `badges' were recorded on a leaderboard placed prominently in a room where others can see, and a non-public recognition (NPR) group.
 The children were then given an educational game called Taiga which would ask them to pose a hypothesis as to why the number of fish in a pond had been decreasing over time, and then perform experiments to justify or disprove the hypothesis.
 It was found that students achieved a statistically significant increase in understanding and performance of topics in the PR group compared to the NPR group.
 Taiga had a variety of educational content embedded within the game that the users can access, and tracked which ones the children had checked during the tasks to determine whether the children were motivated to access more of these. 
-It was then found that the PR group did not access any more of these educational materials than the NPR group, which was unexpected given the previous findings. 
-The badges awarded by Taiga are synonymous with the common game design element of `Achievements', which are awarded to the user after a certain set of requirements have been met - e.g. Achievement Unlocked - Complete 10 Quests.
+However, it was unexpectly also found that the PR group did not access any more of these educational materials than the NPR group, which - given the previous findings - could insinuate that the increased performance was derived from increased confidence in the subject matter. 
+Furthermore, the badges awarded by Taiga are synonymous with the common game design element of `Achievements', which are awarded to the user after a certain set of requirements have been met - e.g. Achievement Unlocked - Complete 10 Quests and are a useful tool for encouraging users to complete many short tasks in order to earn a long-term reward \cite{hamari2011framework}.
 
-A common issue with rewards in education is that ``extrinsic'' rewards (rewards not relating to the activity they are awarded for) ultimately end up undermining the child's attention and motivation from the intrinsic learning activity once the rewards are removed \citep{deci2001extrinsic,ACP:ACP2350090502}.
-This diminishes the usefulness of rewards as a long-term motivation for children.
+A common issue with rewards in education is that `extrinsic' rewards - i.e. rewards not relating to the activity they are awarded for - ultimately end up undermining the child's attention and motivation from the intrinsic learning activity once the rewards are removed \citep{deci2001extrinsic,ACP:ACP2350090502}.
+Therefore it can be derived that the rewards are less useful as a long-term motivation for children, especially if the rewards cease to be given.
 However, \cite{cameron2001negative} highlights that this effect only occurs with children who had high initial interest in the task at hand. 
 For example, rewarding a child for performing in his favourite sport only serves to undermine their original interest in the sport.
+An explanation for this effect might be that by offering the reward, the child's goal for playing the sport has shifted from `I want to play Rugby' to `I want to earn this reward offered for playing Rugby'.
+Therefore, once the reward has stopped, the motivation for playing has also stopped.
 
-During a meta-analysis of \cite{deci2001extrinsic} also found that unexpected rewards had the least negative impact and highest positive effect for children's attention in a task. 
-This could mean that it would be beneficial to include an element of randomness to the rewards for completing a task, such as a random chance of earning an item for each quest.
-
+During a meta-analysis of studies into rewards in education, \cite{deci2001extrinsic} also found that unexpected rewards had the least negative impact and highest positive effect for children's long term attention to a task. 
+This could mean that it would be beneficial to include an element of randomness to the rewards for completing a task, such as a random chance of earning an increased reward or an extra but separate reward.
+\cite{king2010video} lists a variety of different reward structures in video games, such as in-game currency, experience points, levelling up and `rare-item' rewards. 
+In RPGs, quests often have these key reward structures and therefore are established to work suitably well for this project.
 
 \section{Game Design}
 \subsection{Game Design Elements}
+As previously mentioned, it is important to specify what game design elements I will choose to use in my application.
+In the book `100 Elements of Game Design' \citep{despain2012100}, it mentions several useful elements to use.
+
 \cite{Deterding:2011:GDE:2181037.2181040} separated game design elements into five different levels as shown in figure \ref{fig:GameDesignElements}. 
-The key elements I will focus on in my application are `Game interface design patterns', which are common components in games that are not specifically `played with' themselves, but run alongside a game to increase offer more feedback or fun in the application.
-This includes elements such as badges/achievements, leader-boards, levels and experience points.
+The key elements I will focus on in my research are `Game interface design patterns', which are common components in games that are not specifically `played with' themselves, but run alongside a game to increase offer more feedback or fun within the application.
+This includes elements such as badges/achievements, leader-boards, levels and experience points. 
 
 \begin{figure}[ht]
 	\centering
@@ -48,108 +55,12 @@ This includes elements such as badges/achievements, leader-boards, levels and ex
 	\label{fig:GameDesignElements}
 \end{figure}
 
-As previously mentioned, it is important to specify what game design elements I will choose to use in my application.
-In the book `100 Elements of Game Design' \citep{despain2012100}, it mentions several useful elements to use.
-
 \subsubsection{Achievements}
-Achievements are defined by \cite{Montola:2009:AGA:1621841.1621859} as ``optional sub-goals in a secondary reward system''. 
-They are also described as being separate to the core game system and do not affect the progress of the player, and should be seen as more of a meta-game. Achievement features are one of the most commonly implemented game design patterns in gamification \citep{hamari2011framework}.
-
-\cite{Montola:2009:AGA:1621841.1621859} raised concerns in regards to applying achievements to non-game applications that they would create unproductive or unintended behaviours by users. 
-For example, an achievement on a forum for making 1000 posts may inadvertently motivate users to make a large amount of low-effort or spam posts, reducing the quality of the forum.
-However, \cite{Montola:2009:AGA:1621841.1621859} also noted that some users appreciated the changes and found the achievements to be motivating. 
-
-\subsubsection{Character Development}
-\cite{king2010video} lists a variety of different reward structures in video games, such as in-game currency, experience points, levelling up and `rare-item' rewards. 
-As the tasks in KidQuest are structured as Role-Playing Game (RPG) quests, there already exists well established methods of rewarding the user. 
-In RPGs, quests often have these key reward structures and therefore are established to work suitably well for KidQuest.
-
-The rate at which these rewards are earned must be examined to ensure they still feel rewarding throughout. 
-For example, if a quest returns 100 XP points and you require 300 XP to level up from level 1 to 2, this only requires you to complete three quests to level up, meaning these three quests feel rewarding as each quest is offering 1/3rd of a level.
-However, the XP if quests still offer 100 XP and you require 6000 XP to level up from level 30 to 31, the reward from the same quest is now worth 1/60th of a level, despite being the same difficulty to the user.
-Therefore, some scaling of the rewards is required in the app to allow XP rewards to scale suitably with the XP required to level.
-This scaling is referred to as `increasing cost' \citep{1_anderson_2016}.
-Anderson also shows that it is important to determine reasonable caps for numerical relationships in video-games, to stop the increasing cost becoming out of proportion.
-
-\cite{1_anderson_2016} poses that a useful pattern for these kinds of relationships is a classic triangular pattern, in which the first level requires 1 XP to level up, the second level requires 3 XP, the third requires 6. To allow for more meaningful numbers to the user, I have multiplied the results of the formula by 100.
-
-\begin{equation} \label{eq:xprequiredfornextlevel}
-	T_n= \frac{n(n+1)}{2} \times 100
-\end{equation}
-
-Initially, the scaling formula for XP rewards involved using 60XP as a base reward for a medium difficulty quest, then using the player's current level, it would derive a multiplier that would be used to scale the XP reward.
-\begin{equation} \label{eq:xpgainedlinear}
-	\textrm{XP Gained} = 60 \times \frac{(n - 1) \times k}{100} + 1
-\end{equation}
-Where k can be adjusted to specify the strength of the multiplier against the XP rewards, so that if k = 10, a character at level 31 would have a 3x multiplier on quests, meaning the same quest that gave them 60XP at level 1, now gives them 180XP.
-However, when modelling this equation, the number of quests completed quickly becomes out of hand. 
-At level 1, the player must complete 2 medium quests to level up - a reasonable starting point.
-However by level 25 the player must complete 22 quests to level up and by level 99 (One before the level cap) the player must complete an extraordinary 84 medium difficulty quests to level up.
-
-Therefore, triangular numbers can also be useful for calculating the XP gained per quest. By adjusting the triangular numbers formula somewhat, I found a suitable middle ground which still gives the new user the feeling of progressing quickly, but the rate of quests per level quickly slows down to a limit of approximately 10 quests per level by level 100.
-This will ensure that the player will still feel like they are progressing at a reasonable speed throughout.
-
-\begin{equation} \label{eq:xpgainedtriangular}
-	\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10
-\end{equation}
-
-
-%TODO: Work out wtf you are doing with this chart
-\begin{tikzpicture}	
-	\begin{axis}[
-		xlabel=Level,
-		ylabel=Quests to level up,
-		xmin=0,
-		ymin=0,
-	]
-		\addplot coordinates {
-			(1, 1.7)
-			(2, 3)
-			(3, 4)
-			(4, 4.8)
-			(5, 5.4)
-			(6, 5.9)
-			(7, 6.3)
-			(8, 6.6)
-			(9, 6.9)
-			(10,7.1)
-			(11,7.3)
-			(12,7.5)
-			(13,7.6)
-			(14,7.8)
-			(15,7.9)
-			(16,8)
-			(17,8.1)
-			(18,8.2)
-			(19,8.3)
-		};
-		\addlegendentry{Equation \ref{eq:xpgainedtriangular}}
-		\addplot coordinates{
-			(1, 1.7)
-			(2, 2.5)
-			(3, 3.4)
-			(4, 4.2)
-			(5, 5)
-			(6, 5.9)
-			(7, 6.7)
-			(8, 7.5)
-			(9, 8.4)
-			(10, 9.2)
-			(11, 10)
-			(12, 10.9)
-			(13, 11.7)
-			(14, 12.5)
-			(15, 13.4)
-			(16, 14.2)
-			(17, 15)
-			(18, 15.9)
-			(19, 16.7)
-		};
-		\addlegendentry{Equation \ref{eq:xpgainedlinear}}
-	\end{axis}
-\end{tikzpicture}
-
-\subsubsection{Rewards}
+\cite{Montola:2009:AGA:1621841.1621859} performed an experiment to determine the usefulness of achievements within a non-game application by adding them to an image hosting and sharing website.
+Achievements are defined in this paper as ``optional sub-goals in a secondary reward system'' and are described as being separate to the core game system and do not affect the progress of the player and should be seen as more of a meta-game. 
+Concerns were initially raised that by adding achievements to non-game applications that they would encourage unproductive or unintended behaviours by users, for example, an achievement on a forum for making 1000 posts may inadvertently motivate users to make a large amount of low-effort or spam posts, reducing the overall quality of the forum.
+However, \cite{Montola:2009:AGA:1621841.1621859} noted that some users appreciated the changes and found the achievements to be motivating.
+Achievement features are one of the most commonly implemented game design patterns in gamification \citep{hamari2011framework}. 
 
 \subsubsection{Feedback Loops}
 A positive feedback loop involves the player becoming more powerful throughout the game, which in turn makes things easier to complete, which means they can complete more quests and become more powerful even quicker.
@@ -157,14 +68,7 @@ Whilst this sounds like a good element to the game, it is important that develop
 As in my application, quests are completed in the real world and are not tied into the in-game character's power, I will be largely unaffected by this.
 However, if I seek to include an element of competitiveness into the game by allowing users to `battle' each other, it is important to take steps to avoid players becoming too powerful that the battles are no longer enjoyable.
 
-\subsubsection{Competitiveness}
-
-\subsection{Educational Games}
-\cite{Denis:2005:MEG:1178477.1178581} draws a stark contrast between the motivation levels in education and video games, highlighting how 	
-
 \section{Smartphone Applications}
-
-
 \subsection{Android vs. iOS}
 When planning the development of a mobile application, it must be considered which platform is best to target. 
 
@@ -188,8 +92,7 @@ Meanwhile, figure \ref{fig:UKPhoneMarketShare} also shows an Android dominance i
 
 \subsubsection{Fragmentation}
 A common issue with developing for mobiles is that many people do not (or cannot) update their devices to the latest versions.
-Android in particular is problematic for this, as shown in figure \ref{fig:AndroidVersions}.
-This problem is referred to as `Fragmentation'.
+This problem is referred to as `Fragmentation' and is particularyl problematic in Android, as shown in figure \ref{fig:AndroidVersions}.
 Despite being released in October of 2015, the latest Android version Marshmallow is still at less than 2.5\% adoption rate. 
 This is primarily due to software updates being held back by network carrier locked phones and phones falling out of support.
 
@@ -201,9 +104,55 @@ This is primarily due to software updates being held back by network carrier loc
 \end{figure}
 
 As Android phones are manufactured by a variety of different companies, there is less standardization between available handsets. 
-\cite{uniqueandroiddevices} reported that it detected nearly 24,100 distinct devices that downloaded its app in 2015.
-This shows just how much of a problem fragmentation could pose to Android development.
-
+\cite{uniqueandroiddevices} reported that it detected nearly 24,100 distinct devices that downloaded its app in 2015, showing just how much of a problem fragmentation could pose to Android development.
 This also leads to concerns about the variety of screen sizes in these devices, as apps will have to be designed and maintained to support a myriad phones. 
-However, \cite{androidscreenfragmentation} shows that due to the similarities of resolutions between these phones, there are only four key resolutions that need to be managed within Android. %TODO: Due to why
+However, \cite{androidscreenfragmentation} shows that due to the similarities of resolutions between these phones, there are only four key aspect ratios that need to be managed within Android due to the operating systems implementation of scaling.
 
+\section{Development}
+\subsection{Waterfall}
+The waterfall design methodology is a sequential design processed focused on the project progressing to each stage of development one at a time, for example, the design stage of the software would not take place until all requirements have been gathered and finalised.
+Waterfall is considered to be a very structured methodology and is particularly useful when the requirements are well known and are fixed before the project begins and when the project and the technologies are well understood.
+
+However, due to the rigidity of the Waterfall method, particularly around the planning phase, it is easy for mistakes made early on in the software development life cycle to become embedded within the project and be carried forward to later stages.
+For example, if a mistake is made during the requirements gathering phase and is not noticed until a later phase of the project, it will be very costly to change.
+This approach means that risks to the project can be left unnoticed until it is too late in the project to change \cite{kruchten2001waterfall}.
+
+\subsection{Agile}
+The Agile design methodology is a well established and iterative design process that involves regularly moving between the stages of the project in a non-sequential manner. 
+Agile is very adaptable and allows for more flexibility to the software when design issues undoubtedly arise by not setting the specification for the whole project in stone too early.
+By iteratively planning the design of the project, it allows for quick responses to feedback and if one part of the project is changed, it should have minimal effect on the rest of the project stages. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{images/Agile_Image.jpg}
+	\caption{Iterative Agile Development Process}
+	\label{fig:AndroidVersions}
+\end{figure}
+
+Agile dictates that testing should take place regularly throughout the project and by iteratively testing the software at various stages in the life cycle, it gives the developer more chances to catch bugs early.
+Under agile, defects discovered in software should be fixed as soon as possible after discovery \citep{beck2001agile}.
+In a study by \cite{talby2006}, it was found that by following this practice, defects took less time to fix than without.
+This may be due to the fact that the developed features are still fresh in the mind of the developer, and is therefore more easily able to see the problem area and fix.
+The study also found that by keeping the bugs fixed and the code base stable throughout the project, it actually made the development phases of the project faster.
+
+Furthermore, agile testing helps minimize the risks of bugs making it into the final artefact. 
+If there was a single testing phase at the end of the project, it is possible that there would be more bugs than anticipated and that the developers would run out of time to properly fix them all. 
+By using agile testing, this risk is minimized by allowing developers to better manage the time of testing, as the development of certain low priority features will be able to delayed or cancelled earlier in the project to allow mpree time to ensure a quality project.
+
+\subsection{Test-Driven Development}
+As mentioned previously, one of the key principles of agile development is regular and iterative testing throughout the software development life cycle.
+A key factor of test-driven development is planning out the testing phases of the project before the development of that phase begins.
+The workflow of TDD is as follows \citep{Beck:2002:TDD:579193}
+\begin{enumerate}
+	\item Add a test that tests the new feature works.
+	\item Run all tests and see the new one fail.
+	\item Write the code that makes the test pass.
+	\item Run all tests and see them all succeed.
+	\item Refactor the code and tests to remove duplication.
+	\item Repeat.
+\end{enumerate}
+
+A study by \cite{George:2003:IIT:952532.952753} found that developers following TDD produced higher quality code which passed 18\% more functional tests.
+
+Furthermore, a software group at IBM made a drastic change to a TDD based workflow over their previously used ad-hoc testing approach and found that at the cost of a small drop in productivity, their defect rate was reduced by 50\%, the code quality was generally increased and was more flexible to changes and that morale was generally higher \citep{IBMTDD}. 
+The paper also considered that the drop in productivity experienced may well have been down to the change to an unfamiliar system rather than an inherent flaw in TDD, but is not unusual that TDD would have this effect due to the increased time writing, preparing and running tests.

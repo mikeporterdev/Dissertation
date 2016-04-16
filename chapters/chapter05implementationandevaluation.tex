@@ -1,11 +1,13 @@
 %!TEX root = ../main.tex
 
 % 1000-2000 Words
-% For clarity, we present the implementation and evaluation together and split the presentation by the natural split in the code which is the server and application
+% 
 % Merge with evalutation
 
 
-\chapter{Implementation}
+\chapter{Implementation and Evaluation}
+
+For clarity, we present the implementation and evaluation together and split the presentation by the natural split in the code which is the server and application.
 
 \section{Application}
 \subsubsection{Android}
@@ -74,7 +76,7 @@ As the project began it was clear that my initial database/class diagrams were d
 Previously, I have mostly worked on systems that handle many users logging into a web application and designed databases as such. 
 However, I did not account for the fact that with an android application, the database only needs to handle one user, which allowed me to use a simpler - less relationship heavy - database design.
 
-\section{Server Rewrite}
+\subsection{Server Rewrite}
 When it came to be time to implement the parent app, it was realized that the initial designs for the server were not suitable for KidQuest.
 I had initially tried to implement all workflows into the app and store the quests on the client end. 
 The plan was then to send the quests to the parent phone using Google Cloud Messaging (GCM) and have them send back which quests were completed.
@@ -139,3 +141,91 @@ Google have also allowed for support with Mockito to help simulate any missing d
 In order to perform Usability testing, 
 
 \section{Beta Testing}
+
+\section{Game Design}
+
+\subsection{Rewards}
+The rate at which these rewards are earned must be examined to ensure they still feel rewarding throughout. 
+For example, if a quest returns 100 XP points and you require 300 XP to level up from level 1 to 2, this only requires you to complete three quests to level up, meaning these three quests feel rewarding as each quest is offering 1/3rd of a level.
+However, the XP if quests still offer 100 XP and you require 6000 XP to level up from level 30 to 31, the reward from the same quest is now worth 1/60th of a level, despite being the same difficulty to the user.
+Therefore, some scaling of the rewards is required in the app to allow XP rewards to scale suitably with the XP required to level.
+This scaling is referred to as `increasing cost' \citep{1_anderson_2016}.
+Anderson also shows that it is important to determine reasonable caps for numerical relationships in video-games, to stop the increasing cost becoming out of proportion.
+
+\cite{1_anderson_2016} poses that a useful pattern for these kinds of relationships is a classic triangular pattern, in which the first level requires 1 XP to level up, the second level requires 3 XP, the third requires 6. To allow for more meaningful numbers to the user, I have multiplied the results of the formula by 100.
+
+\begin{equation} \label{eq:xprequiredfornextlevel}
+	T_n= \frac{n(n+1)}{2} \times 100
+\end{equation}
+
+Initially, the scaling formula for XP rewards involved using 60XP as a base reward for a medium difficulty quest, then using the player's current level, it would derive a multiplier that would be used to scale the XP reward.
+\begin{equation} \label{eq:xpgainedlinear}
+	\textrm{XP Gained} = 60 \times \frac{(n - 1) \times k}{100} + 1
+\end{equation}
+Where k can be adjusted to specify the strength of the multiplier against the XP rewards, so that if k = 10, a character at level 31 would have a 3x multiplier on quests, meaning the same quest that gave them 60XP at level 1, now gives them 180XP.
+However, when modelling this equation, the number of quests completed quickly becomes out of hand. 
+At level 1, the player must complete 2 medium quests to level up - a reasonable starting point.
+However by level 25 the player must complete 22 quests to level up and by level 99 (One before the level cap) the player must complete an extraordinary 84 medium difficulty quests to level up.
+
+Therefore, triangular numbers can also be useful for calculating the XP gained per quest. By adjusting the triangular numbers formula somewhat, I found a suitable middle ground which still gives the new user the feeling of progressing quickly, but the rate of quests per level quickly slows down to a limit of approximately 10 quests per level by level 100.
+This will ensure that the player will still feel like they are progressing at a reasonable speed throughout.
+
+\begin{equation} \label{eq:xpgainedtriangular}
+	\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10
+\end{equation}
+
+
+%TODO: Work out wtf you are doing with this chart
+\begin{tikzpicture}	
+	\begin{axis}[
+		xlabel=Level,
+		ylabel=Quests to level up,
+		xmin=0,
+		ymin=0,
+	]
+		\addplot coordinates {
+			(1, 1.7)
+			(2, 3)
+			(3, 4)
+			(4, 4.8)
+			(5, 5.4)
+			(6, 5.9)
+			(7, 6.3)
+			(8, 6.6)
+			(9, 6.9)
+			(10,7.1)
+			(11,7.3)
+			(12,7.5)
+			(13,7.6)
+			(14,7.8)
+			(15,7.9)
+			(16,8)
+			(17,8.1)
+			(18,8.2)
+			(19,8.3)
+		};
+		\addlegendentry{Equation \ref{eq:xpgainedtriangular}}
+		\addplot coordinates{
+			(1, 1.7)
+			(2, 2.5)
+			(3, 3.4)
+			(4, 4.2)
+			(5, 5)
+			(6, 5.9)
+			(7, 6.7)
+			(8, 7.5)
+			(9, 8.4)
+			(10, 9.2)
+			(11, 10)
+			(12, 10.9)
+			(13, 11.7)
+			(14, 12.5)
+			(15, 13.4)
+			(16, 14.2)
+			(17, 15)
+			(18, 15.9)
+			(19, 16.7)
+		};
+		\addlegendentry{Equation \ref{eq:xpgainedlinear}}
+	\end{axis}
+\end{tikzpicture}
