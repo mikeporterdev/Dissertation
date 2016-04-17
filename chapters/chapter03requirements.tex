@@ -1,108 +1,61 @@
 %!TEX root = ../main.tex
-
-% 2000-3000 words
-
 \chapter{Requirements and Analysis}
 \label{chap:methodology}
 
 There are two main users for KidQuest, the child and the parent. 
 Both users have different objectives in using the application and it is important that the requirements of each user are analysed separately to insure that the application is suitable.
-In this section we will break down the various use cases of each user.
 
-\section{User Requirements}
+\section{Gathering Requirements}
+\subsection{Actors}
+When determining use cases, the first step is to define the actors in the software.
+In UML, an actor is defined as a ``a type of role played by an entity that interacts with the subject (e.g., by exchanging signals and data), but which is external to the subject.'' \citep[p586-588]{omg2007unified}.
+Actors may represent a human user of the system or other external systems that will interact with the software being modelled.
+Different actors will have different objectives for using the application and it is important that the requirements of each actor are analyzed to ensure the application is suitable.
+In this project, there are two key actors:
 
-\subsection{The Child}
-The child will open the application and be met with a character screen, which will display the relevant information about their character, including the XP/Gold they currently have, the XP needed until the next level and the recent rewards they have earned.
-The child can then check their quests and mark any that they have finished as complete.
-The quest will then move into the pending quest log, ready for a parent to confirm.
-Once the parent has confirmed the quest, the child will be met with a reward of experience points and gold based on the difficulty of the quest.
+\begin{center}
+\begin{tabular}{|p{2cm}|p{8cm}|}  
+	\hline
+	\multicolumn{1}{|c|}{Actor} & \multicolumn{1}{|c|}{Description} \\ \hline
+	Child & A user who uses the application to track tasks \\ \hline
+	Parent & A user who manages the tasks and manages the child users progress \\ \hline
+\end{tabular}
+\end{center}
 
-The child can visit the rewards section to spend their gold on in-game items which will increase the power level of their character. 
-Alternatively, they can spend their gold on rewards that have been set by the parents. 
-i.e. 400 gold will be able to purchase a visit to the cinema.
+\subsection{Identifying Features}
+A useful first step in identifying the features of KidQuest is to use brainstorming to quickly list features that could be possible for the application, without regard to the suitability or feasability of the ideas.
+Essentially, the goal of brainstorming is to achieve quantity over quality \citep[p.144]{leffingwell2000managing}.
+The process for brainstorming KidQuest involved looking at the features of similar existing apps such as task management apps or apps gamified for children whilst keeping in mind the original objectives of this project.
 
-As an incentive to collect the rewards offered in-game, the child will be able to add friends in the game and challenge them to in-game battles. 
-The result of the battle will be generated via the current level and equipment that the character has equipped. 
-For the purposes of safety, friend requests must be confirmed by the parent before the friend request is confirmed.
+%TODO: Put brainstorm here.
 
-The application controls must be kept simple and uniform so that they are able to be learned and used by children.
-Children will not be able to access any parent functions as they will require the parent's pin code. 
-
-\subsection{The Parent}
-The parent can either access the parent functions on the child's application using a pin code, or use their own `parent edition' of the application. 
-When designing the use case of the parents, it is important to minimize the level of interaction required from the parent to ensure they do not become tired of managing the game for the child.
-
-The parent can create quests through a simple interface, entering in the task's name, an optional description and a difficulty level. 
-The quest can have one of 5 difficulty levels, ranging from very hard to very easy.
-The game will generate the rewards for the child based on their current level and the difficulty of the quest.
-Alternatively, the parent can choose from a range of preset quests from three selected categories:
-\begin{itemize}
-	\item 
-		Staff Pick - A list of common tasks chosen by the me to help populate the list with easily selectable quests. 
-		This will contain obvious choices for tasks such as ``Clean your room'' or ``Wash the dishes''
-	\item
-		Trending in Your Area - A list of tasks that have been recently trending in the users location. 
-		This will be used to suggest tasks that many users have been inputting into the app, including recently relevant tasks like ``Rake the leaves in the garden'' at the start of Autumn.
-	\item 
-		Trending Amongst Friends - Tasks that have been trending amongst the users friends list, not including quests counted in the previous 	trending category. 
-		This may include friends added both within the app and/or friends from Facebook integration.  
-\end{itemize}
-
-Parent Screens
-- Login
-- View open quests
-- View pending quests
-- Manage rewards
-- Add quest
-
-\section{Security Requirements}
-
-\subsection{Data Security}
-Legislation in the UK upholds high expectations for the privacy and security of the data of it's citizens. 
-The key piece of legislation is the Data Protection Act \citep{britain_data_1984}
-
-The server application must also be sufficiently protected against malicious attacks such as SQL Injection.
-
-\subsection{Server}
-When parents choose to set up the parent edition of the app
-
-\subsubsection{REST Endpoints}
-The requirements of the server are 	 	
-1. user - POST
-Creating an account
-Login required
-
-2. user/<id> - GET, PUT
-Get details about a child's own account.
-Login required
-
-3. users/<id>/quests/ - GET, POST
-Add a quest for a child.
-Login required
-
-4. users/<id>/quests/<id>/ - GET, PUT
-Login required
-
-\section{MoSCoW}
+\subsection{MoSCoW}
 Developing a software project is a complicated procedure with many potential roadblocks that can be faced.
 As identified in my risk analysis, there are several risks that can cause significant delays to the project, which in turn could be disastrous to the project due to it's tight deadline.
 Research by \cite{requirementsprioritization} has shown that only 16\% of all software projects are delivered on time and within budget, which has harrowing implications for the schedule of KidQuest.
 
 Therefore, it is vital to analyse my priorities when it comes to the requirements of KidQuest, to determine which features are most vital to the project and should have more time and urgency dedicated to them.
 MoSCoW is an easy method of dividing requirements into a clear hierarchy of four categories that establish a priority for the features or requirements of a software project \citep[p.517]{hatton2008choosing}.
-The four groups are as follows:
+Therefore four groups are as follows:
 
-\subsection{Must Have}
+\subsubsection{Must Have}
 Features that vital to the success of the project and can cause delays to the release of the software if they are not finished on time.
 These should be the first features developed in the software and be thoroughly tested to ensure high quality.
 
-\subsection{Should Have}
+\subsubsection{Should Have}
 These are features that are important to have, but will not necessarily be disastrous if they are not completed.
 
-\subsection{Could Have}
+\subsubsection{Could Have}
 This describes features that would be nice to have in the project and could be looked at if there is excess time at the end of the project.
 However it is important to be wary of scope creep and recognise that any feature added will not only add development time, but testing and documentation time too.
 
-\subsection{Won't Have}
+\subsubsection{Won't Have}
 Features that have been suggested that have been agreed are not feasible for this release.
 These could potentially be reraised for a future update to the software.
+
+\section{Security Requirements}
+\subsection{Data Security}
+Legislation in the UK upholds high expectations for the privacy and security of the data of it's citizens. 
+The key piece of legislation is the Data Protection Act \citep{britain_data_1984}
+
+The server application must also be sufficiently protected against malicious attacks such as SQL Injection.
