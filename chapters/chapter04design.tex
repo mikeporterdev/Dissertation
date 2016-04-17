@@ -1,5 +1,30 @@
 %!TEX root = ../main.tex
 \chapter{Design}
+In this section, I will discuss both aesthetic and technical designs for the application as well as offer an overall design of the system as a whole.
+
+\section{User Interface}
+\subsection{Navigation}
+A focus must be put on the usability of the screens in KidQuest.
+They should not only be easy to use, but easy to learn and navigate between, and should offer minimal resistance in the use of the application.
+
+\cite{stone2005user} classifies a good user interface design as an `easy, natural and engaging interaction between a user and a system'.
+
+\subsection{Android Developer Guidelines}
+
+\subsection{Wireframes}
+Wireframing is a useful tool to plan out the aesthetic design of screens and the UI elements used within them. 
+A wireframe is also useful to get a better overview of the navigation between screens, as they can be used to plan out the button presses that will select the next screen.
+The wireframes shown in appendix \ref{appendix:wireframes}
+
+
+\section{System Design}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.55]{images/SystemDiagram.png}
+	\caption{System Design Diagram}
+	\label{fig:systemdesign}
+\end{figure} 
+
 
 \section{User Requirements}
 \subsection{The Child}
@@ -46,11 +71,8 @@ As I am a single developer working on this project, this is beneficial to me as 
 \section{Development Processes}
 There are also many sub-processes that are born out of or tie into Agile which could be beneficial for my project.
 
-\subsection{Feature-Driven Development}
-Feature-driven development (FDD) is an lightweight and iterative software development process which involves mapping out the feature list of the software as the `plan' for it's development.
-
-
 \subsection{Test-Driven Development}
+From the various development processes I have examined, I have chosen to use test-driven development as my key driving force 
 
 However, it must also be considered that if the practice offers a higher quality of code it is inherently likely to produce less errors and therefore the productivity/time trade-off may be worth it.
 It is also noted that I must be prepared as I am unfamiliar with TDD myself, and will likely experience a similar drop in productivity as I begin to practice the methodology, however the paper offered several useful tips for developers/teams who are new to the practice.
@@ -78,18 +100,9 @@ The flask framework was chosen specifically as it is very simple to write and ho
 To safely store and version control the code, I used a GitHub private repository to host my code in cloud storage. 
 This allows me to better manage changes to the code-base. 
 
-\section{Aesthetic Design}
-
-\subsection{Wireframes}
-
-\subsection{Android Developer Guidelines}
-\section{Use Cases}	
-
 \section{Development Style}
 
 \section{Testing}
-
-%TODO: Move these paragraphs to Design.
 Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
 Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
 As a main principle of REST is to plan out the specific endpoints that can be messaged, it becomes rather simple to plan out tests in the form of sending an example of a valid and invalid request of each request type to each endpoint.

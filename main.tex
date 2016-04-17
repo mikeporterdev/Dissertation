@@ -20,6 +20,12 @@
 \usepackage{pgfplots}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 \pagestyle{fancy}
@@ -37,6 +43,7 @@
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 \pgfplotsset{compat=1.13}
+%TC:group tabular 1 1
 
 \lstset{ %
   backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
