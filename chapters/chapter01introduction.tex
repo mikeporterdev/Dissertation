@@ -3,50 +3,48 @@
 \label{chap:intro}
 
 \section{Problem Definition}
-Parents often find it difficult to motivate children to perform chores in a timely manner. 
+Parents can often find it difficult to motivate their children to perform chores in a timely manner. 
 Many parents have attempted to implement a simple reward system to incentivize their children, but often fail to keep up with the rewards or maintain the tracking needed to make the positive reinforcement truly effective.
 I believe this is a problem that all parents face, and one we have all faced as children ourselves.  
 
 \section{Proposed Artefact}
-I want to create a mobile application that will allow parents to assign tasks and rewards to their children in the form of `quests' in a role-playing game, effectively gamifying chores. 
-The quests can take the form of ``Tidy your room'' or ``Complete your homework'' and offer rewards of experience points and gold to level up the child's in-game avatar. 
-I believe the app will provide children with incentive and positive reinforcement to acheive more. test
+I want to create a mobile application, KidQuest, that will allow parents to assign tasks and rewards to their children in the form of `quests' in a role-playing game, effectively gamifying chores. 
+The quests can take the form of ``Tidy your room'' or ``Complete your homework'' and offer rewards of experience points (XP) and gold. KidQuest will also allow the child to create an in-game character that they can customise and level up using aforementioned gold and XP.
+I believe the app will provide children with incentive and positive reinforcement to acheive more.
 
-Inspiration from this project came from two main sources: the online game Habitica, which sought to help people better themselves by adding their own tasks and to-do lists as quests and offering self-defined rewards on completion. 
-However, this game focuses largely on adults and required people to manage the software themselves, whereas KidQuest will provide the separation of adult and child to help parents motivate their children.
+Inspiration from this project came from two main sources: Firstly, the online game Habitica, which sought to help people better themselves by adding their own tasks and to-do lists as quests and offering self-defined rewards on completion. 
+Habitica, however, focuses largely on adults and requires people to manage the software themselves, whereas KidQuest will provide two separate interfaces for the adult and child to help parents motivate their children; allowing the parents to tailor the software to the specific child.
 
-Secondly, an experiment at Indiana University, where a professor chose to give out XP rewards and levels in his Games Development class instead of letter based grades \cite{sheldon2011multiplayer}  and found increased enthusiasm and participation amongst students in the class \cite{sheldonclasspostmortem}.
+Secondly, an experiment at Indiana University, where a professor chose to give out XP rewards and levels in his Games Development class instead of letter based grades \cite{sheldon2011multiplayer}.  
+The professor found increased enthusiasm and participation amongst students in the class \cite{sheldonclasspostmortem}.
 
 \section{Clients}
-The key clients for this app will be the parent(s) inputting quests into the game and marking a quest as complete once they have inspected the work. 
-The child will also be able to view quests, notify the parents that a quest requirement is ready for inspection and choose skills and equipment for their character. 
-Parents will also be able to monitor their children's activities and progress, whilst approving or rejecting various interactions that the child may have on the app.
+The key clients for this app will be the parent(s) or guardians inputting quests into the game and marking a quest as complete once they have inspected the work. 
+The child will also be able to view quests, notify the parents that a quest requirement is ready for inspection, and choose skills and equipment for their character.
+Parents will also be able to monitor their children's activities and progress, whilst approving or rejecting various activities that the child may encounter whilst using the application. 
 
 \section{Aims and Objectives}
-The aim of this project will evaluate the usefulness of game-based rewards for children performing chores. 
-To achieve this, I have identifeid the following objectives for KidQuest:
+The aim of this project is to evaluate the usefulness of game-based rewards for children performing chores. 
+To achieve this, I have identified the following objectives for KidQuest:
 
 \begin{itemize}
-	\item Create a well designed mobile application, capable of tracking and rewarding children for chores and adhering to the Android Developer specifications.
-	\item Create a secure and robust public API to allow applications to connect to the KidQuest service.
+	\item Create a well designed mobile application, capable of tracking progress and offering rewards for chores and adhering to the Android Developer specifications.
+	\item Create a secure and robust public API to allow applications to connect to the KidQuest service
 	\item Utilize appropriate technologies to securely create the two deliverables to a high quality
-	\item Utilize automated testing to ensure test coverage of over 80\% for the API.
+	\item Utilize automated testing to ensure test coverage of over 80\% for the API
 \end{itemize}
 
 \section{Risks}
 As this is a solo development project, there is a significant risk that there will be flaws in the initial design. 
-This is due to the fact - coupled with the fact that this is new technology to me - that there is a high probability that I will misunderstand what is needed for certain designs or misunderstand what the correct tool for the job is.
-Because of this I would argue that during this project, it is almost certain that the initial spec for this project will change and redesigns will need to be made. 
-In order to mitigate this, I have taken steps to make individual features and sections of the code of the project as modular as possible, hoping to be able to swap out sections of the code should certain changes arise.
-I will also code many aspects of the app with the idea that it may move to a server back-end, rather than having data stored in the app. 
- 
-The risk of changes in turn raises a key risk to the project which is that it may not be ready for the deadline. 
-I consider this to be a high severity risk to the project, as the hand-in date for the project is firm and unchangeable. 
+Because this technology was previously unknown to me, there is a high probability that I will not fully understand what is needed for certain designs or misjudge what the correct tool for the job is.
+Because of this, I would argue that - during this project - it is almost certain that the initial specifications for this project will change and redesigns will need to be made.
+In order to mitigate this, I have taken steps to make individual features and sections of the code of the project as modular as possible, hoping to be able to swap out small sections of the code should certain changes arise.
+The scale and importance of the above changes could, in themselves, lead to the project not entirely fulfilling the above objectives. I believe this makes the above risk high severity.
 
-As I am the only developer on the project, there is a high risk of the code quality being lower than what can be expected from a team.
+As I am the only developer on the project, there is a high risk of the code quality being lower than what could be expected from a team.
 I am undertaking a self code-review policy, where I reserve some time to inspect the code of each feature branch before it is merged into the master branch.
-I believe that if I am sufficiently strict with the reviews, they will help me ensure that code quality is kept up to an acceptable standard.
-Arrangements have also been made with a fellow course member to code review each others code as our projects are sufficiently different enough to avoid plagiarism and we both have strong interests in keeping our code quality to a high standard.
+I believe that if I am sufficiently strict with the reviews, they will help me ensure that code quality is kept to an acceptable standard.
+To help minimise this risk, arrangements have also been made with a fellow course member to code review each other's code. 
 When utilized correctly, code review can find approximately 30-70\% of logic errors within a program \citep{myers2011art}.
 
 Another risk that may arise is the potential for hardware failure. 
@@ -55,3 +53,15 @@ Whilst it is unlikely, steps must still be taken to mitigate this, and so I will
 The report, app code and server code will all be stored on both my PC and my Laptop as a local backup, and all three will also be stored in a remote GitHub repository (Which will remain private until the deadline to avoid plagiarism).
 This will ensure that should the worst occur, I will not lose any work barring the work that is yet to be uploaded.
 Therefore if I make regular commits to GitHub, the deliverables of this project shall remain safe. 
+
+\section{Terminology}
+
+The following terms will be used throughout:
+
+\begin{itemize}
+	\item Parent - The primary human user. The Parent assigns, manages, and approves their child's quests. In actual usage, this will usually be a real-life parent or guardian of the secondary user. 
+	\item Child - The secondary human user. The Child marks quests as complete and creates an character. In actual usage, this will usually be a dependent of the primary user. 
+	\item Quest - A task given to a child.
+	\item Quest Reward - Experience Points (XP) or gold. These can be used to level up a character or purchase real-life rewards.
+	\item RPG - Role playing game, a common format of video games where a focus is put on levelling up (strengthening) you character.
+\end{itemize}
