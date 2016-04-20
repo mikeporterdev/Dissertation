@@ -72,39 +72,16 @@ JSON is better supported by numerous libraries and or
 %Reconsider this writing
 
 
-As the project began it was clear that my initial database/class diagrams were drawn with incorrect assumptions about the project. 
-Previously, I have mostly worked on systems that handle many users logging into a web application and designed databases as such. 
-However, I did not account for the fact that with an android application, the database only needs to handle one user, which allowed me to use a simpler - less relationship heavy - database design.
 
 \subsection{Server Rewrite}
-When it came to be time to implement the parent app, it was realized that the initial designs for the server were not suitable for KidQuest.
-I had initially tried to implement all workflows into the app and store the quests on the client end. 
 The plan was then to send the quests to the parent phone using Google Cloud Messaging (GCM) and have them send back which quests were completed.
 However, GCM was not suitable for moving the quests reliably and I found that it was too likely that information would be lost or become out of sync between parent and child devices.
 
 Therefore, I decided to push most of the data and functionality to the server-side and have the app interact with the server to perform actions.
 I still chose to use GCM for communicating from the server to a client in order to push notifications when tasks are confirmed or completed.
 
-Making the move to server-side implementation did have two main consequences. 
-Firstly, users would now require an internet connection to use the app so that it is able to communicate with the server.
-This may cause an issue for users who have limited data plans on their phone contracts, however, as the app only communicates using JSON web service requests, data usage is kept to a minimum as requests are only a few kilobytes at a time.
-Also, these users will often be conscious about their data usages anyway and will use android settings to restrict data, or only use the app on WiFi. 
-Secondly, I would need to have increased security requirements surrounding the data, making sure that it is sufficiently encrypted during transfer to the server, and that the data stored on the server itself is protected as well.
-All users were now required to create an account with the server in order to use the app, as the server needed to store the data on it's end rather than on the users' phone.
 
-However, making the move to server-side functionality offers many benefits also.
-By implementing everything server-side, the app has become significantly more portable. 
-As all functionality rests in the server, any alternative apps - such as iOS or a web app - would be trivial to create as they only have to tie into the existing API, and the only code that would need to be created for these apps would be code to simply send and receive web service requests to the API.
-Furthermore, it would also create the ability for the app to easily work between users using different versions. 
-i.e. An parent using iOS would be able to monitor a child using an Android phone.
 
-To handle logins securely, I implemented a token-based authentication system within the server. 
-Upon their first request, the user submits their username and password within a HTTP POST request to the endpoint `api/token'.
-The server then sends back an encrypted token that is derived out of various attributes of their account, which the user client stores.
-The app will then authenticate itself with the server for every future request using this token.
-This offers the main benefit that the app only has to store the token and not the username and password, which would leave it vulnerable to other (malicious) apps accessing it.
-The app will also not have to send their username and password with each request that it makes to the API, minimizing the risk of the password within the request being intercepted in transport.
-The password is only stored within the server, which has securely encrypted it with a salted hash.
 
 
 Separating child and parent users was a mistake.

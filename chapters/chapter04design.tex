@@ -18,12 +18,47 @@ The wireframes shown in appendix \ref{appendix:wireframes}
 
 
 \section{System Design}
+In order to gain a better overview of the system, I mapped out how the individual pieces of the KidQuest system work together.
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.55]{images/SystemDiagram.png}
 	\caption{System Design Diagram}
 	\label{fig:systemdesign}
 \end{figure} 
+
+\subsection{Server API}
+As initial designs began it was clear that my initial database/class diagrams were drawn with incorrect assumptions about the project. 
+Initial designs attempted to implement all workflows into the applications and communicate directly between two phones, storing all necessary on the client end. 
+However, these designs presented many drawbacks, the key of which was that communications between two mobile devices appeared to be unreliable enough to ensure that data remained synchronized between them.
+For example, if a child user marked a quest as completed, their phone would send a notification to the parent user.
+However if this notification was not received by the parent, the quest would fall into a limbo-like state where the parent is waiting for it to be completed and the child is waiting for it to be confirmed.
+
+Therefore, the system calls for a central location in order for two users to reliably communicate between each other.
+By implementing the functionality into a server-based application, the system becomes significantly more portable. 
+As all functionality of the system rests in a centralized location, any ported apps - such as iOS or a web app - would only have to tie into the existing API.
+This would make porting the application trivial, as the only code that would need to be created for these apps would be code to simply send and receive web service requests to the API and display the data that it receives.
+
+Making the move to server-side implementation did have two main consequences. 
+Firstly, users would now require an internet connection to use the app so that it is able to communicate with the server.
+This may cause an issue for users who have limited data plans on their phone contracts, however, as the app only communicates using JSON web service requests, data usage is kept to a minimum as requests are only a few kilobytes at a time.
+Also, these users will often be conscious about their data usages anyway and will use android settings to restrict data, or only use the app on WiFi. 
+Secondly, I would need to have increased security requirements surrounding the data, making sure that it is sufficiently encrypted during transfer to the server, and that the data stored on the server itself is protected as well.
+All users were now required to create an account with the server in order to use the app, as the server needed to store the data on it's end rather than on the users' phone.
+
+
+Furthermore, centralized functionality would also allow the app to easily work between users using different versions of the code. 
+i.e. A parent using iOS would be able to monitor a child using an Android phone.
+
+\subsection{Security Requirements}
+To handle logins securely, I plan on implementing a token-based authentication system within the server. 
+Upon their first request, the user submits their username and password within a HTTP POST request to the endpoint `api/token'.
+The server then sends back an encrypted token that is derived out of various attributes of their account, which the user client stores.
+The app will then authenticate itself with the server for every future request using this token.
+This offers the main benefit that the app only has to store the token and not the username and password, which would leave it vulnerable to other (malicious) apps accessing it.
+The app will also not have to send their username and password with each request that it makes to the API, minimizing the risk of the password within the request being intercepted in transport.
+The password is only stored within the server, which has securely encrypted it with a salted hash.
+
 
 
 \section{User Requirements}
@@ -36,10 +71,6 @@ Once the parent has confirmed the quest, the child will be met with a reward of 
 The child can visit the rewards section to spend their gold on in-game items which will increase the power level of their character. 
 Alternatively, they can spend their gold on rewards that have been set by the parents. 
 i.e. 400 gold will be able to purchase a visit to the cinema.
-
-As an incentive to collect the rewards offered in-game, the child will be able to add friends in the game and challenge them to in-game battles. 
-The result of the battle will be generated via the current level and equipment that the character has equipped. 
-For the purposes of safety, friend requests must be confirmed by the parent before the friend request is confirmed.
 
 The application controls must be kept simple and uniform so that they are able to be learned and used by children.
 Children will not be able to access any parent functions as they will require the parent's pin code. 
