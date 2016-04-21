@@ -88,6 +88,45 @@ Separating child and parent users was a mistake.
 
 Interestingly, \cite{4597151} also states that testing a program tells us `little about its quality', arguing that the quality of a test case far outweighs sheer quantity of tests.
 
+\section{Testing}
+Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
+Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
+As a main principle of REST is to plan out the specific endpoints that can be messaged, it becomes rather simple to plan out tests in the form of sending an example of a valid and invalid request of each request type to each endpoint.
+For example, the endpoint of `/api/users/<userId>/' allows two request types, GET and PUT, which generates four test cases.
+\begin{itemize}
+	\item{Valid GET}
+	\item{Invalid GET}
+	\item{Valid PUT}
+	\item{Invalid PUT}
+\end{itemize}  
+%TODO: Research what test generation this is
+
+However, this raises issues when considering that a request could be invalid for multiple reasons, and simply testing for invalid/valid may not reach adequate code coverage.
+An example of this could be that a PUT request may be invalid due to an email address already existing within the database or because they have not included a valid did not include any new data about the user, which are two separate sections of the code that arguably each require their own tests.
+Because of this, it must be analysed whether or not the test cases achieve sufficient code coverage, rather than just relying on the entry points into the software.
+Luckily, the python package `coverage.py' allows for simple analysis of unit tests to determine the current code coverage for tests, which will provide a higher rate of confidence.
+
+\subsection{Unit Testing} 
+Unit Testing is integral to the workflow of test-driven development
+
+\subsection{Integration Testing}
+Integration testing encompasses tests that specifically test that the various parts of the project work together correctly.
+For example, in this project, integration tests would test that the server and mobile app are able to correctly function together, by ensuring that the app can correctly send requests and that the server receives those requests as they were sent.
+
+
+\subsection{Black Box Testing}
+Black box testing describes the testing of software without using explicit knowledge of the code.
+Essentially, it is testing by using that the usage of the application is correct
+
+\subsection{White Box Testing}
+
+
+\subsection{Regression Testing}
+Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
+This is made significantly easier by the implementation of strong automated unit tests, which allow me to quickly retest the majority of the code by rerunning the test suite.
+I also intend to follow a common development practice where a unit test is added for each defect that is found within the code, a new unit test is added to detect the presence of that bug specifically. 
+This will allow me to easily spot any recurrences of legacy bugs that would otherwise go unnoticed.
+
 \section{Test-Driven Development}
 In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. From the server's point of view, there are only a handful of requests that a user can make, and only a handful of tests for those requests. Before writing each endpoint of the server, I 
 
