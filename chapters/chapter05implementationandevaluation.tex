@@ -104,7 +104,9 @@ For the server, I will an extension library of Flask called Flask-Testing, which
 Flask-Testing allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
 Then, as each separate test case is run, I used the library to delete the test database and regenerate it to ensure that previous unit tests would not interfere with new tests.
 
-
+For example, the following code is a simple test that creates a child user on the server, then attempts to get the user details from the server without authorizing itself first. 
+The test will pass if the server correctly rejects the request with a `401: Not Authorized' error or fail otherwise.
+\lstinputlisting[language=python]{codesnippets/serverunittest.py}
 
 %%Results
 
@@ -151,9 +153,9 @@ This will ensure that the player will still feel like they are progressing at a 
 	\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10
 \end{equation}
 
-
 %TODO: Work out wtf you are doing with this chart
-\begin{tikzpicture}	
+\begin{center}
+\begin{tikzpicture}
 	\begin{axis}[
 		xlabel=Level,
 		ylabel=Quests to level up,
@@ -206,3 +208,9 @@ This will ensure that the player will still feel like they are progressing at a 
 		\addlegendentry{Equation \ref{eq:xpgainedlinear}}
 	\end{axis}
 \end{tikzpicture}
+\end{center}
+
+\subsection{Gold Rewards}
+\begin{equation} \label{eq:openloopreward}
+	yk = ax_k + by_{k-1} + cy_{k-2}lc
+\end{equation}

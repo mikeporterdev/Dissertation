@@ -2,21 +2,6 @@
 \chapter{Design}
 In this section, I will discuss both aesthetic and technical designs for the application as well as offer an overall design of the system as a whole.
 
-\section{User Interface}
-\subsection{Navigation}
-A focus must be put on the usability of the screens in KidQuest.
-They should not only be easy to use, but easy to learn and navigate between, and should offer minimal resistance in the use of the application.
-
-\cite{stone2005user} classifies a good user interface design as an `easy, natural and engaging interaction between a user and a system'.
-
-\subsection{Android Developer Guidelines}
-
-\subsection{Wireframes}
-Wireframing is a useful tool to plan out the aesthetic design of screens and the UI elements used within them. 
-A wireframe is also useful to get a better overview of the navigation between screens, as they can be used to plan out the button presses that will select the next screen.
-The wireframes shown in appendix \ref{appendix:wireframes}
-
-
 \section{System Design}
 In order to gain a better overview of the system, I mapped out how the individual pieces of the KidQuest system work together.
 
@@ -34,66 +19,51 @@ However, these designs presented many drawbacks, the key of which was that commu
 For example, if a child user marked a quest as completed, their phone would send a notification to the parent user.
 However if this notification was not received by the parent, the quest would fall into a limbo-like state where the parent is waiting for it to be completed and the child is waiting for it to be confirmed.
 
-Therefore, the system calls for a central location in order for two users to reliably communicate between each other.
+Therefore, the system calls for a centralized location in order for two users to reliably communicate between each other.
 By implementing the functionality into a server-based application, the system becomes significantly more portable. 
 As all functionality of the system rests in a centralized location, any ported apps - such as iOS or a web app - would only have to tie into the existing API.
 This would make porting the application trivial, as the only code that would need to be created for these apps would be code to simply send and receive web service requests to the API and display the data that it receives.
 
-Making the move to server-side implementation did have two main consequences. 
+It also has a positive effect on the maintainability of the software. 
+Updating software on mobile becomes difficult as some people do not always update their apps to the latest version. 
+Furthermore, two users working together on two different versions of the app could cause serious interoperability problems.
+The server API helps this, as all functionality updates to the system can be made in the server rather than user devices, effectively distributing updated functionality to all users at once, instantly.
+
+However, server-side implementation does have two main consequences which must be considered. 
 Firstly, users would now require an internet connection to use the app so that it is able to communicate with the server.
-This may cause an issue for users who have limited data plans on their phone contracts, however, as the app only communicates using JSON web service requests, data usage is kept to a minimum as requests are only a few kilobytes at a time.
-Also, these users will often be conscious about their data usages anyway and will use android settings to restrict data, or only use the app on WiFi. 
-Secondly, I would need to have increased security requirements surrounding the data, making sure that it is sufficiently encrypted during transfer to the server, and that the data stored on the server itself is protected as well.
-All users were now required to create an account with the server in order to use the app, as the server needed to store the data on it's end rather than on the users' phone.
+This may cause an issue for users who have limited data plans on their phone contracts or limited connectivity. 
+However, this issue can be mitigated by keeping the data sent to a minimum and making the app only send requests it needs to.
+Furthermore, options exist in the Android OS that restrict an application's data usage, meaning that requests will be halted until the user has connected to a usable wi-fi network.
 
+Secondly, All users will be required to create an account with the server in order to use the app, as the system needs to store the data on the server end rather than on the users' phone.
+I would need to have increased security requirements surrounding that data, making sure that it is sufficiently encrypted during transit between the user device and server, and that the data stored on the server itself is sufficiently protected as well.
 
-Furthermore, centralized functionality would also allow the app to easily work between users using different versions of the code. 
-i.e. A parent using iOS would be able to monitor a child using an Android phone.
-
-\subsection{Security Requirements}
+\subsubsection{Security Requirements}
 To handle logins securely, I plan on implementing a token-based authentication system within the server. 
-Upon their first request, the user submits their username and password within a HTTP POST request to the endpoint `api/token'.
-The server then sends back an encrypted token that is derived out of various attributes of their account, which the user client stores.
+Upon their first request, the user submits their username and password within a HTTP POST request to the server.
+The server then sends back an encrypted token that is derived out of various hashed attributes of their account, which the user client then stores.
 The app will then authenticate itself with the server for every future request using this token.
-This offers the main benefit that the app only has to store the token and not the username and password, which would leave it vulnerable to other (malicious) apps accessing it.
-The app will also not have to send their username and password with each request that it makes to the API, minimizing the risk of the password within the request being intercepted in transport.
+This offers the main benefit that the app only has to store the token and not the username and password, which would leave it vulnerable to other (malicious) apps accessing critical user data.
+It will also mean that the app will not have to send their username and password with each request that it makes to the API, minimizing the risk of the password within the request being intercepted in transport.
 The password is only stored within the server, which has securely encrypted it with a salted hash.
 
+\section{Database}
+\subsection{Design}
+Entity Relationship Diagrams (ERD) are a visual representation of tables, columns and relationships within a database.
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/entityRelationshipDiagram.png}
+	\caption{Server Entity Relationship Diagram}
+	\label{fig:erd}
+\end{figure} 
 
-\section{User Requirements}
-\subsection{The Child}
-The child will open the application and be met with a character screen, which will display the relevant information about their character, including the XP/Gold they currently have, the XP needed until the next level and the recent rewards they have earned.
-The child can then check their quests and mark any that they have finished as complete.
-The quest will then move into the pending quest log, ready for a parent to confirm.
-Once the parent has confirmed the quest, the child will be met with a reward of experience points and gold based on the difficulty of the quest.
-
-The child can visit the rewards section to spend their gold on in-game items which will increase the power level of their character. 
-Alternatively, they can spend their gold on rewards that have been set by the parents. 
-i.e. 400 gold will be able to purchase a visit to the cinema.
-
-The application controls must be kept simple and uniform so that they are able to be learned and used by children.
-Children will not be able to access any parent functions as they will require the parent's pin code. 
-
-\subsection{The Parent}
-The parent can either access the parent functions on the child's application using a pin code, or use their own `parent edition' of the application. 
-When designing the use case of the parents, it is important to minimize the level of interaction required from the parent to ensure they do not become tired of managing the game for the child.
-
-The parent can create quests through a simple interface, entering in the task's name, an optional description and a difficulty level. 
-The quest can have one of 5 difficulty levels, ranging from very hard to very easy.
-The game will generate the rewards for the child based on their current level and the difficulty of the quest.
-Alternatively, the parent can choose from a range of preset quests from three selected categories:
-\begin{itemize}
-	\item 
-		Staff Pick - A list of common tasks chosen by the me to help populate the list with easily selectable quests. 
-		This will contain obvious choices for tasks such as ``Clean your room'' or ``Wash the dishes''
-	\item
-		Trending in Your Area - A list of tasks that have been recently trending in the users location. 
-		This will be used to suggest tasks that many users have been inputting into the app, including recently relevant tasks like ``Rake the leaves in the garden'' at the start of Autumn.
-	\item 
-		Trending Amongst Friends - Tasks that have been trending amongst the users friends list, not including quests counted in the previous 	trending category. 
-		This may include friends added both within the app and/or friends from Facebook integration.  
-\end{itemize}
+\subsection{Database Access}
+In this design, the central database is only accessible via the server API, rather than using a direct connection to any of the users' individual devices.
+Instead, the server will offer publicly available web services that will provide functionality to input or update data. 
+This has the benefit of allowing me to properly validate and sanitize any data sent by the user before being added to the database and correctly reject requests that are unsuitable. 
+These services will ensure the user making the request is authorized to take actions on that account - i.e. The user making the request must be either the owner of that account or a registered parent of the user - before allowing them to perform any functionality.
+This segregation of the database helps to protect user data, as the database is not made accessible over the web at any point and is therefore less vulnerable to malicious entry.
 
 \section{Development Methodologies}
 \subsection{Agile}
@@ -145,6 +115,7 @@ For example, the endpoint of `/api/users/<userId>/' allows two request types, GE
 	\item{Invalid put}
 \end{itemize}  
 %TODO: Research what test generation this is
+
 However, this raises issues when considering that a request could be invalid for multiple reasons, and simply testing for invalid/valid may not reach adequate code coverage.
 An example of this could be that a PUT request may be invalid due to an email address already existing within the database or because they have not included a valid did not include any new data about the user, which are two separate sections of the code that arguably each require their own tests.
 Because of this, it must be analysed whether or not the test cases achieve sufficient code coverage, rather than just relying on the entry points into the software.
@@ -169,3 +140,16 @@ This is made significantly easier by the implementation of strong automated unit
 I also intend to follow a common development practice where a unit test is added for each defect that is found within the code, a new unit test is added to detect the presence of that bug specifically. 
 This will allow me to easily spot any recurrences of legacy bugs that would otherwise go unnoticed.
 
+\section{User Interface}
+\subsection{Navigation}
+A focus must be put on the usability of the screens in KidQuest.
+They should not only be easy to use, but easy to learn and navigate between, and should offer minimal resistance in the use of the application.
+
+\cite{stone2005user} classifies a good user interface design as an `easy, natural and engaging interaction between a user and a system'.
+
+\subsection{Android Developer Guidelines}
+
+\subsection{Wireframes}
+Wireframing is a useful tool to plan out the aesthetic design of screens and the UI elements used within them. 
+A wireframe is also useful to get a better overview of the navigation between screens, as they can be used to plan out the button presses that will select the next screen.
+The wireframes shown in appendix \ref{appendix:wireframes} give an overview of the general aesthetic style that will be used.
