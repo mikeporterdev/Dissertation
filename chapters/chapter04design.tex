@@ -50,6 +50,14 @@ The password is only stored within the server, which has securely encrypted it w
 The application will greet the user with a login/register screen that will be used to authenticate with the server before the rest of the app can be accessed.
 The login process will be bypassed if the user currently has a valid authentication token.
 
+The app will then communicate with the server to gather the relevant information needed for it's current screen, being careful to only request what is needed.
+Once the information has been received, the app will display the information in a well-laid out manner and provide relevant options to add or update the data on the server.
+
+On the first login of the app, the Child user will be prompted to name their character and then will be instructed to pass the phone to the Parent who will create a PIN code.
+Certain functions of the app will require this PIN code to be accessed, to prevent the Child from circumventing the nature of the app by giving themselves unlimited rewards.
+Parents will be able to interact with the app solely through the Child's phone, but will also be able to set up an account on their own device which will provide the Parent functions remotely.
+As a safety concern, this Parent account must be set up on the Child's device and will require the PIN code, to insure the account belongs to an actual parent of that user.
+
 \subsection{Database}
 \subsubsection{Design}
 After planning out the requirements, the next step in the design of the project was to plan out the database structure.

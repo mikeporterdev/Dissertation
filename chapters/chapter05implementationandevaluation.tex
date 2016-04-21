@@ -23,23 +23,12 @@ In order to keep up with a modern and usable design for the application, I have 
 \subsubsection{Google Cloud Messaging}
 The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
 
-\subsection{Facebook SDK}
-In order to achieve better functionality in the social media features within the app, I will need to gather access to certain information about the user with their strict and explicit permission. 
-Tying in the Facebook SDK into the app is the easiest way to gather this information in a secure manner that does not supersede the users wishes.
-For example, using the Facebook SDK, I can prompt the user to allow the app permission to gather the users friends list, detect which of them also have used the app and have connected it to facebook and connect the two users as friends within my app.
-%TODO: Reword this shit
-This technology has strict ethical concerns however, as gathering this information on children has a potential risk for privacy and security concerns, therefore
-
 \subsection{SQLite}
 
 \subsubsection{Object-Relational Mapper}
 I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis. 
 This was primarily for more ease-of-use purposes than any performance reasons. 
 I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
-
-%TODO Remove
-However, ultimately I decided to go with GreenDAO due to more community support - based on GreenDAO having four times the number of community questions on Stack Overflow - and better documentation.
-GreenDAO allowed for me generate my MySQL tables, the Java objects and data access object (DAO) patterns by writing out the names of the tables, their properties and their relationships. 
 
 %SQLAlchemy
 
@@ -48,8 +37,8 @@ Implementing an ORM also allows me to more easily protect the application agains
 
 \section{Server Web-Services}
 \subsection{Flask}
-For the server-side implementation, I will need tools that allow me to easily create a Web-Service API and provide controlled access to these over the web.
-For this task, I have chosen to use Flask as it is well established within the Python community and is incredibly low-effort to set up. 
+For the server-side implementation, I will need tools that allow me to easily create a web service API and provide controlled access to functionality over the web.
+For this task, I chose to use Flask as it is well established within the Python community and is incredibly low-effort to set up. 
 Flask is suitable for both quick prototyping of web-services and reliable deployment/hosting of functionality over the internet.
 By setting up 
 
