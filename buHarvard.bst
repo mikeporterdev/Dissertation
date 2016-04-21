@@ -53,6 +53,7 @@ ENTRY
     title
     type
     url
+    urldate
     volume
     year
   }
@@ -522,7 +523,7 @@ FUNCTION {n.dashify}
 }
 
 FUNCTION {word.in}
-{ "" }
+{ "In " emphasize }
 
 FUNCTION {format.date}
 { year "year" bibinfo.check duplicate$ empty$
@@ -942,6 +943,10 @@ FUNCTION {inproceedings}
   format.pages "pages" output.check
   new.sentence
   format.note output
+  urldate empty$
+  { "there is url but no urldate in " cite$ * warning$ }
+  { " [Accessed: " * urldate * "]" * }
+  if$
   fin.entry
 }
 FUNCTION {conference} { inproceedings }
@@ -989,7 +994,11 @@ FUNCTION {misc}
   howpublished "howpublished" bibinfo.check output
   new.sentence
   format.note output
-  fin.entry
+  urldate empty$
+  { "there is url but no urldate in " cite$ * warning$ }
+  { " [Accessed: " * urldate * "]" * }
+  if$
+  fin.entry 
 }
 FUNCTION {phdthesis}
 { output.bibitem
@@ -1367,7 +1376,7 @@ FUNCTION {begin.bib}
   write$ newline$
   "\providecommand{\url}[1]{{\tt #1}}"
   write$ newline$
-  "\providecommand{\urlprefix}{URL }"
+  "\providecommand{\urlprefix}{Available from: }"
   write$ newline$
 }
 EXECUTE {begin.bib}
