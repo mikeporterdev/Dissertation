@@ -2,19 +2,21 @@
 \chapter{Requirements and Analysis}
 \label{chap:methodology}
 
-There are two main users for the application, the child and the parent. 
-Both users have different objectives in using the application and it is important that the requirements of each user are analysed separately to insure that the application is suitable.
+There are two main users for the application, the Child and the Parent.
+Both users have different objectives when using the application, and it is important that the requirements of each user are analysed separately to ensure that the application is suitable for both.
 
 \section{Defining Requirements}
 \subsection{Functional Requirements}
 Functional requirements are, in simple terms, things that the system should be able to do. 
-Generally, functional requirements will specify behaviours, common goals or functionality that one may require from the software that is being designed.
-Typical examples of these could include `display customer' or `add order' and the overall quality of the software can be evaluated by the quality of these individual features.
+Generally, functional requirements will specify behaviours, common goals, or functionality that one may require from the software being designed.
+Typical examples of these could include `display customer' or `add order'. 
+The overall quality of the software can be evaluated by the quality and effectiveness of these individual features.
 
 \subsection{Non-functional Requirements}
 Non-functional requirements are defined by \cite[p.6]{chung2012non} as ``Software requirements that describes not what the software will do, but how the software will do it''.
 This includes examples such as the software's performance requirements, usability, quality of services, reliability etc.
-These are generally more subjective aspects of the software requirements and are therefore harder to evaluate, but should be considered when using the software during development iterations.
+These are generally more subjective aspects of the software requirements and are therefore harder to evaluate. 
+It is important, however, that they still be considered during development iterations.
 
 Software specifications are made up of both functional and non-functional requirements \cite[p.143]{chung2012non}. 
 
@@ -22,15 +24,16 @@ Software specifications are made up of both functional and non-functional requir
 \subsection{Actors}
 When determining use cases, the first step is to define the actors in the software.
 In UML, an actor is defined as a ``a type of role played by an entity that interacts with the subject (e.g., by exchanging signals and data), but which is external to the subject.'' \citep[p586-588]{omg2007unified}.
-Actors may represent a human user of the system or other external systems that will interact with the software being modelled.
-Different actors will have different objectives for using the application and it is important that the requirements of each actor are analysed to ensure the application is suitable.
-In this project there are two key actors, the child and the parent. The child uses the application to track their tasks, and the parent uses the application to manage both the tasks and the child's progress.
+Actors may represent a human users of the system or other external systems that will interact with the software being modelled.
+Different actors will have different objectives for using the application and it is important that the requirements of each actor are analysed to ensure the application is suitable. %you have pretty much exactly repeated yourself here. Seems like here is the more relevent place for that info, so maybe delete the first pragraph in this section and stick in any missing bits here?
+In this project there are two key actors, the Child and the Parent. 
+The child uses the application to track their tasks, and the parent uses the application to manage both the tasks and the child's progress. %I think they way I worded it in your other chapter might have been clearer. Maybe I didn't change it. But I think you should either exactly match the wording in your Terminology bit, or totally differ it. if that makes sense!
 
 \subsection{Identifying Features}
 A useful first step in identifying the features of the software artefact is to use brainstorming to quickly list features that could be possible for the application, without regard to the suitability or feasibility of the ideas.
 Essentially, the goal of brainstorming is to achieve quantity over quality \citep[p.144]{leffingwell2000managing}.
-Once a wide breadth of ideas have been listed out on a brainstorm, it is recommended to begin an `idea reduction' stage, where ideas are briefly evaluated to rule out obviously infeasible ideas to obtain a solid list of features that can be more deeply evaluated at later stages.
-The process for brainstorming the application involved looking at the features of similar existing apps such as task management apps or apps gamified for children whilst keeping in mind the original objectives of this project.
+Once a wide breadth of ideas have been listed out on a brainstorm, it is recommended to begin an `idea reduction' stage, where ideas are briefly evaluated to rule out obviously infeasible ideas to obtain a solid list of features that can be more deeply evaluated at a later stage.
+The process for brainstorming the application involved looking at the features of similar existing apps - such as task management apps or apps gamified for children - whilst keeping in mind the original objectives of this project.
 The results of this brainstorming process can be seen in figure \ref{fig:brainstorm}.
 
 \begin{figure}[ht]
@@ -39,93 +42,94 @@ The results of this brainstorming process can be seen in figure \ref{fig:brainst
 	\caption{Brainstorm of Potential Features}
 	\label{fig:brainstorm}
 \end{figure} 
+% TODO: standardise capitalisation within the figure? Level/apps/collecting etc. 
 
 \subsection{MoSCoW}
 Developing a software project is a complicated procedure with many potential roadblocks that can be faced.
-As identified in my risk analysis, there are several risks that can cause significant delays to the project, which in turn could be disastrous to the project due to it's tight deadline.
-Research by \cite{requirementsprioritization} has shown that only 16\% of all software projects are delivered on time and within budget, which has harrowing implications for the schedule of this artefact.
+As identified in my risk analysis, there are several risks that can cause significant delays to the project, which in turn could be disastrous to the project due to its fixed deadline.
+Research by \cite{requirementsprioritization} has shown that only 16\% of all software projects are delivered on time and within budget, which has harrowing implications for the schedule of the project.
 
-Therefore, a useful next step is to analyse my priorities when it comes to the requirements of the project and to determine which features are most vital to the project and should have more time and urgency dedicated to them.
+In light of this, a useful next step is to prioritise the tasks ahead by determining which features are most vital to the project and will, therefore, require most time and urgency.
 MoSCoW is an easy method of dividing requirements into a clear hierarchy of four categories that establish a priority for the features or requirements of a software project \citep[p.517]{hatton2008choosing}.
-This MoSCoW list will serve as the final list of features that I hope to include within this project and will be referred back to as my `to-do' list throughout development. 
-However, it is important to explicitly note that this is not a target of what features will be in the application, but rather a hierarchical `wish list' of features that may or may not be achieved depending on time restraints.
+This MoSCoW list will serve as the final list of features that I hope to include within this project and will be referred to as my `to-do list' throughout development. 
+It is important to explicitly note, however, that this is not a target of features that will be in the application, but rather a hierarchical `wish list' of features that may or may not be achieved, depending on how development progresses within the time frame.
 I have separated the functional requirements (FRxx) and non-functional requirements (NRxx) into the four MoSCoW categories in the following list:
 
 \subsubsection{Must Have}
-Features that vital to the success of the project and can cause delays to the release of the software if they are not finished on time.
+There are some features that will be vital to the success of the project and can cause delays to the release of the software if they are not finished on time.
 These should be the first features developed in the software and be thoroughly tested to ensure high quality.
 
 \begin{center}
 \begin{longtable}{|C{1cm}|L{3cm}|L{8cm}|}
 	\hline
 	\textbf{No.} & \multicolumn{1}{C{3cm}}{\textbf{Feature}} & \multicolumn{1}{|C{8cm}|}{\textbf{Description}} \\ \hline
-	FR01 & Child Tasks App & A child can login and see tasks to complete and mark as completed accordingly. \\ \hline
-	FR02 & Parent Control App & A parent can login and view details about the child users account. \\ \hline
-	FR03 & RPG Rewards & Child users will be rewarded with experience points and will level up after obtaining certain amounts. \\ \hline
-	FR04 & Gold Rewards & Child users will be given a gold reward for completing tasks on time. \\ \hline
-	FR05 & Reward shop & Parents will be able to set real life rewards for the child user to purchase using earned gold. \\ \hline
-	NR01 & Reliability & App must not crash, and must handle errors gracefully. \\ \hline
-	NR02 & Security & Server must not make user information publicly available without correct authentication. \\ \hline 
+	FR01 & Child Tasks App & A Child can login and see tasks to complete, and mark as completed accordingly \\ \hline
+	FR02 & Parent Control App & A Parent can login and view details about the Child user's account \\ \hline
+	FR03 & RPG Rewards & Child users will be rewarded with experience points and will level up after obtaining certain amounts \\ \hline
+	FR04 & Gold Rewards & Child users will be given a gold reward for completing tasks on time \\ \hline
+	FR05 & Reward shop & Parents will be able to set real life rewards for the Child user to purchase using earned gold \\ \hline
+	NR01 & Reliability & App must not crash, and must handle errors gracefully \\ \hline
+	NR02 & Security & Server must not make user information accessible without correct authentication \\ \hline
 \end{longtable}
 \end{center}
 
 \subsubsection{Should Have}
-These are features that are important to have, but will not necessarily be disastrous if they are not completed.
+These are features that are important to have, but are not integral to the app's main functionality, so will not render the app useless if they are incomplete at the end of the process.
 
 \begin{center}
 \begin{longtable}{|C{1cm}|L{3cm}|L{8cm}|}
 	\hline
 	\textbf{No.} & \multicolumn{1}{C{3cm}}{\textbf{Feature}} & \multicolumn{1}{|C{8cm}|}{\textbf{Description}} \\ \hline
-	FR06 & REST API back-end & Implement a REST API server that the parent and child apps can use to communicate with each other, instead of phone to phone communication. \\ \hline
-	FR07 & Preset Quests & Allow parents to choose from a list of preset tasks generated by the server, such as trending tasks. \\ \hline
-	FR08 & Friends List & Allow children to add each other as friends in the app. The adding of friends should be monitored and approved by parent users. \\ \hline
-	FR09 & Notifications & Alert a user whenever their respective parent/child performs certain actions \\ \hline
-	NR03 & Usability & User must be able to easily navigate between various screens. \\ \hline
-	NR04 & Usability & The app should be responsive and reliable. \\ \hline 
-	NR05 & Android Developer Guidelines & App must make a best effort to follow the Android Developer Material guidelines laid out by Google. \\ \hline
+	FR06 & REST API back-end & Implement a REST API server that the Parent and Child apps can use to communicate with each other, instead of phone to phone communication \\ \hline
+	FR07 & Preset Quests & Allow Parents to choose from a list of preset tasks generated by the server, such as trending tasks \\ \hline
+	FR08 & Friends List & Allow Children to add each other as friends in the app. The adding of friends should be monitored and approved by Parent users \\ \hline
+	FR09 & Notifications & Alert a user whenever their respective Parent/Child performs certain actions \\ \hline
+	NR03 & Usability & User must be able to easily navigate between various screens \\ \hline
+	NR04 & Usability & The app should be responsive and reliable \\ \hline 
+	NR05 & Android Developer Guidelines & App must make a best effort to follow the Android Developer Material guidelines laid out by Google \\ \hline
 \end{longtable}
 \end{center}
 
 \subsubsection{Could Have}
-This describes features that would be nice to have in the project and could be looked at if there is excess time at the end of the project.
-However it is important to be wary of scope creep and recognize that any feature added will not only add development time, but testing and documentation time too.
+This describes features that would be preferable to have in the project and could be looked at, if there is time to, at the end of the project.
+However, it is important to be wary of scope creep and recognize that any feature added will not only add development time, but testing and documentation time too.
 
 \begin{center}
 \begin{longtable}{|C{1cm}|L{3cm}|L{8cm}|}
 	\hline
 	\textbf{No.} & \multicolumn{1}{C{3cm}}{\textbf{Feature}} & \multicolumn{1}{|C{8cm}|}{\textbf{Description}} \\ \hline
-	FR10 & Friend Battles & Child users can select friends to `battle' with and compete with each other. \\ \hline
-	FR11 & Graph Friend Selection & Graph selection UI for inviting friends to do group quests. \\ \hline
-	FR12 & Web application & Allow parents/children to use a web application to access their accounts. \\ \hline
+	FR10 & Friend Battles & Child users can select friends to `battle' with and compete with each \\ \hline
+	FR11 & Graph Friend Selection & Graph selection UI for inviting friends to undertake group quests \\ \hline
+	FR12 & Web application & Allow Parents/Children to use a web application to access their accounts \\ \hline
 \end{longtable}
 \end{center}
 
 \subsubsection{Won't Have}
-Suggested features that are not practically feasible for this release.
+Suggested features that are not feasible for this release, due to time and resource constraints.
 These could potentially be re-raised for a future update to the software.
 
 \begin{center}
 \begin{longtable}{|C{1cm}|L{3cm}|L{8cm}|}
 	\hline
 	\textbf{No.} & \multicolumn{1}{C{3cm}}{\textbf{Feature}} & \multicolumn{1}{|C{8cm}|}{\textbf{Description}} \\ \hline
-	FR13 & Sound Effects & Music and audio effects when certain events are completed. \\ \hline
-	FR14 & Character Graphics & Artistically designed graphical interface. \\ \hline
-	FR15 & Leaderboards & A constantly updated ranking of calculated `scores' between friended users. \\ \hline
+	FR13 & Sound Effects & Music and audio effects when certain events are completed \\ \hline
+	FR14 & Character Graphics & Artistically designed graphical interface \\ \hline
+	FR15 & Leaderboards & A constantly updated ranking of calculated `scores' between befriended users \\ \hline
 \end{longtable}
 \end{center}
 
 \subsection{Use Case Diagrams}
-In order to properly specify the requirements for a user in more detail, it is useful to plan out the various use cases a user may take in a Use Case Diagram.
-The purpose of a use case diagram is to show the actors who interact the system, their goals and how those goals work in relation to each other.
-Use case diagrams are also useful to help visualize an outside view of a system and gather requirements - although in this case I am using the diagram to refine the requirements that I have already mapped out.
+In order to properly specify the requirements for a user in more detail, it is useful to plan out the various use cases a user may take in a use case diagram.  
+The purpose of a use case diagram is to show the actors the system, their goals, and how those goals work in relation to each other.
+Use case diagrams are also helpful to visualize an outside view of a system and gather requirements - although in this case I am using the diagram to refine the requirements that I have already mapped out.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.55]{images/UseCaseDiagram.png}
-	\caption{Use Case Diagram of the `Must Have' functional requirements}
+	\caption{Use case diagram of the `Must Have' functional requirements}
 	\label{fig:usecasediagram}
 \end{figure} 
-
+% again - check your capitalisation.
 In figure \ref{fig:usecasediagram}, you can see the two actors in the system and the relationships between the tasks that they may take. 
-The diagram also lists tasks that are extended from another task such as `view pending task', which for all intents and purposes is the same feature as `view tasks', except that you only see a subset of the tasks. 
-You can also more clearly see the layout of the reward shop, where the use case details how the parent can view the shop to add or remove rewards, whereas the child can view the shop to purchase rewards.
+The diagram also lists tasks that are extended from another task such as `view pending task', which, for all intents and purposes, is the same feature as `view tasks'. The difference is that you only see a subset of the tasks. 
+You can also more clearly see the layout of the reward shop, where the use case details how the Parent can view the shop to add or remove rewards, whereas the Child can view the shop to purchase rewards.
