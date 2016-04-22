@@ -1,27 +1,29 @@
 %!TEX root = ../main.tex
-
-% 1000-2000 Words
-% 
-% Merge with evalutation
-
-
 \chapter{Implementation and Evaluation}
 
+%Damiens words not mine
 For clarity, we present the implementation and evaluation together and split the presentation by the natural split in the code which is the server and application.
 
 \section{Application}
 \subsubsection{Android}
 Android has been chosen for this application due to the large success and market hold of the operating system.
 
+
 Primarily I will be targeting to support Android versions down to API level 16 (Jelly Bean 4.1).
 This decision has been made as figure \ref{fig:AndroidVersions} shows that by supporting this far back, my application will be compatible with over 95\% of current phones. 
 Older versions than this will not be targeted, as development and testing time is limited and many features will have to be limited due to lacking functionality within these older versions.
 
-\subsubsection{Material Design}
-In order to keep up with a modern and usable design for the application, I have chosen to adhere to the most current standards set by Google for material design.
-
 \subsubsection{Google Cloud Messaging}
 The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
+In Android, this can be achieved using push notifications relayed through the Google Cloud Messaging (GCM) service.
+GCM can be utilized to send messages to an Android device, but is largely unreliable \citep{gcmreliability} and therefore should only be used for notifications, rather than the transmission of data.
+The service requires that the server registers with the GCM to retrieve an API key and that the user device registers to retrieve a GCM registration ID \citep{gcm}. 
+When a user registers with the artefact server, the registration ID is stored wtihin the database to be used to send notifcations.
+When a particular action is performed on an account in the API, the server will check if that user has an attached account - i.e. either a Parent monitoring a Child or vice versa.
+Then, the server sends the message and the target GCM registration ID to the GCM system which passes on the message.
+
+Within the application, a listener service has been implemented to be triggered upon the receipt of a GCM message that will create a push notification with the message sent by the server.
+Examples of the push notification messages can be seen in appendix \ref{appendix:pushnotifications}
 
 \subsection{SQLite}
 
