@@ -36,13 +36,18 @@ By utilizing Flask, I was able to easily translate a user's web request into a m
 This short code snipped shows the method used to return all rewards in the reward shop for a user.
 This method is activated upon sending a GET request to the endpoint such as `server\_host\_name:5000/api/user/1/rewards/', and will return the rewards for the first user in JSON format, provided the attached authentication details match that user. 
 
-\subsection{SQLite}
+\subsection{Database}
 \subsubsection{Object-Relational Mapper}
 I chose to use a pre-built Object Relational Mapping (ORM) library to interface with the database, rather than crafting particular queries on an ad hoc basis. 
 This was primarily for more ease-of-use purposes than any performance reasons. 
 I decided upon using SQLAlchemy as the ORM for the server due to strong Flask support.
 Specifically, the Flask-SQLAlchemy library was utilized to provide Flask specific functions that could be used to interface with the database.
 Implementing an ORM also allows me to more easily protect the application against SQL injection, as Flask purposefully escapes special characters that would allow such an attack \citep[p.15]{copeland2008essential}.
+
+\subsubsection{SQLite}
+I have opted to use SQLite to store the user data in the server.
+SQLite is a very lightweight RDBMS that is well supported by the Flask-SQLAlchemy library.
+The database tables will be automatically generated out of the classes created in Flask on the first run of an application, as well the relationships described in figure \ref{appendix:erd}. 
 
 \section{Application}
 \subsection{Android}
@@ -161,11 +166,16 @@ In this system, a quest is added with an expiry date value, which defaults to on
 At around halfway through the time available to complete the task, the reward from the quest will begin to reduce at a steady rate for the remaining time.
 Eventually, if the task remains incomplete until the expiry date, the gold reward drops to zero, the quest expires and the quest is removed from their tasks.
 
+Secondly, I extended this system to base the given reward for a quest off of the Child's time-based performance in their last three quests.
 
-Secondly, 
+If the user has completed less than three quests, the effect is ignored as there is not enough data.
+
+The end result is that if a Child allows a quest to expire
+This system encourages the user to maintain a streak of fulfilling tasks in a timely manner and discourages them from allowing a quest to expire as it will not just be that reward that is effected, but their rewards for the next three quests.
+It is intended that this will influence children to begin thinking about their tasks in a long-term manner.
 
 \begin{equation} \label{eq:openloopreward}
-	yk = ax_k + by_{k-1} + cy_{k-2}lc
+	y_k = ax_k + by_{k-1} + cy_{k-2} + dy_{k-3}
 \end{equation}
 
 
