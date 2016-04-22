@@ -1,19 +1,17 @@
 %!TEX root = ../main.tex
 \chapter{Implementation and Evaluation}
 
-%Damiens words not mine
+%Damien's words not mine
 For clarity, we present the implementation and evaluation together and split the presentation by the natural split in the code which is the server and application.
 
 \section{Application}
-\subsubsection{Android}
+\subsection{Android}
 Android has been chosen for this application due to the large success and market hold of the operating system.
+Primarily I will be aiming to support Android versions down to API level 16 (Jelly Bean 4.1).
+This decision has been made as appendix \ref{appendix:sdkmarketshare} shows that by supporting this far back, the application will be compatible with over 95\% of current phones. 
+Older versions than this will not be targeted, as development and testing time is limited and it would mean that many features would have to be limited due to lacking functionality within these older versions.
 
-
-Primarily I will be targeting to support Android versions down to API level 16 (Jelly Bean 4.1).
-This decision has been made as figure \ref{fig:AndroidVersions} shows that by supporting this far back, my application will be compatible with over 95\% of current phones. 
-Older versions than this will not be targeted, as development and testing time is limited and many features will have to be limited due to lacking functionality within these older versions.
-
-\subsubsection{Google Cloud Messaging}
+\subsection{Google Cloud Messaging}
 The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
 In Android, this can be achieved using push notifications relayed through the Google Cloud Messaging (GCM) service.
 GCM can be utilized to send messages to an Android device, but is largely unreliable \citep{gcmreliability} and therefore should only be used for notifications, rather than the transmission of data.
@@ -23,32 +21,35 @@ When a particular action is performed on an account in the API, the server will 
 Then, the server sends the message and the target GCM registration ID to the GCM system which passes on the message.
 
 Within the application, a listener service has been implemented to be triggered upon the receipt of a GCM message that will create a push notification with the message sent by the server.
-Examples of the push notification messages can be seen in appendix \ref{appendix:pushnotifications}
+Examples of the push notification messages can be seen in appendix \ref{appendix:pushnotifications}.
 
-\subsection{SQLite}
+\section{Server}
+\subsection{Representational State Transfer (REST)}
+To structure the server's web services, I have chosen to use a REST architecture style.
+REST involves dividing the web services into specific objects which can be accessed through sending a request to that object's URL, this is called an `endpoint' or a `URI'.
+These endpoints are then connected to via different HTTP methods, of which the following are used:
+\begin{description}[align=left]
+	\item [GET] Retrieves an item or list of items.
+	\item [POST] Creates a new item.
+	\item [PUT] Updates an existing item or list of items.
+	\item [DELETE] Deletes an item.
+\end{description}
+For example, if someone wanted to retrieve all users of a REST service, they could send a GET request to the `/users/' endpoint. 
+If, however, they wanted to retrieve a specific user, they would send a GET request to `/users/$x$/' where $x$ is the user's ID.
+And finally, sending a POST request to `/users/$x$/quests/' would create a a new quest for user $x$.
 
-\subsubsection{Object-Relational Mapper}
-I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis. 
-This was primarily for more ease-of-use purposes than any performance reasons. 
-I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
+Collectively, these request methods and endpoints will form the basis for all communication with the server. 
+A full plan for the endpoints of the server artefact can be seen in appendix \ref{appendix:endpoints} and examples of requests in \ref{appendix:requests}.
 
-%SQLAlchemy
-
-Implementing an ORM also allows me to more easily protect the application against malicious SQL injection attacks as both GreenDAO and SQLAlchemy provide sufficient protection against this. 
-
-
-\section{Server Web-Services}
 \subsection{Flask}
 For the server-side implementation, I will need tools that allow me to easily create a web service API and provide controlled access to functionality over the web.
-For this task, I chose to use Flask as it is well established within the Python community and is incredibly low-effort to set up. 
-Flask is suitable for both quick prototyping of web-services and reliable deployment/hosting of functionality over the internet.
-By setting up 
+For this task, I chose to use Flask as it is well established within the Python community and is relatively easy to set up and maintain. 
+Flask is suitable for both quick prototyping of web-services and reliable deployment/hosting of the functionality over the internet.
 
-\subsubsection{REST vs. SOAP}
-Flask will give me the tools to create the web-services but I must consider the structure in which I choose to build them. 
-
-SOAP and REST are both well established web service protocols that offer a wide range of benefits making them suitable for use for the remote API.
-
+By utilizing Flask, I was able to easily translate a user's web request into a method call, with relevant parameters, using the following code:
+\lstinputlisting[language=python]{codesnippets/getrewards.py}
+This short code snipped shows the method used to return all rewards in the reward shop for a user.
+This method is activated upon sending a GET request to the endpoint such as `server\_host\_name:5000/api/user/1/rewards/', and will return the rewards for the first user in JSON format, provided the attached authentication details match that user. 
 
 \subsubsection{JSON vs. XML}
 In order to communicate to the servers web services, I will need to decide upon a message format. 
@@ -58,6 +59,16 @@ REST is capable of using both XML and JSON to communicate over the web and neith
 JSON is better supported by numerous libraries and or
 
 
+
+\subsection{SQLite}
+\subsubsection{Object-Relational Mapper}
+I chose to use a pre-built Object Relational Mapping library to interface with the database, rather than crafting particular queries on an ad hoc basis. 
+This was primarily for more ease-of-use purposes than any performance reasons. 
+I considered a variety of options for which library to use, initially deciding upon SugarORM due to its very quick learning curve and low use of boilerplate syntax. 
+
+%SQLAlchemy
+
+Implementing an ORM also allows me to more easily protect the application against malicious SQL injection attacks as both GreenDAO and SQLAlchemy provide sufficient protection against this. 
 
 
 %Reconsider this writing
@@ -77,82 +88,7 @@ I still chose to use GCM for communicating from the server to a client in order 
 
 Separating child and parent users was a mistake.
 
-Interestingly, \cite{4597151} also states that testing a program tells us `little about its quality', arguing that the quality of a test case far outweighs sheer quantity of tests.
-
-\section{Testing}
-Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
-Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
-As a main principle of REST is to plan out the specific endpoints that can be messaged, it becomes rather simple to plan out tests in the form of sending an example of a valid and invalid request of each request type to each endpoint.
-For example, the endpoint of `/api/users/<userId>/' allows two request types, GET and PUT, which generates four test cases.
-\begin{itemize}
-	\item{Valid GET}
-	\item{Invalid GET}
-	\item{Valid PUT}
-	\item{Invalid PUT}
-\end{itemize}  
-%TODO: Research what test generation this is
-
-However, this raises issues when considering that a request could be invalid for multiple reasons, and simply testing for invalid/valid may not reach adequate code coverage.
-An example of this could be that a PUT request may be invalid due to an email address already existing within the database or because they have not included a valid did not include any new data about the user, which are two separate sections of the code that arguably each require their own tests.
-Because of this, it must be analysed whether or not the test cases achieve sufficient code coverage, rather than just relying on the entry points into the software.
-Luckily, the python package `coverage.py' allows for simple analysis of unit tests to determine the current code coverage for tests, which will provide a higher rate of confidence.
-
-\subsection{Unit Testing} 
-Unit Testing is integral to the workflow of test-driven development
-
-\subsection{Integration Testing}
-Integration testing encompasses tests that specifically test that the various parts of the project work together correctly.
-For example, in this project, integration tests would test that the server and mobile app are able to correctly function together, by ensuring that the app can correctly send requests and that the server receives those requests as they were sent.
-
-
-\subsection{Black Box Testing}
-Black box testing describes the testing of software without using explicit knowledge of the code.
-Essentially, it is testing by using that the usage of the application is correct
-
-\subsection{White Box Testing}
-
-
-\subsection{Regression Testing}
-Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
-This is made significantly easier by the implementation of strong automated unit tests, which allow me to quickly retest the majority of the code by rerunning the test suite.
-I also intend to follow a common development practice where a unit test is added for each defect that is found within the code, a new unit test is added to detect the presence of that bug specifically. 
-This will allow me to easily spot any recurrences of legacy bugs that would otherwise go unnoticed.
-
-\section{Test-Driven Development}
-In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. From the server's point of view, there are only a handful of requests that a user can make, and only a handful of tests for those requests. Before writing each endpoint of the server, I 
-
-\section{Functional Testing}
-
-\section{Unit Testing}
-%UT explanation
-
-As a part of Test-Driven Development, unit testing is a integral part of the development process.
-
-%Server
-
-For the server, I will an extension library of Flask called Flask-Testing, which streamlined the process of writing and running unit tests.
-Flask-Testing allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
-Then, as each separate test case is run, I used the library to delete the test database and regenerate it to ensure that previous unit tests would not interfere with new tests.
-
-For example, the following code is a simple test that creates a child user on the server, then attempts to get the user details from the server without authorizing itself first. 
-The test will pass if the server correctly rejects the request with a `401: Not Authorized' error or fail otherwise.
-\lstinputlisting[language=python]{codesnippets/serverunittest.py}
-
-%%Results
-
-%App
-As the app is written in Java, there is already strong backing for the use of tools like JUnit to perform easily unit tests.
-Google have also allowed for support with Mockito to help simulate any missing dependencies during the tests.
-
-%%Results
-
-\section{Usability Testing}
-In order to perform Usability testing, 
-
-\section{Beta Testing}
-
 \section{Game Design}
-
 \subsection{Rewards}
 The rate at which these rewards are earned must be examined to ensure they still feel rewarding throughout. 
 For example, if a quest returns 100 XP points and you require 300 XP to level up from level 1 to 2, this only requires you to complete three quests to level up, meaning these three quests feel rewarding as each quest is offering 1/3rd of a level.
@@ -168,9 +104,11 @@ Anderson also shows that it is important to determine reasonable caps for numeri
 \end{equation}
 
 Initially, the scaling formula for XP rewards involved using 60XP as a base reward for a medium difficulty quest, then using the player's current level, it would derive a multiplier that would be used to scale the XP reward.
+
 \begin{equation} \label{eq:xpgainedlinear}
 	\textrm{XP Gained} = 60 \times \frac{(n - 1) \times k}{100} + 1
 \end{equation}
+
 Where k can be adjusted to specify the strength of the multiplier against the XP rewards, so that if k = 10, a character at level 31 would have a 3x multiplier on quests, meaning the same quest that gave them 60XP at level 1, now gives them 180XP.
 However, when modelling this equation, the number of quests completed quickly becomes out of hand. 
 At level 1, the player must complete 2 medium quests to level up - a reasonable starting point.
@@ -183,7 +121,6 @@ This will ensure that the player will still feel like they are progressing at a 
 	\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10
 \end{equation}
 
-%TODO: Work out wtf you are doing with this chart
 \begin{center}
 \begin{tikzpicture}
 	\begin{axis}[
@@ -241,6 +178,73 @@ This will ensure that the player will still feel like they are progressing at a 
 \end{center}
 
 \subsection{Gold Rewards}
+A key goal of the project is achieving long term motivation for children, and to avoid the non-continuous effects mentioned by \cite{deci2001extrinsic} in chapter 2 research.
+In order to achieve this goal, I implemented two key elements to the rewards earned from a quest.
+
+Firstly, in order to discourage Child users from delaying performing a task, I implemented a system that gradually diminishes the maximum achievable gold reward for a quest over time. 
+In this system, a quest is added with an expiry date value, which defaults to one week from the quest creation date.
+At around halfway through the time available to complete the task, the reward from the quest will begin to reduce at a steady rate for the remaining time.
+Eventually, if the task remains incomplete until the expiry date, the gold reward drops to zero, the quest expires and the quest is removed from their tasks.
+
+
+Secondly, 
+
 \begin{equation} \label{eq:openloopreward}
 	yk = ax_k + by_{k-1} + cy_{k-2}lc
 \end{equation}
+
+
+
+
+\section{Testing}
+Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
+Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
+As a main principle of REST is to plan out the specific endpoints that can be messaged, it becomes rather simple to plan out tests in the form of sending an example of a valid and invalid request of each request type to each endpoint.
+For example, the endpoint of `/api/users/<userId>/' allows two request types, GET and PUT, which generates four test cases.
+\begin{itemize}
+	\item{Valid GET}
+	\item{Invalid GET}
+	\item{Valid PUT}
+	\item{Invalid PUT}
+\end{itemize}  
+%TODO: Research what test generation this is
+
+However, this raises issues when considering that a request could be invalid for multiple reasons, and simply testing for invalid/valid may not reach adequate code coverage.
+An example of this could be that a PUT request may be invalid due to an email address already existing within the database or because they have not included a valid did not include any new data about the user, which are two separate sections of the code that arguably each require their own tests.
+This issue is highlighted by \cite{4597151}, who states that testing a program tells us `little about its quality', arguing that the quality of a test case far outweighs sheer quantity of tests.
+Because of this, it must be analysed whether or not the test cases achieve sufficient code coverage, rather than just relying on the entry points into the software.
+Luckily, the python package `coverage.py' allows for simple analysis of unit tests to determine the current code coverage for tests, which will provide a higher rate of confidence.
+
+\subsection{Test-Driven Development}
+In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. From the server's point of view, there are only a handful of requests that a user can make, and only a handful of tests for those requests. Before writing each endpoint of the server, I 
+
+\subsection{Unit Testing} 
+As a part of Test-Driven Development, unit testing is a integral part of the development process.
+
+%Server
+
+For the server, I will an extension library of Flask called Flask-Testing, which streamlined the process of writing and running unit tests.
+Flask-Testing allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
+Then, as each separate test case is run, I used the library to delete the test database and regenerate it to ensure that previous unit tests would not interfere with new tests.
+
+For example, the following code is a simple test that creates a child user on the server, then attempts to get the user details from the server without authorizing itself first. 
+The test will pass if the server correctly rejects the request with a `401: Not Authorized' error or fail otherwise.
+\lstinputlisting[language=python]{codesnippets/serverunittest.py}
+
+\subsection{Integration Testing}
+Integration testing encompasses tests that specifically test that the various parts of the project work together correctly.
+For example, in this project, integration tests would test that the server and mobile app are able to correctly function together, by ensuring that the app can correctly send requests and that the server receives those requests as they were sent.
+
+
+\subsection{Black Box Testing}
+Black box testing describes the testing of software without using explicit knowledge of the code.
+Essentially, it is testing by using that the usage of the application is correct
+
+\subsection{White Box Testing}
+
+
+\subsection{Regression Testing}
+Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
+This is made significantly easier by the implementation of strong automated unit tests, which allow me to quickly retest the majority of the code by rerunning the test suite.
+I also intend to follow a common development practice where a unit test is added for each defect that is found within the code, a new unit test is added to detect the presence of that bug specifically. 
+This will allow me to easily spot any recurrences of legacy bugs that would otherwise go unnoticed.
