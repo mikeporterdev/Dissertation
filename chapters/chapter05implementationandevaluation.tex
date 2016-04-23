@@ -101,13 +101,22 @@ This will ensure that the player will still feel like they are progressing at a 
 	\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10
 \end{equation}
 
-\begin{center}
+The rate of quests required to level up using these two systems is mapped in figure \ref{fig:xprewardcomparison}.
+This figure was mapped out assuming all quests completed were of medium difficulty, whereas in real usage the speed will increase or decrease depending on the difficulty of quests.
+
+In my evaluation of the artefact, I found that the second system provided much more of a rewarding feel to the user. 
+The application still provided a very fast gain when the user first starts using the app, but quickly levels off to a reasonable amount.
+Whereas the first system quickly spiralled out of control.
+
+\begin{figure}
+\centering
 \begin{tikzpicture}
 	\begin{axis}[
 		xlabel=Level,
 		ylabel=Quests to level up,
 		xmin=0,
 		ymin=0,
+		legend pos = outer north east
 	]
 		\addplot coordinates {
 			(1, 1.7)
@@ -155,7 +164,9 @@ This will ensure that the player will still feel like they are progressing at a 
 		\addlegendentry{Equation \ref{eq:xpgainedlinear}}
 	\end{axis}
 \end{tikzpicture}
-\end{center}
+\caption{A comparison of two XP reward systems}
+\label{fig:xprewardcomparison}
+\end{figure}
 
 \subsection{Gold Rewards}
 A key goal of the project is achieving long term motivation for children, and to avoid the non-continuous effects mentioned by \cite{deci2001extrinsic} in chapter 2 research.
@@ -165,20 +176,79 @@ Firstly, in order to discourage Child users from delaying performing a task, I i
 In this system, a quest is added with an expiry date value, which defaults to one week from the quest creation date.
 At around halfway through the time available to complete the task, the reward from the quest will begin to reduce at a steady rate for the remaining time.
 Eventually, if the task remains incomplete until the expiry date, the gold reward drops to zero, the quest expires and the quest is removed from their tasks.
+This is an example of an `open loop system', 
 
 Secondly, I extended this system to base the given reward for a quest off of the Child's time-based performance in their last three quests.
-
-If the user has completed less than three quests, the effect is ignored as there is not enough data.
-
-The end result is that if a Child allows a quest to expire
+This is referred to as a `closed loop system', where the reward amount is calculated based off of previous rewards.
+The end result is that if a Child allows a quest to begin expiring, it will effect the following three quests rather than just this one.
 This system encourages the user to maintain a streak of fulfilling tasks in a timely manner and discourages them from allowing a quest to expire as it will not just be that reward that is effected, but their rewards for the next three quests.
 It is intended that this will influence children to begin thinking about their tasks in a long-term manner.
+If the user has completed less than three quests, the effect is ignored as there is not enough data.
+The reward is calculated using the following equation:
 
-\begin{equation} \label{eq:openloopreward}
+\begin{equation} \label{eq:closedloopreward}
 	y_k = ax_k + by_{k-1} + cy_{k-2} + dy_{k-3}
 \end{equation}
 
+A comparison of the two types of rewards can be seen in figure \ref{fig:rewardcomparison}.
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+	\begin{axis}[
+	xlabel=Quests Completed,
+	ylabel=Gold Stored,
+	ymin=0,
+	xmin=0,
+	legend pos = outer north east
+	]
+		\addplot coordinates{
+			(0,0)
+			(1,100)
+			(2,245)
+			(3,495)
+			(4,795)
+			(5,795)
+			(6,1535)
+			(7,1585)
+			(8,2185)
+			(9,2485)
+			(10,2485)
+			(11,2785)
+			(12,2815)
+			(13,3115)
+			(14,3415)
+		};
+		\addlegendentry{Open Loop Rewards}
+		\addplot coordinates{
+			(0,0)
+			(1,100)
+			(2,245)
+			(3,495)
+			(4,795)
+			(5,795)
+			(6,1402)
+			(7,1450)
+			(8,1891)
+			(9,2161)
+			(10,2293)
+			(11,2496)
+			(12,2628)
+			(13,2832)
+			(14,3098)
+		};
+		\addlegendentry{Closed Loop Rewards}
+	\end{axis}
+\end{tikzpicture}
+\caption{A comparison of the two reward types}
+\label{fig:rewardcomparison}
+\end{figure}
+
+The gold and XP reward systems follow two separate paths.
+Where both the XP gained per quest and the XP required to level up both increase each level, the gold rewards remain at a continuous gain and do not involve player levels.
+Furthermore, with XP, I have preferred the system that rewards the player with more XP, whereas with gold rewards I have preferred the system that provides less.
+This is mainly due to the inclusion of a reward shop in the project, which exchanges some of the Child's gold storage for a real life reward set by the Parent. 
+Therefore, in order for this to work successfully, the amount of gold that a child earns must remain in check.
 
 
 \section{Testing}
