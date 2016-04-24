@@ -1,3 +1,25 @@
+%!TEX root = ../main.tex
 \chapter{REST Endpoint Plan}
 \label{appendix:endpoints}
 
+\begin{table}
+\centering
+\begin{tabular}{|l|p{1.5cm}|l|p{2.1cm}|}
+	\hline
+	Endpoint & Request Type & Description & Authorization Required? \\ \hline
+	/users/ & POST & Create a new user & N \\ \hline
+	/users/$userid$/ & GET & Get details about a user & Y \\ \hline
+	/users/$userid$/ & PUT & Update properties of a user & Y \\ \hline
+	/users/$userid$/quests/ & GET & Get list of all user quests & Y \\ \hline
+	/users/$userid$/quests/ & POST & Add new user quest & Y \\ \hline
+	/users/$userid$/quests/$questid$/ & GET & Get details about a quest & Y \\ \hline
+	/users/$userid$/quests/$questid$/ & PUT & Update a quest & Y \\ \hline
+	/users/$userid$/rewards/ & GET & Get all user rewards & Y \\ \hline
+	/users/$userid$/rewards/ & POST & Add a new user reward & Y \\ \hline
+	/users/$userid$/rewards/$rewardid$/ & GET & Get a specific reward & Y \\ \hline
+	/users/$userid$/rewards/$rewardid$/ & PUT & Update a specific reward & Y \\ \hline
+	/quests/getTrending/ & GET & Get all trending quests & N \\ \hline
+	/quests/getStaffPick/ & GET & Get preset staff pick quests & N \\ \hline
+\end{tabular}
+\caption{Planned REST Endpoints}
+\end{table}
