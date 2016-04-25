@@ -8,12 +8,12 @@ For clarity, we present the implementation and evaluation together and split the
 \subsection{Representational State Transfer (REST)}
 To structure the server's web services, I have chosen to use a REST architecture style.
 REST involves dividing the web services into specific objects which can be accessed through sending a request to that object's URL, this is called an `endpoint' or a `URI'.
-These endpoints are then connected to via different HTTP methods, of which the following are used:
+These endpoints are then connected to via different HTTP methods, such as the following:
 \begin{description}[align=left]
 	\item [GET] Retrieves an item or list of items.
 	\item [POST] Creates a new item.
 	\item [PUT] Updates an existing item or list of items.
-	\item [DELETE] Deletes an item.
+	\item [DELETE] Deletes an item. 
 \end{description}
 For example, if someone wanted to retrieve all users of a REST service, they could send a GET request to the `/users/' endpoint. 
 If, however, they wanted to retrieve a specific user, they would send a GET request to `/users/$x$/' where $x$ is the user's ID.
@@ -22,9 +22,12 @@ And finally, sending a POST request to `/users/$x$/quests/' would create a a new
 Collectively, these request methods and endpoints will form the basis for all communication with the server. 
 A full plan for the endpoints of the server artefact can be seen in appendix \ref{appendix:endpoints} and examples of requests in \ref{appendix:requests}.
 
-\subsubsection{JSON vs. XML}
-In order to communicate to the servers web services, a messaging format needed to be specified. 
-REST is capable of using both XML and JSON to communicate over the web and both are a reliable form of transferring data, but there are 
+\subsubsection{JSON}
+In order to facilitate communication between the server and devices, JSON has been chosen as the primary messaging format for this system.
+JSON is a format of transmitting data in a both human and machine readable way using key value pairs.
+When the server is required to return objects from the database, it will be able to serialize the python object into JSON text and return it in the request.
+The application will then be able to de-serialize the JSON back into a Java object, translating the JSON values back into object properties.
+Examples of possible requests can be seen in appendix \ref{appendix:requests}.
 
 \subsection{Flask}
 For the server-side implementation, I will need tools that allow me to easily create a web service API and provide controlled access to functionality over the web.
@@ -267,9 +270,12 @@ A comparison of the two types of rewards can be seen in figure \ref{fig:rewardco
 
 The gold and XP reward systems follow two separate paths.
 Where both the XP gained per quest and the XP required to level up both increase each level, the gold rewards remain at a continuous gain and do not involve player levels.
-Furthermore, with XP, I have preferred the system that rewards the player with more XP, whereas with gold rewards I have preferred the system that provides less.
+Furthermore, with XP, I have preferred the system that rewards the player with more XP, whereas with gold rewards the system that provided less was preferred.
 This is mainly due to the inclusion of a reward shop in the project, which exchanges some of the Child's gold storage for a real life reward set by the Parent. 
 Therefore, in order for this to work successfully, the amount of gold that a child earns must remain in check.
+
+\subsection{Evaluation}
+
 
 
 \section{Testing}
@@ -292,14 +298,13 @@ Because of this, it must be analysed whether or not the test cases achieve suffi
 Luckily, the python package `coverage.py' allows for simple analysis of unit tests to determine the current code coverage for tests, which will provide a higher rate of confidence.
 
 \subsection{Test-Driven Development}
-In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. From the server's point of view, there are only a handful of requests that a user can make, and only a handful of tests for those requests. Before writing each endpoint of the server, I 
+In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. From the server's point of view, there are only a handful of requests that a user can make, and only a handful of tests for those requests. Before writing each endpoint of the server, I developed a unit test using the Flask-Testing library that would test the various inputs to this end point.
+Usually, these unit tests consisted of python code to create and send a request to the testing server and then check the database to verify if the data was stored correctly.
 
 \subsection{Unit Testing} 
 As a part of Test-Driven Development, unit testing is a integral part of the development process.
 
-%Server
-
-For the server, I will an extension library of Flask called Flask-Testing, which streamlined the process of writing and running unit tests.
+I used an extension library of Flask called Flask-Testing, which streamlined the process of writing and running unit tests.
 Flask-Testing allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
 Then, as each separate test case is run, I used the library to delete the test database and regenerate it to ensure that previous unit tests would not interfere with new tests.
 
@@ -311,6 +316,8 @@ The test will pass if the server correctly rejects the request with a `401: Not 
 Integration testing encompasses tests that specifically test that the various parts of the project work together correctly.
 For example, in this project, integration tests would test that the server and mobile app are able to correctly function together, by ensuring that the app can correctly send requests and that the server receives those requests as they were sent.
 
+As the large majority of functionality took place in the server application, much of the integration testing that took place was to test that the mobile application was correctly requesting, sending and displaying data that it received from the server.
+
 
 \subsection{Black Box Testing}
 Black box testing describes the testing of software without using explicit knowledge of the code.
@@ -321,12 +328,14 @@ Essentially, it is testing by using that the usage of the application is correct
 
 \subsection{Regression Testing}
 Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
+
 This was made significantly easier by the implementation of strong automated unit tests, which allowed me to quickly retest the majority of the code by rerunning the test suite.
 I also followed a common development practice where a unit test is added for each defect that is found within the code, a new unit test was added to detect the presence of that bug specifically. 
 This allowed me to easily spot any recurrences of legacy bugs that would have otherwise gone unnoticed.
 
-\section{Problems Encountered}
-\subsection{Data Loss}
+\section{Further Evaluation}
+\subsection{Problems Encountered}
+\subsubsection{Data Loss}
 As predicted in the risk analysis in chapter 1, there was a small issue with data loss during the development of the application.
 During a reformat of my PCs hard drive, there was a small amount of code on the machine that had saved in a remote location.
 However, by following the plans set out in the risk analysis, this issue was greatly mitigated by the fact that I had regularly committed and pushed code to the git repo. 
