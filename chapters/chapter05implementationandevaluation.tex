@@ -49,6 +49,27 @@ I have opted to use SQLite to store the user data in the server.
 SQLite is a very lightweight RDBMS that is well supported by the Flask-SQLAlchemy library.
 The database tables will be automatically generated out of the classes created in Flask on the first run of an application, as well the relationships described in figure \ref{appendix:erd}. 
 
+\subsection{Evaluation}
+\subsubsection{Objectives}
+Of my objectives, there are two that are relevant to the server.
+
+1. Create a secure and robust public API to allow applications to connect to the the artefact's service.
+
+The server application successfully provides a public API that provides web services to connecting clients.
+The server provides the necessary information for clients securely, by requiring successful HTTP authentication to retrieve information about an user or any of it's quests/rewards.
+The server is resilient to crashes and automatically rejects bad requests before the invalid data can be stored in the database.
+
+2. Utilize test-driven development to provide automated testing, ensuring test coverage of over 80\% for the API
+
+Using the practice of test-driven development for the server API was a general success. 
+For some parts, the methodology was found to be rather strict and caused some delays on development time.
+However, once the practice had been used for a little while, it began to drastically improve development time, particularly in the case of debugging that arose during development.
+Furthermore, during testing phases, the tested code passed many of its functional tests on the first try, which is likely due to the fact that it is tested during the development process.
+Overall, it was found that each particular feature took slightly longer to develop, but took significantly less time during testing phases.
+These findings agree with the research in chapter 2, as \cite{IBMTDD} found similar results of reduced productivity, but it resulted in code with less defects.
+
+The final result for automated test coverage came in at 91\% code coverage for the server, exceeding the 80\% target, and analysis of the code shows all major server functions were covered by automated unit tests.
+
 \section{Application}
 \subsection{Android}
 Android has been chosen for this application due to the large success and market hold of the operating system.
@@ -61,7 +82,7 @@ The app will be responsible for relaying information between the parent and chil
 In Android, this can be achieved using push notifications relayed through the Google Cloud Messaging (GCM) service.
 GCM can be utilized to send messages to an Android device, but is largely unreliable \citep{gcmreliability} and therefore should only be used for notifications, rather than the transmission of data.
 The service requires that the server registers with the GCM to retrieve an API key and that the user device registers to retrieve a GCM registration ID \citep{gcm}. 
-When a user registers with the artefact server, the registration ID is stored wtihin the database to be used to send notifcations.
+When a user registers with the artefact server, the registration ID is stored wtihin the database to be used to send notifications.
 When a particular action is performed on an account in the API, the server will check if that user has an attached account - i.e. either a Parent monitoring a Child or vice versa.
 Then, the server sends the message and the target GCM registration ID to the GCM system which passes on the message.
 
@@ -300,6 +321,13 @@ Essentially, it is testing by using that the usage of the application is correct
 
 \subsection{Regression Testing}
 Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
-This is made significantly easier by the implementation of strong automated unit tests, which allow me to quickly retest the majority of the code by rerunning the test suite.
-I also intend to follow a common development practice where a unit test is added for each defect that is found within the code, a new unit test is added to detect the presence of that bug specifically. 
-This will allow me to easily spot any recurrences of legacy bugs that would otherwise go unnoticed.
+This was made significantly easier by the implementation of strong automated unit tests, which allowed me to quickly retest the majority of the code by rerunning the test suite.
+I also followed a common development practice where a unit test is added for each defect that is found within the code, a new unit test was added to detect the presence of that bug specifically. 
+This allowed me to easily spot any recurrences of legacy bugs that would have otherwise gone unnoticed.
+
+\section{Problems Encountered}
+\subsection{Data Loss}
+As predicted in the risk analysis in chapter 1, there was a small issue with data loss during the development of the application.
+During a reformat of my PCs hard drive, there was a small amount of code on the machine that had saved in a remote location.
+However, by following the plans set out in the risk analysis, this issue was greatly mitigated by the fact that I had regularly committed and pushed code to the git repo. 
+The lost code was not able to be recovered, but the loss was kept to an absolute minimum as the last commit had taken place a few hours before the reformat.
