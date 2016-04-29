@@ -65,8 +65,15 @@ This should ensure the Parent account belongs to an actual parent of that user, 
 After planning out the requirements, the next step in the design of the project was to plan out the database structure.
 I created an entity relationship diagram (ERD) to map out the various tables needed and the relationships between them.
 ERDs are a useful visual representation of tables, columns and relationships within a database.
-An ERD for the server application can be found in Appendix \ref{appendix:erd}.
+An ERD for the server application can be found in Appendix \ref{fig:erd}.
 The requirements for the database are relatively simple: it is comprised of 3 tables and 26 data fields and will store all the necessary data about a user's account and their tasks.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.45]{../images/entityRelationshipDiagram.png}
+	\caption{Server Entity Relationship Diagram}
+	\label{fig:erd}
+\end{figure}
 
 \subsubsection{Database Access}
 In this design, the central database is only accessible via the server API, rather than using a direct connection to any of the users' individual devices.

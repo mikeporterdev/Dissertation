@@ -42,6 +42,7 @@ This method is activated upon sending a GET request to the endpoint such as `ser
 \subsection{Database}
 \subsubsection{Object-Relational Mapper}
 I chose to use a pre-built Object Relational Mapping (ORM) library to interface with the database, rather than crafting particular queries on an ad hoc basis. 
+%Feel like I need another way to say this line
 This was primarily for more ease-of-use purposes than any performance reasons. 
 I decided upon using SQLAlchemy as the ORM for the server due to strong Flask support.
 Specifically, the Flask-SQLAlchemy library was utilized to provide Flask specific functions that could be used to interface with the database.
@@ -50,7 +51,7 @@ Implementing an ORM also allows me to more easily protect the application agains
 \subsubsection{SQLite}
 I have opted to use SQLite to store the user data in the server.
 SQLite is a very lightweight RDBMS that is well supported by the Flask-SQLAlchemy library.
-The database tables will be automatically generated out of the classes created in Flask on the first run of an application, as well the relationships described in figure \ref{appendix:erd}. 
+The database tables will be automatically generated out of the classes created in Flask on the first run of an application, as well the relationships described in figure \ref{fig:erd}. 
 
 \subsection{Evaluation}
 
@@ -95,7 +96,7 @@ When a particular action is performed on an account in the API, the server will 
 Then, the server sends the message and the target GCM registration ID to the GCM system which passes on the message.
 
 Within the application, a listener service has been implemented to be triggered upon the receipt of a GCM message that will create a push notification with the message sent by the server.
-Examples of the push notification messages can be seen in appendix \ref{appendix:pushnotifications}.
+Examples of the push notification and a list of possible messages can be seen in appendix \ref{appendix:pushnotifications}.
 
 \section{Game Design}
 \subsection{Rewards}
