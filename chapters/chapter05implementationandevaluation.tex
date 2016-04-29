@@ -53,6 +53,7 @@ SQLite is a very lightweight RDBMS that is well supported by the Flask-SQLAlchem
 The database tables will be automatically generated out of the classes created in Flask on the first run of an application, as well the relationships described in figure \ref{appendix:erd}. 
 
 \subsection{Evaluation}
+
 \subsubsection{Objectives}
 Of my objectives, there are two that are relevant to the server.
 
@@ -62,7 +63,11 @@ The server application successfully provides a public API that provides web serv
 The server provides the necessary information for clients securely, by requiring successful HTTP authentication to retrieve information about an user or any of it's quests/rewards.
 The server is resilient to crashes and automatically rejects bad requests before the invalid data can be stored in the database.
 
-2. Utilize test-driven development to provide automated testing, ensuring test coverage of over 80\% for the API
+2. Utilize appropriate technologies to securely create the two deliverables to a high quality
+
+
+
+3. Utilize test-driven development to provide automated testing, ensuring test coverage of over 80\% for the API
 
 Using the practice of test-driven development for the server API was a general success. 
 For some parts, the methodology was found to be rather strict and caused some delays on development time.
@@ -101,29 +106,21 @@ Therefore, some scaling of the rewards is required in the app to allow XP reward
 This scaling is referred to as `increasing cost' \citep{1_anderson_2016}.
 Anderson also shows that it is important to determine reasonable caps for numerical relationships in video-games, to stop the increasing cost becoming out of proportion.
 
-\cite{1_anderson_2016} poses that a useful pattern for these kinds of relationships is a classic triangular pattern, in which the first level requires 1 XP to level up, the second level requires 3 XP, the third requires 6. To allow for more meaningful numbers to the user, I have multiplied the results of the formula by 100.
+\cite{1_anderson_2016} poses that a useful pattern for these kinds of relationships is a classic triangular pattern, in which the first level requires 1 XP to level up, the second level requires 3 XP, the third requires 6. To allow for more meaningful numbers to the user, I have multiplied the results of the formula by 100. The formula for this is $T_n= \frac{n(n+1)}{2} \times 100$, where $T$ is the XP required to level up and $n$ is the current level.
 
-\begin{equation} \label{eq:xprequiredfornextlevel}
-	T_n= \frac{n(n+1)}{2} \times 100
-\end{equation}
+For XP rewards, the initial scaling formula involved using 60 XP as a base reward for a medium difficulty quest.
+Then using the player's current level, it would derive a multiplier that would be used to scale the XP reward, using the following formula: 
+$\textrm{XP Gained} = 60 \times \frac{(n - 1) \times k}{100} + 1$ where $n$ is the current character level and $k$ can be adjusted to determine the strength of the multiplier against the XP rewards.
+Under this formula, if $k$ = 10, a character at level 31 would have a 3x multiplier on quests, meaning the same quest that gave them 60XP at level 1, now gives them 180XP.
 
-Initially, the scaling formula for XP rewards involved using 60XP as a base reward for a medium difficulty quest, then using the player's current level, it would derive a multiplier that would be used to scale the XP reward.
-
-\begin{equation} \label{eq:xpgainedlinear}
-	\textrm{XP Gained} = 60 \times \frac{(n - 1) \times k}{100} + 1
-\end{equation}
-
-Where $k$ can be adjusted to specify the strength of the multiplier against the XP rewards, so that if $k$ = 10, a character at level 31 would have a 3x multiplier on quests, meaning the same quest that gave them 60XP at level 1, now gives them 180XP.
 However, when modelling this equation, the number of quests completed quickly becomes out of hand. 
 At level 1, the player must complete 2 medium quests to level up - a reasonable starting point.
 However by level 25 the player must complete 22 quests to level up and by level 99 (One before the level cap) the player must complete an extraordinary 84 medium difficulty quests to level up.
 
-Therefore, triangular numbers can also be useful for calculating the XP gained per quest. By adjusting the triangular numbers formula somewhat, I found a suitable middle ground which still gives the new user the feeling of progressing quickly, but the rate of quests per level quickly slows down to a limit of approximately 10 quests per level by level 100.
+Therefore, I also modelled triangular numbers for calculating the XP gained per quest. 
+I adjusted the initial triangular numbers formula to $\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10$ and found a suitable middle ground.
+This formula gives the new user the feeling of progressing quickly, but the rate of quests per level quickly slows down to a limit of approximately 10 quests per level by level 100.
 This will ensure that the player will still feel like they are progressing at a reasonable speed throughout.
-
-\begin{equation} \label{eq:xpgainedtriangular}
-	\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10
-\end{equation}
 
 The rate of quests required to level up using these two systems is mapped in figure \ref{fig:xprewardcomparison}.
 This figure was mapped out assuming all quests completed were of medium difficulty, whereas in real usage the speed will increase or decrease depending on the difficulty of quests.
@@ -163,7 +160,7 @@ Whereas the first system quickly spiralled out of control.
 			(18,8.2)
 			(19,8.3)
 		};
-		\addlegendentry{Equation \ref{eq:xpgainedtriangular}}
+		\addlegendentry{Adjusted Triangular Progression}
 		\addplot coordinates{
 			(1, 1.7)
 			(2, 2.5)
@@ -185,7 +182,7 @@ Whereas the first system quickly spiralled out of control.
 			(18, 15.9)
 			(19, 16.7)
 		};
-		\addlegendentry{Equation \ref{eq:xpgainedlinear}}
+		\addlegendentry{Linear Progression}
 	\end{axis}
 \end{tikzpicture}
 \caption{A comparison of two XP reward systems}
@@ -208,12 +205,8 @@ The end result is that if a Child allows a quest to begin expiring, it will effe
 This system encourages the user to maintain a streak of fulfilling tasks in a timely manner and discourages them from allowing a quest to expire as it will not just be that reward that is effected, but their rewards for the next three quests.
 It is intended that this will influence children to begin thinking about their tasks in a long-term manner.
 If the user has completed less than three quests, the effect is ignored as there is not enough data.
-The reward is calculated using the following equation:
-
-\begin{equation} \label{eq:closedloopreward}
-	y_k = ax_k + by_{k-1} + cy_{k-2} + dy_{k-3}
-\end{equation}
-
+The reward is calculated using the following equation: $y_k = ax_k + by_{k-1} + cy_{k-2} + dy_{k-3}$ where $k$ is the quest, $y$ is the reward for that quest and $a$-$d$ are adjustable coefficients that sum up to 1.
+ 
 A comparison of the two types of rewards can be seen in figure \ref{fig:rewardcomparison}.
 
 \begin{figure}[ht]
@@ -282,7 +275,7 @@ Therefore, in order for this to work successfully, the amount of gold that a chi
 Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
 Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
 As a main principle of REST is to plan out the specific endpoints that can be messaged, it becomes rather simple to plan out tests in the form of sending an example of a valid and invalid request of each request type to each endpoint.
-For example, the endpoint of `/api/users/<userId>/' allows two request types, GET and PUT, which generates four test cases.
+For example, the endpoint of `/api/users/$userId$/' allows two request types, GET and PUT, which generates four test cases.
 \begin{itemize}
 	\item{Valid GET}
 	\item{Invalid GET}
