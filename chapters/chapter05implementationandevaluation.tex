@@ -64,11 +64,7 @@ The server application successfully provides a public API that provides web serv
 The server provides the necessary information for clients securely, by requiring successful HTTP authentication to retrieve information about an user or any of it's quests/rewards.
 The server is resilient to crashes and automatically rejects bad requests before the invalid data can be stored in the database.
 
-2. Utilize appropriate technologies to securely create the two deliverables to a high quality
-
-
-
-3. Utilize test-driven development to provide automated testing, ensuring test coverage of over 80\% for the API
+2. Utilize test-driven development to provide automated testing, ensuring test coverage of over 80\% for the API
 
 Using the practice of test-driven development for the server API was a general success. 
 For some parts, the methodology was found to be rather strict and caused some delays on development time.
@@ -98,6 +94,13 @@ Then, the server sends the message and the target GCM registration ID to the GCM
 Within the application, a listener service has been implemented to be triggered upon the receipt of a GCM message that will create a push notification with the message sent by the server.
 Examples of the push notification and a list of possible messages can be seen in appendix \ref{appendix:pushnotifications}.
 
+\subsection{Evaluation}
+Incorrect assumptions were made in regards to the provided functionality of the GCM service. 
+Initially, plans for the application involved using the GCM to communicate between two devices in order to share the information needed for the Parent app.
+However, it was discovered that GCM was largely unreliable \citep{gcmreliability} and was prone to errors and failed messages.
+Therefore, it was decided that GCM was unsuitable for the use of communications between devices, as the risk of critical information being lost in transit was too high, and this functionality was moved to the server.
+However, GCM was still found to be suitable for the non-critical push notifications, as reliability is not strictly necessary in this case. 
+
 \section{Game Design}
 \subsection{Rewards}
 The rate at which these rewards are earned must be examined to ensure they still feel rewarding throughout. 
@@ -125,10 +128,6 @@ This will ensure that the player will still feel like they are progressing at a 
 
 The rate of quests required to level up using these two systems is mapped in figure \ref{fig:xprewardcomparison}.
 This figure was mapped out assuming all quests completed were of medium difficulty, whereas in real usage the speed will increase or decrease depending on the difficulty of quests.
-
-In my evaluation of the artefact, I found that the second system provided much more of a rewarding feel to the user. 
-The application still provided a very fast gain when the user first starts using the app, but quickly levels off to a reasonable amount.
-Whereas the first system quickly spiralled out of control.
 
 \begin{figure}
 \centering
@@ -198,11 +197,11 @@ Firstly, in order to discourage Child users from delaying performing a task, I i
 In this system, a quest is added with an expiry date value, which defaults to one week from the quest creation date.
 At around halfway through the time available to complete the task, the reward from the quest will begin to reduce at a steady rate for the remaining time.
 Eventually, if the task remains incomplete until the expiry date, the gold reward drops to zero, the quest expires and the quest is removed from their tasks.
-This is an example of an `open loop system', 
+This is an example of an `open loop system', where previous performance has no bearing on the current reward.
 
 Secondly, I extended this system to base the given reward for a quest off of the Child's time-based performance in their last three quests.
 This is referred to as a `closed loop system', where the reward amount is calculated based off of previous rewards.
-The end result is that if a Child allows a quest to begin expiring, it will effect the following three quests rather than just this one.
+The end result is that if a Child allows a quest to begin expiring, it will effect the following three quests rather than just the current one.
 This system encourages the user to maintain a streak of fulfilling tasks in a timely manner and discourages them from allowing a quest to expire as it will not just be that reward that is effected, but their rewards for the next three quests.
 It is intended that this will influence children to begin thinking about their tasks in a long-term manner.
 If the user has completed less than three quests, the effect is ignored as there is not enough data.
@@ -262,21 +261,22 @@ A comparison of the two types of rewards can be seen in figure \ref{fig:rewardco
 \label{fig:rewardcomparison}
 \end{figure}
 
+\subsection{Evaluation}
+In my evaluation of the artefact, I found that the triangular XP system provided much more of a rewarding feel to the user. 
+The application still provided a very fast gain when the user first starts using the app, but quickly levels off to a reasonable amount.
+Whereas the linear system quickly spiralled out of control, which I felt was counter-intuitive to the intended motivational effects and would ultimately dishearten users who would have otherwise enjoyed the app.
+
 The gold and XP reward systems follow two separate paths.
 Where both the XP gained per quest and the XP required to level up both increase each level, the gold rewards remain at a continuous gain and do not involve player levels.
 Furthermore, with XP, I have preferred the system that rewards the player with more XP, whereas with gold rewards the system that provided less was preferred.
 This is mainly due to the inclusion of a reward shop in the project, which exchanges some of the Child's gold storage for a real life reward set by the Parent. 
 Therefore, in order for this to work successfully, the amount of gold that a child earns must remain in check.
 
-\subsection{Evaluation}
-
-
-
 \section{Testing}
 Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
 Programs and scripts exist to ease the process somewhat, but I found the easiest way to be automating the requests entirely. 
-As a main principle of REST is to plan out the specific endpoints that can be messaged, it becomes rather simple to plan out tests in the form of sending an example of a valid and invalid request of each request type to each endpoint.
-For example, the endpoint of `/api/users/$userId$/' allows two request types, GET and PUT, which generates four test cases.
+As a main principle of REST is to plan out the specific endpoints that can be messaged, it becomes rather simple to deduce automated tests by sending examples of valid and invalid requests to endpoints and then verifying the stored data.
+For example, the endpoint of `/api/users/$userId$/' allows two request types, GET and PUT, which easily generates four test cases.
 \begin{itemize}
 	\item{Valid GET}
 	\item{Invalid GET}
@@ -291,15 +291,14 @@ This issue is highlighted by \cite{4597151}, who states that testing a program t
 Because of this, it must be analysed whether or not the test cases achieve sufficient code coverage, rather than just relying on the entry points into the software.
 Luckily, the python package `coverage.py' allows for simple analysis of unit tests to determine the current code coverage for tests, which will provide a higher rate of confidence.
 
-\subsection{Test-Driven Development}
-In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. From the server's point of view, there are only a handful of requests that a user can make, and only a handful of tests for those requests. Before writing each endpoint of the server, I developed a unit test using the Flask-Testing library that would test the various inputs to this end point.
+\subsection{Test-Driven Development and Unit Testing}
+In the creation of a REST API, it is much easier to develop a test plan due to the clearly laid out workflow of the user. 
+From the server's point of view, there are only a handful of requests that a user can make, and a small number of tests for those requests. 
+Before writing each endpoint of the server, I developed a unit test  that would test the various inputs to this endpoint.
 Usually, these unit tests consisted of python code to create and send a request to the testing server and then check the database to verify if the data was stored correctly.
 
-\subsection{Unit Testing} 
-As a part of Test-Driven Development, unit testing is a integral part of the development process.
-
 I used an extension library of Flask called Flask-Testing, which streamlined the process of writing and running unit tests.
-Flask-Testing allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
+The library allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
 Then, as each separate test case is run, I used the library to delete the test database and regenerate it to ensure that previous unit tests would not interfere with new tests.
 
 For example, the following code is a simple test that creates a child user on the server, then attempts to get the user details from the server without authorizing itself first. 
@@ -312,13 +311,16 @@ For example, in this project, integration tests would test that the server and m
 
 As the large majority of functionality took place in the server application, much of the integration testing that took place was to test that the mobile application was correctly requesting, sending and displaying data that it received from the server.
 
-
 \subsection{Black Box Testing}
 Black box testing describes the testing of software without using explicit knowledge of the code.
-Essentially, it is testing by using that the usage of the application is correct
+Essentially, it is testing by using that the usage of the application is correct.
+The android application was mostly tested using black box testing by listing out various actions that a user may perform on the app - whether valid or invalid actions - and testing that they are correctly accepted or rejected.
+
+Due to the nature of the server code being primarily machine to machine communication, I consider black box testing to be inappropriate for testing the server.
 
 \subsection{White Box Testing}
-
+White box testing is the testing of a system using the knowledge of how the code works and encompasses tests such as boundary testing and equivalence partitioning testing.
+This was mostly performed on the server side code due to the fact that the majority of the android code was GUI based and performed no actual functionality.
 
 \subsection{Regression Testing}
 Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
@@ -327,13 +329,19 @@ This was made significantly easier by the implementation of strong automated uni
 I also followed a common development practice where a unit test is added for each defect that is found within the code, a new unit test was added to detect the presence of that bug specifically. 
 This allowed me to easily spot any recurrences of legacy bugs that would have otherwise gone unnoticed.
 
-\section{Further Evaluation}
-\subsection{Problems Encountered}
+\section{Problems Encountered}
+\subsection{Server Rewrite}
+As previously mentioned, issues arose regarding my assumptions about the GCM service.
+Initially, it was planned to have most of the functionality within the phone application and have monitoring phones communicate with it.
+Due to this, initial prototypes of both server and applications were inappropriate for the development of the system and had to be reworked.
+This incurred large delays in the progress of the artefact as alternatives technologies were considered altogether.
+It was debated whether Flask was still suitable for the task, as I believed that all the extra code needed in the server might become too messy when written for Flask.
+
+There were also initial issues with implementing automated testing within Flask, as I had not understood the extra requirements needed to run an separate, debugable instance of Flask and as such struggled to implement unit tests that successfully tested the web services.
+However, with the discovery of both the Flask-Testing library and the GCM library it was found that the Flask code that had already been written would be able to reworked into a suitable API.
+
 \subsubsection{Data Loss}
 As predicted in the risk analysis in chapter 1, there was a small issue with data loss during the development of the application.
 During a regular reformat of my PC's hard drive, a small amount of code on the machine that had not been saved in a remote location was irretrievably deleted.
 However, by following the plans set out in the risk analysis, this issue was greatly mitigated by the fact that I had regularly committed and pushed code to the git repository. 
 The lost code was not able to be recovered, but the loss was kept to an absolute minimum as the last commit had taken place only a few hours before the reformat.
-
-\subsubsection{server Rewrite}
-During early design phases, 
