@@ -1,13 +1,13 @@
 %!TEX root = ../main.tex
 \chapter{Implementation and Evaluation}
 
-%Damien's words not mine
-For clarity, we present the implementation and evaluation together and split the presentation by the natural split in the code which is the server and application.
+For clarity, I present the implementation and evaluation together and split the presentation by the natural split in the code which is the server and application.
 
 \section{Server}
 \subsection{Representational State Transfer (REST)}
 To structure the server's web services, I have chosen to use a REST architecture style.
-REST involves dividing the web services into specific objects which can be accessed through sending a request to that object's URL, this is called an `endpoint' or a `URI'.
+REST involves dividing the web services into specific objects which can be accessed through sending a request to that object's URL. 
+This is called an `endpoint' or a `URI'.
 These endpoints are then connected to via different HTTP methods, such as the following:
 \begin{description}[align=left]
 	\item [GET] Retrieves an item or list of items.
@@ -25,8 +25,8 @@ A full plan for the endpoints of the server artefact can be seen in appendix \re
 \subsubsection{JSON}
 In order to facilitate communication between the server and devices, JSON has been chosen as the primary messaging format for this system.
 JSON is a format of transmitting data in a both human and machine readable way using key value pairs.
-When the server is required to return objects from the database, it will be able to serialize the python object into JSON text and return it in the request.
-The application will then be able to de-serialize the JSON back into a Java object, translating the JSON values back into object properties.
+When the server is required to return objects from the database, it will be able to serialise the python object into JSON text and return it in the request.
+The application will then be able to de-serialise the JSON back into a Java object, translating the JSON values back into object properties.
 Examples of possible requests can be seen in appendix \ref{appendix:requests}.
 
 \subsection{Flask}
@@ -34,9 +34,9 @@ For the server-side implementation, I will need tools that allow me to easily cr
 For this task, I chose to use Flask as it is well established within the Python community and is relatively easy to set up and maintain. 
 Flask is suitable for both quick prototyping of web-services and reliable deployment/hosting of the functionality over the internet.
 
-By utilizing Flask, I was able to easily translate a user's web request into a method call, with relevant parameters, using the following code:
+By utilising Flask, I was able to easily translate a user's web request into a method call, with relevant parameters, using the following code:
 \lstinputlisting[language=python]{codesnippets/getrewards.py}
-This short code snipped shows the method used to return all rewards in the reward shop for a user.
+This short code snippet shows the method used to return all rewards in the reward shop for a user.
 This method is activated upon sending a GET request to the endpoint such as `server\_host\_name:5000/api/user/1/rewards/', and will return the rewards for the first user in JSON format, provided the attached authentication details match that user. 
 
 \subsection{Database}
@@ -45,7 +45,7 @@ I chose to use a pre-built Object Relational Mapping (ORM) library to interface 
 %Feel like I need another way to say this line
 This was primarily for more ease-of-use purposes than any performance reasons. 
 I decided upon using SQLAlchemy as the ORM for the server due to strong Flask support.
-Specifically, the Flask-SQLAlchemy library was utilized to provide Flask specific functions that could be used to interface with the database.
+Specifically, the Flask-SQLAlchemy library was utilised to provide Flask specific functions that could be used to interface with the database.
 Implementing an ORM also allows me to more easily protect the application against SQL injection, as Flask purposefully escapes special characters that would allow such an attack \citep[p.15]{copeland2008essential}.
 
 \subsubsection{SQLite}
@@ -58,16 +58,16 @@ The database tables will be automatically generated out of the classes created i
 \subsubsection{Objectives}
 Of my objectives, there are two that are relevant to the server.
 
-1. Create a secure and robust public API to allow applications to connect to the the artefact's service.
+1. Create a secure and robust public API to allow applications to connect to the artefact's service.
 
 The server application successfully provides a public API that provides web services to connecting clients.
 The server provides the necessary information for clients securely, by requiring successful HTTP authentication to retrieve information about an user or any of it's quests/rewards.
 The server is resilient to crashes and automatically rejects bad requests before the invalid data can be stored in the database.
 
-2. Utilize test-driven development to provide automated testing, ensuring test coverage of over 80\% for the API
+2. Utilise test-driven development to provide automated testing, ensuring test coverage of over 80\% for the API
 
 Using the practice of test-driven development for the server API was a general success. 
-For some parts, the methodology was found to be rather strict and caused some delays on development time.
+For some parts, the methodology was found to be rather strict and caused some delays to development time.
 However, once the practice had been used for a little while, it began to drastically improve development time, particularly in the case of debugging that arose during development.
 Furthermore, during testing phases, the tested code passed many of its functional tests on the first try, which is likely due to the fact that it is regularly tested during the development process.
 Overall, it was found that most features took slightly longer to develop, but took significantly less time during testing phases.
@@ -85,7 +85,7 @@ Older versions than this will not be targeted, as development and testing time i
 \subsection{Google Cloud Messaging}
 The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
 In Android, this can be achieved using push notifications relayed through the Google Cloud Messaging (GCM) service.
-GCM can be utilized to send messages to an Android device, but is largely unreliable \citep{gcmreliability} and therefore should only be used for notifications, rather than the transmission of data.
+GCM can be utilised to send messages to an Android device, but is largely unreliable \citep{gcmreliability} and therefore should only be used for notifications, rather than the transmission of data.
 The service requires that the server registers with the GCM to retrieve an API key and that the user device registers to retrieve a GCM registration ID \citep{gcm}. 
 When a user registers with the artefact server, the registration ID is stored wtihin the database to be used to send notifications.
 When a particular action is performed on an account in the API, the server will check if that user has an attached account - i.e. either a Parent monitoring a Child or vice versa.
@@ -105,7 +105,7 @@ However, GCM was still found to be suitable for the non-critical push notificati
 \subsection{Rewards}
 The rate at which these rewards are earned must be examined to ensure they still feel rewarding throughout. 
 For example, if a quest returns 100 XP points and you require 300 XP to level up from level 1 to 2, this only requires you to complete three quests to level up, meaning these three quests feel rewarding as each quest is offering 1/3rd of a level.
-However, f quests still offer 100 XP and you require 6000 XP to level from 30 to 31, the reward from the same quest is now worth 1/60th of what it was before, despite being the same difficulty to the user.
+However, if quests still offer 100 XP and you require 6000 XP to level from 30 to 31, the reward from the same quest is now worth 1/60th of what it was before, despite being the same difficulty to the user.
 Therefore, some scaling of the rewards is required in the app to allow XP rewards to scale suitably with the XP required to level.
 This scaling is referred to as `increasing cost' \citep{1_anderson_2016}.
 Anderson also shows that it is important to determine reasonable caps for numerical relationships in video-games, to stop the increasing cost becoming out of proportion.
@@ -200,11 +200,11 @@ Eventually, if the task remains incomplete until the expiry date, the gold rewar
 This is an example of an `open loop system', where previous performance has no bearing on the current reward.
 
 Secondly, I extended this system to base the given reward for a quest off of the Child's time-based performance in their last three quests.
-This is referred to as a `closed loop system', where the reward amount is calculated based off of previous rewards.
+This is referred to as a `closed loop system', where the reward amount is calculated based off previous rewards.
 The end result is that if a Child allows a quest to begin expiring, it will effect the following three quests rather than just the current one.
 This system encourages the user to maintain a streak of fulfilling tasks in a timely manner and discourages them from allowing a quest to expire as it will not just be that reward that is effected, but their rewards for the next three quests.
 It is intended that this will influence children to begin thinking about their tasks in a long-term manner.
-If the user has completed less than three quests, the effect is ignored as there is not enough data.
+If the user has completed fewer than three quests, the effect is ignored as there is not enough data.
 The reward is calculated using the following equation: $y_k = ax_k + by_{k-1} + cy_{k-2} + dy_{k-3}$ where $k$ is the quest, $y$ is the reward for that quest and $a$-$d$ are adjustable coefficients that sum up to 1.
  
 A comparison of the two types of rewards can be seen in figure \ref{fig:rewardcomparison}.
@@ -262,15 +262,15 @@ A comparison of the two types of rewards can be seen in figure \ref{fig:rewardco
 \end{figure}
 
 \subsection{Evaluation}
-In my evaluation of the artefact, I found that the triangular XP system provided much more of a rewarding feel to the user. 
+In my evaluation of the artefact, I found that the triangular XP system provided a much more rewarding feel to the user. 
 The application still provided a very fast gain when the user first starts using the app, but quickly levels off to a reasonable amount.
-Whereas the linear system quickly spiralled out of control, which I felt was counter-intuitive to the intended motivational effects and would ultimately dishearten users who would have otherwise enjoyed the app.
+The linear system quickly spiralled, which I felt was counter-intuitive to the intended motivational effects and would ultimately dishearten users who would have otherwise enjoyed the app.
 
 The gold and XP reward systems follow two separate paths.
-Where both the XP gained per quest and the XP required to level up both increase each level, the gold rewards remain at a continuous gain and do not involve player levels.
-Furthermore, with XP, I have preferred the system that rewards the player with more XP, whereas with gold rewards the system that provided less was preferred.
+Where both the XP gained per quest and the XP required to level up increase each level, the gold rewards remain at a continuous gain and do not involve player levels.
+With XP, I preferred the system that rewards the player with more XP, whereas with gold rewards, the system that provided less was preferred.
 This is mainly due to the inclusion of a reward shop in the project, which exchanges some of the Child's gold storage for a real life reward set by the Parent. 
-Therefore, in order for this to work successfully, the amount of gold that a child earns must remain in check.
+Therefore, in order for this to work successfully, the amount of gold that a child earns must remain stable.
 
 \section{Testing}
 Unfortunately, when developing a REST API, it is difficult to manually write and send the request to the API to test it.
@@ -286,7 +286,7 @@ For example, the endpoint of `/api/users/$userId$/' allows two request types, GE
 %TODO: Research what test generation this is
 
 However, this raises issues when considering that a request could be invalid for multiple reasons, and simply testing for invalid/valid may not reach adequate code coverage.
-An example of this could be that a PUT request may be invalid due to an email address already existing within the database or because they have not included a valid did not include any new data about the user, which are two separate sections of the code that arguably each require their own tests.
+A PUT request, for example, could be invalid due to an email address already existing in the system, or no new data being entered about the user. Both of these reasons are in separate sections of the code that each require their own tests.
 This issue is highlighted by \cite{4597151}, who states that testing a program tells us `little about its quality', arguing that the quality of a test case far outweighs sheer quantity of tests.
 Because of this, it must be analysed whether or not the test cases achieve sufficient code coverage, rather than just relying on the entry points into the software.
 Luckily, the python package `coverage.py' allows for simple analysis of unit tests to determine the current code coverage for tests, which will provide a higher rate of confidence.
@@ -301,12 +301,12 @@ I used an extension library of Flask called Flask-Testing, which streamlined the
 The library allows you to create a new instance of your Flask application with a separate configuration file which can be changed to make the app connect to a different MySQL database file - in this case it connected to a freshly generated and empty test database.
 Then, as each separate test case is run, I used the library to delete the test database and regenerate it to ensure that previous unit tests would not interfere with new tests.
 
-For example, the following code is a simple test that creates a child user on the server, then attempts to get the user details from the server without authorizing itself first. 
-The test will pass if the server correctly rejects the request with a `401: Not Authorized' error or fail otherwise.
+For example, the following code is a simple test that creates a Child user on the server, then attempts to get the user details from the server without authorising itself first. 
+The test will pass if the server correctly rejects the request with a `401: Not Authorised' error or fail otherwise.
 \lstinputlisting[language=python]{codesnippets/serverunittest.py}
 
 \subsection{Integration Testing}
-Integration testing encompasses tests that specifically test that the various parts of the project work together correctly.
+Integration testing encompasses tests that ensure the various parts of the project work together correctly.
 For example, in this project, integration tests would test that the server and mobile app are able to correctly function together, by ensuring that the app can correctly send requests and that the server receives those requests as they were sent.
 
 As the large majority of functionality took place in the server application, much of the integration testing that took place was to test that the mobile application was correctly requesting, sending and displaying data that it received from the server.
@@ -316,7 +316,7 @@ Black box testing describes the testing of software without using explicit knowl
 Essentially, it is testing by using that the usage of the application is correct.
 The android application was mostly tested using black box testing by listing out various actions that a user may perform on the app - whether valid or invalid actions - and testing that they are correctly accepted or rejected.
 
-Due to the nature of the server code being primarily machine to machine communication, I consider black box testing to be inappropriate for testing the server.
+Due to the nature of the server code being primarily machine-to-machine communication, I consider black box testing to be inappropriate for testing the server.
 
 \subsection{White Box Testing}
 White box testing is the testing of a system using the knowledge of how the code works and encompasses tests such as boundary testing and equivalence partitioning testing.
@@ -326,7 +326,7 @@ This was mostly performed on the server side code due to the fact that the major
 Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
 
 This was made significantly easier by the implementation of strong automated unit tests, which allowed me to quickly retest the majority of the code by rerunning the test suite.
-I also followed a common development practice where a unit test is added for each defect that is found within the code, a new unit test was added to detect the presence of that bug specifically. 
+I also followed a common development practice where a unit test is added for each defect found within the code to detect the presence of that bug specifically. 
 This allowed me to easily spot any recurrences of legacy bugs that would have otherwise gone unnoticed.
 
 \section{Problems Encountered}
@@ -334,10 +334,10 @@ This allowed me to easily spot any recurrences of legacy bugs that would have ot
 As previously mentioned, issues arose regarding my assumptions about the GCM service.
 Initially, it was planned to have most of the functionality within the phone application and have monitoring phones communicate with it.
 Due to this, initial prototypes of both server and applications were inappropriate for the development of the system and had to be reworked.
-This incurred large delays in the progress of the artefact as alternatives technologies were considered altogether.
+This incurred large delays in the progress of the artefact as alternative technologies were considered altogether.
 It was debated whether Flask was still suitable for the task, as I believed that all the extra code needed in the server might become too messy when written for Flask.
 
-There were also initial issues with implementing automated testing within Flask, as I had not understood the extra requirements needed to run an separate, debugable instance of Flask and as such struggled to implement unit tests that successfully tested the web services.
+There were also initial issues with implementing automated testing within Flask, as I had not understood the extra requirements needed to run a separate, debugable instance of Flask and as such struggled to implement unit tests that successfully tested the web services.
 However, with the discovery of both the Flask-Testing library and the GCM library it was found that the Flask code that had already been written would be able to reworked into a suitable API.
 
 \subsubsection{Data Loss}

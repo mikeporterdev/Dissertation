@@ -16,7 +16,7 @@ In order to gain a better overview of the system, I mapped out how the individua
 In the initial stages of design, there were incorrect assumptions made about the project, which led to early diagrams being inaccurate and ultimately unworkable.
 Initial designs attempted to implement all workflows into the applications and communicate directly between two phones, storing all necessary data/information on the client end. 
 However, these designs presented many shortcomings. The main drawback was that communications between two mobile devices was unreliable, to the extent that it was not possible to ensure that data would remain synchronised between them.
-For example, if a Child user marked a quest as completed, their phone would send a notification to the Parent user.
+For example, if a Child marked a quest as completed, their phone would send a notification to the Parent.
 However, if this notification was not received by the Parent, the quest would fall into a limbo-like state where the Parent is waiting for it to be completed and the Child is waiting for it to be confirmed.
 
 In order to prevent this type of occurrence, the system calls for a centralised location. This will allow two users to reliably communicate with each other.
@@ -51,9 +51,9 @@ The application will greet the user with a login/register screen that will be us
 The login process will be bypassed if the user currently has a valid authentication token.
 
 The app will then communicate with the server to gather the relevant information needed for its current screen, being careful to only request what is necessary.
-Once the information has been received, the app will display that information in a well-laid out manner and provide relevant options to add or update the data on the server.
+Once the information has been received, the app will display that information in a well laid out manner and provide relevant options to add or update the data on the server.
 
-On the first login of the app, the Child user will be prompted to enter a name for their character. 
+On the first login of the app, the Child will be prompted to enter a name for their character. 
 They will then be instructed to pass the phone to the Parent who will create a PIN code.
 Performing certain functions of the app will require this PIN code to be entered, thus preventing the Child from circumventing the nature of the app by giving themselves unlimited rewards.
 Parents will be able to interact with the app solely through the Child's phone, but will also be able to set up an account on their own device which will provide the Parent functions remotely.
@@ -99,7 +99,7 @@ However, due to the complexities of generating unit tests for Android, I have ch
 One of the components of software quality is usability and usefulness of it's User Interface (UI) \citep{isosoftwarequality}. 
 As such, a focus must be put on making the screens of the application clearly usable.
 The screens should not only be easy to use but easy to learn and navigate between. The interface should present minimal obstruction in the use of the application. 
-The server application does not require an interface as its intended use is solely machine to machine communication.
+The server application does not require an interface as its intended use is solely machine-to-machine communication.
 
 \subsection{Screen Design}
 \cite{stone2005user} classifies a good user interface design as an `easy, natural and engaging interaction between a user and a system'.
@@ -110,11 +110,11 @@ The wireframes shown in appendix \ref{appendix:wireframes} give an overview of t
 
 \subsubsection{Your Quests Screen}
 This will be a simple screen that displays the quests and potential rewards in an easy to read list.
-The screen also offers a button used to mark a quest as complete, which will send this information to the Parent user for confirmation before rewards are offered.
+The screen also offers a button used to mark a quest as complete, which will send this information to the Parent for confirmation before rewards are offered.
 
 \subsubsection{Character Screen}
 This screen offers a quick overview of the user's character, gold, XP and the requirements needed to level up.
-This will be the first screen that a Child user sees after logging in.
+This will be the first screen that a Child sees after logging in.
 
 \subsubsection{Navigation Menu}
 A navigation menu is necessary for the user to be able to change between screens with ease.

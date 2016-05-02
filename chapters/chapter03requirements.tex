@@ -10,18 +10,18 @@ Typical examples of these could include `display customer' or `add order'.
 The overall quality of the software can be evaluated by the quality and effectiveness of these individual features.
 
 \subsection{Non-functional Requirements}
-Non-functional requirements are defined by \cite[p.6]{chung2012non} as ``Software requirements that describes not what the software will do, but how the software will do it''.
+Non-functional requirements are defined as ``Software requirements that describes not what the software will do, but how the software will do it'' \citep[p.6]{chung2012non}.
 This includes examples such as the software's performance requirements, usability, quality of services, reliability etc.
 These are generally more subjective aspects of the software requirements and are therefore harder to evaluate. 
 It is important, however, that they still be considered during development iterations.
 
-Software specifications are made up of both functional and non-functional requirements \cite[p.143]{chung2012non}. 
+Software specifications are made up of both functional and non-functional requirements \citep{chung2012non}. 
 
 \section{Gathering Requirements}
 \subsection{Actors}
 When determining use cases, the first step is to define the actors in the software.
 In UML, an actor is defined as a ``a type of role played by an entity that interacts with the subject (e.g., by exchanging signals and data), but which is external to the subject.'' \citep[p586-588]{omg2007unified}.
-Actors may represent a human users of the system or other external systems that will interact with the software being modelled.
+Actors may represent human users of the system or other external systems that will interact with the software being modelled.
 Different actors will have different objectives for using the application and it is important that the requirements of each actor are analysed to ensure the application is suitable. 
 In this project there are two key actors, the Child and the Parent. 
 The Child marks quests as complete and creates an character. In actual usage, this will usually be a dependent of the primary user. 
@@ -30,7 +30,7 @@ The Parent assigns, manages, and approves their child's quests. In actual usage,
 \subsection{Identifying Features}
 A useful first step in identifying the features of the software artefact is to use brainstorming to quickly list features that could be possible for the application, without regard to the suitability or feasibility of the ideas.
 Essentially, the goal of brainstorming is to achieve quantity over quality \citep[p.144]{leffingwell2000managing}.
-Once a wide breadth of ideas have been listed out on a brainstorm, it is recommended to begin an `idea reduction' stage, where ideas are briefly evaluated to rule out obviously infeasible ideas to obtain a solid list of features that can be more deeply evaluated at a later stage.
+Once a wide breadth of ideas has been listed out on a brainstorm, it is recommended to begin an `idea reduction' stage, where ideas are briefly evaluated to rule out obviously infeasible ideas to obtain a solid list of features that can be more deeply evaluated at a later stage.
 The process for brainstorming the application involved looking at the features of similar existing apps - such as task management apps or apps gamified for children - whilst keeping in mind the original objectives of this project.
 The results of this brainstorming process can be seen in figure \ref{fig:brainstorm}.
 
@@ -40,10 +40,11 @@ The results of this brainstorming process can be seen in figure \ref{fig:brainst
 	\caption{Brainstorm of Potential Features}
 	\label{fig:brainstorm}
 \end{figure} 
-% TODO: standardise capitalisation within the figure? Level/apps/collecting etc. 
+% TODO: standardise capitalisation within the figure? Level/apps/collecting etc.
+%Still has the name KidQuest in this too  
 
 \subsection{MoSCoW}
-Developing a software project is a complicated procedure with many potential roadblocks that can be faced.
+Developing a software project is a complicated procedure with many potential roadblocks to be faced.
 As identified in my risk analysis, there are several risks that can cause significant delays to the project, which in turn could be disastrous to the project due to its fixed deadline.
 Research by \cite{requirementsprioritization} has shown that only 16\% of all software projects are delivered on time and within budget, which has harrowing implications for the schedule of the project.
 
@@ -64,10 +65,10 @@ These should be the first features developed in the software and be thoroughly t
 	\hline
 	\textbf{No.} & \multicolumn{1}{C{3cm}}{\textbf{Feature}} & \multicolumn{1}{|C{8cm}|}{\textbf{Description}} \\ \hline
 	FR01 & Child Tasks App & A Child can login and see tasks to complete, and mark as completed accordingly \\ \hline
-	FR02 & Parent Control App & A Parent can login and view details about the Child user's account \\ \hline
+	FR02 & Parent Control App & A Parent can login and view details about the Child's account \\ \hline
 	FR03 & RPG Rewards & Child users will be rewarded with experience points and will level up after obtaining certain amounts \\ \hline
 	FR04 & Gold Rewards & Child users will be given a gold reward for completing tasks on time \\ \hline
-	FR05 & Reward shop & Parents will be able to set real life rewards for the Child user to purchase using earned gold \\ \hline
+	FR05 & Reward shop & Parents will be able to set real life rewards for the Child to purchase using earned gold \\ \hline
 	FR06 & REST API back-end & Implement a REST API server that the Parent and Child apps can use to communicate with each other, instead of phone to phone communication \\ \hline
 	NR01 & Reliability & App must not crash, and must handle errors gracefully \\ \hline
 	NR02 & Security & Server must not make user information accessible without correct authentication \\ \hline
@@ -82,8 +83,8 @@ These are features that are important to have, but are not integral to the app's
 \begin{longtable}{|C{1cm}|L{3cm}|L{8cm}|}
 	\hline
 	\textbf{No.} & \multicolumn{1}{C{3cm}}{\textbf{Feature}} & \multicolumn{1}{|C{8cm}|}{\textbf{Description}} \\ \hline
-	FR07 & Preset Quests & Allow Parents to choose from a list of preset tasks generated by the server, such as trending tasks \\ \hline
-	FR08 & Friends List & Allow Children to add each other as friends in the app. The adding of friends should be monitored and approved by Parent users \\ \hline
+	FR07 & Preset Quests & Allow Parent uers to choose from a list of preset tasks generated by the server, such as trending tasks \\ \hline
+	FR08 & Friends List & Allow Child users to add each other as friends in the app. The adding of friends should be monitored and approved by Parent users \\ \hline
 	FR09 & Notifications & Alert a user whenever their respective Parent/Child performs certain actions \\ \hline
 	NR03 & Portability & The server should be platform agnostic and serve content regardless of client device \\ \hline
 	NR04 & Usability & User must be able to easily navigate between various screens \\ \hline
@@ -94,16 +95,16 @@ These are features that are important to have, but are not integral to the app's
 
 \subsubsection{Could Have}
 This describes features that would be preferable to have in the project and could be looked at, if there is time to, at the end of the project.
-However, it is important to be wary of scope creep and recognize that any feature added will not only add development time, but testing and documentation time too.
+However, it is important to be wary of scope creep and recognise that any feature added will not only add development time, but testing and documentation time too.
 
 \begin{center}
 \fontsize{8}{10}\selectfont
 \begin{longtable}{|C{1cm}|L{3cm}|L{8cm}|}
 	\hline
 	\textbf{No.} & \multicolumn{1}{C{3cm}}{\textbf{Feature}} & \multicolumn{1}{|C{8cm}|}{\textbf{Description}} \\ \hline
-	FR10 & Friend Battles & Child users can select friends to `battle' with and compete with each \\ \hline
+	FR10 & Friend Battles & Child users can select friends to `battle' with and compete with \\ \hline
 	FR11 & Graph Friend Selection & Graph selection UI for inviting friends to undertake group quests \\ \hline
-	FR12 & Web application & Allow Parents/Children to use a web application to access their accounts \\ \hline
+	FR12 & Web application & Allow Parent/Child to use a web application to access their accounts \\ \hline
 \end{longtable}
 \end{center}
 
@@ -125,7 +126,7 @@ These could potentially be re-raised for a future update to the software.
 \subsection{Use Case Diagrams}
 In order to properly specify the requirements for a user in more detail, it is useful to plan out the various use cases a user may take in a use case diagram.  
 The purpose of a use case diagram is to show the actors the system, their goals, and how those goals work in relation to each other.
-Use case diagrams are also helpful to visualize an outside view of a system and gather requirements - although in this case I am using the diagram to refine the requirements that I have already mapped out.
+Use case diagrams are also helpful to visualise an outside view of a system and gather requirements - although in this case I am using the diagram to refine the requirements that I have already mapped out.
 
 \begin{figure}[ht]
 	\centering
