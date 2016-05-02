@@ -13,13 +13,13 @@ In order to gain a better overview of the system, I mapped out how the individua
 \end{figure} 
 
 \subsection{Server API}
-In the inital stages of design, there were incorrect assumptions made about the project, which led to early diagrams being inaccurate and ultimately unworkable.
+In the initial stages of design, there were incorrect assumptions made about the project, which led to early diagrams being inaccurate and ultimately unworkable.
 Initial designs attempted to implement all workflows into the applications and communicate directly between two phones, storing all necessary data/information on the client end. 
 However, these designs presented many shortcomings. The main drawback was that communications between two mobile devices was unreliable, to the extent that it was not possible to ensure that data would remain synchronised between them.
 For example, if a Child user marked a quest as completed, their phone would send a notification to the Parent user.
 However, if this notification was not received by the Parent, the quest would fall into a limbo-like state where the Parent is waiting for it to be completed and the Child is waiting for it to be confirmed.
 
-In order to prevent this type of occcurence, the system calls for a centralised location. This will allow two users to reliably communicate with each other.
+In order to prevent this type of occurrence, the system calls for a centralised location. This will allow two users to reliably communicate with each other.
 By implementing the functionality into a server-based application, the system becomes significantly more portable. 
 As all functionality of the system rests in a centralised location, any ported apps - such as iOS or a web app - would only have to tie into the existing Application Program Interface (API).
 This would make porting the application simple, as the only code that would need to be created for these apps would be to simply send and receive web service requests to the API and display the data that it receives.
@@ -65,7 +65,7 @@ This should ensure the Parent account belongs to an actual parent of that user, 
 After planning out the requirements, the next step in the design of the project was to plan out the database structure.
 I created an entity relationship diagram (ERD) to map out the various tables needed and the relationships between them.
 ERDs are a useful visual representation of tables, columns and relationships within a database.
-An ERD for the server application can be found in Appendix \ref{fig:erd}.
+An ERD for the server application can be found in figure \ref{fig:erd}.
 The requirements for the database are relatively simple: it is comprised of 3 tables and 26 data fields and will store all the necessary data about a user's account and their tasks.
 
 \begin{figure}[ht]

@@ -69,8 +69,8 @@ The server is resilient to crashes and automatically rejects bad requests before
 Using the practice of test-driven development for the server API was a general success. 
 For some parts, the methodology was found to be rather strict and caused some delays on development time.
 However, once the practice had been used for a little while, it began to drastically improve development time, particularly in the case of debugging that arose during development.
-Furthermore, during testing phases, the tested code passed many of its functional tests on the first try, which is likely due to the fact that it is tested during the development process.
-Overall, it was found that each particular feature took slightly longer to develop, but took significantly less time during testing phases.
+Furthermore, during testing phases, the tested code passed many of its functional tests on the first try, which is likely due to the fact that it is regularly tested during the development process.
+Overall, it was found that most features took slightly longer to develop, but took significantly less time during testing phases.
 These findings agree with the research in chapter 2, as \cite{IBMTDD} found similar results of reduced productivity, but it resulted in code with less defects.
 
 The final result for automated test coverage came in at 91\% code coverage for the server, exceeding the 80\% target, and analysis of the code shows all major server functions were covered by automated unit tests.
@@ -105,21 +105,21 @@ However, GCM was still found to be suitable for the non-critical push notificati
 \subsection{Rewards}
 The rate at which these rewards are earned must be examined to ensure they still feel rewarding throughout. 
 For example, if a quest returns 100 XP points and you require 300 XP to level up from level 1 to 2, this only requires you to complete three quests to level up, meaning these three quests feel rewarding as each quest is offering 1/3rd of a level.
-However, the XP if quests still offer 100 XP and you require 6000 XP to level up from level 30 to 31, the reward from the same quest is now worth 1/60th of a level, despite being the same difficulty to the user.
+However, f quests still offer 100 XP and you require 6000 XP to level from 30 to 31, the reward from the same quest is now worth 1/60th of what it was before, despite being the same difficulty to the user.
 Therefore, some scaling of the rewards is required in the app to allow XP rewards to scale suitably with the XP required to level.
 This scaling is referred to as `increasing cost' \citep{1_anderson_2016}.
 Anderson also shows that it is important to determine reasonable caps for numerical relationships in video-games, to stop the increasing cost becoming out of proportion.
 
-\cite{1_anderson_2016} poses that a useful pattern for these kinds of relationships is a classic triangular pattern, in which the first level requires 1 XP to level up, the second level requires 3 XP, the third requires 6. To allow for more meaningful numbers to the user, I have multiplied the results of the formula by 100. The formula for this is $T_n= \frac{n(n+1)}{2} \times 100$, where $T$ is the XP required to level up and $n$ is the current level.
+Anderson proposes that a useful pattern for these kinds of relationships is a classic triangular pattern, in which the first level requires 1 XP to level up, the second level requires 3 XP, the third requires 6 etc. To allow for more meaningful numbers to the user, I have multiplied the results of this formula by 100. The formula for this is $T_n= \frac{n(n+1)}{2} \times 100$, where $T$ is the XP required to level up and $n$ is the current level.
 
 For XP rewards, the initial scaling formula involved using 60 XP as a base reward for a medium difficulty quest.
 Then using the player's current level, it would derive a multiplier that would be used to scale the XP reward, using the following formula: 
 $\textrm{XP Gained} = 60 \times \frac{(n - 1) \times k}{100} + 1$ where $n$ is the current character level and $k$ can be adjusted to determine the strength of the multiplier against the XP rewards.
 Under this formula, if $k$ = 10, a character at level 31 would have a 3x multiplier on quests, meaning the same quest that gave them 60XP at level 1, now gives them 180XP.
 
-However, when modelling this equation, the number of quests completed quickly becomes out of hand. 
+However, when modelling this equation, the number of quests needed quickly becomes out of hand. 
 At level 1, the player must complete 2 medium quests to level up - a reasonable starting point.
-However by level 25 the player must complete 22 quests to level up and by level 99 (One before the level cap) the player must complete an extraordinary 84 medium difficulty quests to level up.
+However by level 25 the player must complete 22 quests to level up and by level 100 the player must complete an extraordinary 84 medium difficulty quests.
 
 Therefore, I also modelled triangular numbers for calculating the XP gained per quest. 
 I adjusted the initial triangular numbers formula to $\textrm{XP Gained} = \frac{(n+2)(n+3)}{2} \times 10$ and found a suitable middle ground.
@@ -194,7 +194,7 @@ A key goal of the project is achieving long term motivation for children, and to
 In order to achieve this goal, I implemented two key elements to the rewards earned from a quest.
 
 Firstly, in order to discourage Child users from delaying performing a task, I implemented a system that gradually diminishes the maximum achievable gold reward for a quest over time. 
-In this system, a quest is added with an expiry date value, which defaults to one week from the quest creation date.
+In this system, a quest is added with an expiry date value, which defaults to one week from the quest creation date, unless otherwise specified.
 At around halfway through the time available to complete the task, the reward from the quest will begin to reduce at a steady rate for the remaining time.
 Eventually, if the task remains incomplete until the expiry date, the gold reward drops to zero, the quest expires and the quest is removed from their tasks.
 This is an example of an `open loop system', where previous performance has no bearing on the current reward.
@@ -320,7 +320,7 @@ Due to the nature of the server code being primarily machine to machine communic
 
 \subsection{White Box Testing}
 White box testing is the testing of a system using the knowledge of how the code works and encompasses tests such as boundary testing and equivalence partitioning testing.
-This was mostly performed on the server side code due to the fact that the majority of the android code was GUI based and performed no actual functionality.
+This was mostly performed on the server side code due to the fact that the majority of the android code was GUI based and provided no actual functionality.
 
 \subsection{Regression Testing}
 Regression testing is the practice of retesting the previously tested parts of the software to ensure that they are still performing correctly after a change elsewhere in the code, it can also be used to describe the process of testing previously detected and fixed bugs to determine that they have not reappeared.
@@ -330,7 +330,7 @@ I also followed a common development practice where a unit test is added for eac
 This allowed me to easily spot any recurrences of legacy bugs that would have otherwise gone unnoticed.
 
 \section{Problems Encountered}
-\subsection{Server Rewrite}
+\subsubsection{Server Rewrite}
 As previously mentioned, issues arose regarding my assumptions about the GCM service.
 Initially, it was planned to have most of the functionality within the phone application and have monitoring phones communicate with it.
 Due to this, initial prototypes of both server and applications were inappropriate for the development of the system and had to be reworked.
