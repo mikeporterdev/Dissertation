@@ -1,0 +1,60 @@
+{
+  "character_level": 1,
+  "character_name": null,
+  "children": null,
+  "email": "parent@parent.com",
+  "gold": 0,
+  "id": 1,
+  "parent": {
+    "email": "test3@test.com",
+    "id": 2,
+    "quests": []
+  },
+  "parent_pin": null,
+  "quests": [
+    {
+      "completed": false,
+      "completed_date": null,
+      "confirmed": false,
+      "created_date": "2016-04-20 13:05:05",
+      "current_reward": 0,
+      "description": "potatoes\n",
+      "difficultyLevel": "VERY_EASY",
+      "expiryDate": "2016-04-27 13:04:47",
+      "gold_reward": 100,
+      "id": 1,
+      "title": "potatoes",
+      "xp_reward": 100
+    },
+    {
+      "completed": false,
+      "completed_date": null,
+      "confirmed": false,
+      "created_date": "2016-04-20 13:09:30",
+      "current_reward": 0,
+      "description": "potatoes",
+      "difficultyLevel": "VERY_EASY",
+      "expiryDate": "2016-04-27 13:04:47",
+      "gold_reward": 100,
+      "id": 2,
+      "title": "potatoes",
+      "xp_reward": 100
+    },
+    {
+      "completed": false,
+      "completed_date": null,
+      "confirmed": false,
+      "created_date": "2016-04-20 21:58:53",
+      "current_reward": 0,
+      "description": "test",
+      "difficultyLevel": "VERY_EASY",
+      "expiryDate": "2016-04-19 13:04:47",
+      "gold_reward": 100,
+      "id": 3,
+      "title": "test",
+      "xp_reward": 100
+    }
+  ],
+  "xp": 0,
+  "xp_required": 100
+}
