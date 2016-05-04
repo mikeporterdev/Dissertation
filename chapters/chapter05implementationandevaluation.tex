@@ -54,16 +54,12 @@ SQLite is a very lightweight RDBMS that is well supported by the Flask-SQLAlchem
 The database tables will be automatically generated out of the classes created in Flask on the first run of an application, as well the relationships described in figure \ref{fig:erd}. 
 
 \subsection{Evaluation}
-Of my objectives, there are two that are relevant to the server.
-
+Of my objectives, there are two that are relevant to the server:
 1. Create a secure and robust public API to allow applications to connect to the artefact's service.
-
 The server application successfully provides a public API that provides web services to connecting clients.
 The server provides the necessary information for clients securely, by requiring successful HTTP authentication to retrieve information about an user or any of it's quests/rewards.
-The server is resilient to crashes and automatically rejects bad requests before the invalid data can be stored in the database.
-
+The server is resilient to crashes and automatically rejects bad requests before the invalid data can be stored in the database, and
 2. Utilise test-driven development to provide automated testing, ensuring test coverage of over 80\% for the API
-
 Using the practice of test-driven development for the server API was a general success. 
 For some parts, the methodology was found to be rather strict and caused some delays to development time.
 However, once the practice had been used for a little while, it began to drastically improve development time, particularly in the case of debugging that arose during development.
@@ -76,9 +72,11 @@ The final result for automated test coverage came in at 91\% code coverage for t
 \section{Application}
 \subsection{Android}
 Android has been chosen for this application due to the large success and market hold of the operating system.
-Primarily I will be aiming to support Android versions down to API level 16 (Jelly Bean 4.1).
+Primarily I will be aiming to support Android versions down to API level 16 (Jelly Bean 4.1) \footnotemark[1].
 This decision has been made as appendix \ref{appendix:sdkmarketshare} shows that by supporting this far back, the application will be compatible with over 95\% of current phones. 
 Older versions than this will not be targeted, as development and testing time is limited and it would mean that many features would have to be limited due to lacking functionality within these older versions.
+
+\footnotetext[1]{Many features included in recent Android versions will not work in older versions. Android development allows you to specify a minimum Android version to prevent the use of features that will not work on older phones.}
 
 \subsection{Google Cloud Messaging}
 The app will be responsible for relaying information between the parent and child clients in a reliable and timely manner.
@@ -95,7 +93,7 @@ Examples of the push notification and a list of possible messages can be seen in
 \subsection{Evaluation}
 Incorrect assumptions were made in regards to the provided functionality of the GCM service. 
 Initially, plans for the application involved using the GCM to communicate between two devices in order to share the information needed for the Parent app.
-However, it was discovered that GCM was largely unreliable \citep{gcmreliability} and was prone to errors and failed messages.
+However, it was discovered that GCM was \emph{largely unreliable} \citep{gcmreliability} and was prone to errors and failed messages.
 Therefore, it was decided that GCM was unsuitable for the use of communications between devices, as the risk of critical information being lost in transit was too high, and this functionality was moved to the server.
 However, GCM was still found to be suitable for the non-critical push notifications, as reliability is not strictly necessary in this case. 
 

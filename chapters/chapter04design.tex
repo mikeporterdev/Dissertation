@@ -52,6 +52,7 @@ The login process will be bypassed if the user currently has a valid authenticat
 
 The app will then communicate with the server to gather the relevant information needed for its current screen, being careful to only request what is necessary.
 Once the information has been received, the app will display that information in a well laid out manner and provide relevant options to add or update the data on the server.
+The app should follow the android developer guidelines (See section \ref{devguidelines}) to provide a familiar layout.
 
 On the first login of the app, the Child will be prompted to enter a name for their character. 
 They will then be instructed to pass the phone to the Parent who will create a PIN code.
@@ -128,6 +129,7 @@ This is due to the fact that the Parent user is somewhat disconnected from the R
 I also believe that Parent users will find manually entering values of XP/gold tiresome and would find selecting a difficulty level easier. 
 
 \subsection{Android Developer Guidelines}
+\label{devguidelines}
 \cite{materialdesignguidelines} have laid down clear guidelines on how to use the UI elements they have provided in the Android Source Development Kit.
 By using these guidelines, the application will be more portable, as its UI will be more scalable to the various sizes of devices that are available.% UI is User Interface?
 Following these guidelines will also help make the application maintainable, as following standards is a useful way of ensuring that other developers will be able to better understand the design used in this artefact.
