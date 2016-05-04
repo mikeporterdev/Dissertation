@@ -1,45 +1,16 @@
 {
   "character_level": 1,
-  "character_name": null,
+  "character_name": "TestCharacter",
   "children": null,
-  "email": "parent@parent.com",
+  "email": "child@child.com",
   "gold": 0,
   "id": 1,
   "parent": {
-    "email": "test3@test.com",
-    "id": 2,
-    "quests": []
+    "email": "parent@parent.com",
+    "id": 2
   },
-  "parent_pin": null,
+  "parent_pin": 1234,
   "quests": [
-    {
-      "completed": false,
-      "completed_date": null,
-      "confirmed": false,
-      "created_date": "2016-04-20 13:05:05",
-      "current_reward": 0,
-      "description": "potatoes\n",
-      "difficultyLevel": "VERY_EASY",
-      "expiryDate": "2016-04-27 13:04:47",
-      "gold_reward": 100,
-      "id": 1,
-      "title": "potatoes",
-      "xp_reward": 100
-    },
-    {
-      "completed": false,
-      "completed_date": null,
-      "confirmed": false,
-      "created_date": "2016-04-20 13:09:30",
-      "current_reward": 0,
-      "description": "potatoes",
-      "difficultyLevel": "VERY_EASY",
-      "expiryDate": "2016-04-27 13:04:47",
-      "gold_reward": 100,
-      "id": 2,
-      "title": "potatoes",
-      "xp_reward": 100
-    },
     {
       "completed": false,
       "completed_date": null,
@@ -51,7 +22,7 @@
       "expiryDate": "2016-04-19 13:04:47",
       "gold_reward": 100,
       "id": 3,
-      "title": "test",
+      "title": "Clean your room",
       "xp_reward": 100
     }
   ],

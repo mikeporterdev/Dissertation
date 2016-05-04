@@ -1,2 +1,21 @@
+%!TEX root = ../main.tex
 \chapter{Example Requests}
 \label{appendix:requests}
+\section{Create new user}
+\texttt{POST http://kitari.ddns.net:5000/api/users/ No Authorization Required}
+
+Required JSON:
+\lstinputlisting[language=json,firstnumber=1]{codesnippets/examplepostuser.json}
+
+\section{Create new quest request}
+\texttt{POST http://kitari.ddns.net:5000/api/users/1/quests/ Requires Authorization}
+
+Required JSON:
+\lstinputlisting[language=json,firstnumber=1]{codesnippets/examplepostquest.json}
+
+
+\section{Get user details request}
+\texttt{GET http://kitari.ddns.net:5000/api/users/1/ Requires Authorization}
+
+Example Response:
+\lstinputlisting[language=json,firstnumber=1]{codesnippets/exampleuserresponse.json}
