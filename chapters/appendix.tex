@@ -1,9 +1,9 @@
 %!TEX root = ../main.tex
 \begin{appendices}
 \addtocontents{lof}{\protect\setcounter{tocdepth}{0}}
-
-\chapter{Sheldon Book Grading Structure}
-
+\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries\raggedright}{\chaptertitlename\ \thechapter}{1em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+\titleformat{\section}{\normalfont\Large\bfseries\raggedright}{\thesection}{1em}{}
 \input{appendices/wireframes}
 
 \input{appendices/notifications}
@@ -24,7 +24,12 @@
 
 \chapter{Screenshots}
 
+\input{appendices/testplan}
+
 \chapter{Project Proposal}
+\includepdf[pages={1-2},scale=0.8]{../appendices/ProjectProposal.pdf}
+
+\chapter{Proposed Gantt Chart}
 
 \chapter{Actual Gantt Chart}
 
