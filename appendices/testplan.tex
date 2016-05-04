@@ -41,7 +41,23 @@
 \end{tabularx} 
 
 \section{General App Tests}
+\begin{tabularx}{\linewidth}{p{1cm} X X X X}
+\textbf{No.} & \textbf{Description}                    & \textbf{Expected Outcome}                                  	& \textbf{Actual Outcome (If failed)} & \textbf{Test Data}                                          \\ \hline
+1            & Check navigation bar works               & Each item takes user to the correct screen                       &                                     & Click each element in the navigation bar                                  \\ \hline
+2            & Check first time set up                  & User is prompted to enter character name and parent PIN code     &                                     & Clear app data in Android settings and register new account               \\ \hline
+3            & Check parent restricted navigation items & Parent PIN code prompt appears                                   &                                     & Click `Add Quest', `Add Reward' and `Set Up Parent' in the navigation bar \\ \hline
+4            & Check gold display on character screen   & `Gold: 100gp' is displayed on character screen or similar value. &                                     & Complete and confirm an `Very Easy' level quest                           \\ \hline
+5            & Check XP display on character screen     & `XP: 100gp' is displayed on character screen or similar value.   &                                     & Complete and confirm an `Very Easy' level quest                           \\ \hline
+6            & Check levelling up                       & Character level is 2 and XP is 300/600                           &                                     & Create new account, complete and confirm an `Medium' level quest          \\ \hline
+\end{tabularx} 
 
 \section{Parent App Tests}
+\begin{tabularx}{\linewidth}{p{1cm} X X X X}
+\textbf{No.} & \textbf{Description}                    & \textbf{Expected Outcome}                                  	& \textbf{Actual Outcome (If failed)} & \textbf{Test Data}                                          \\ \hline
+1            & Check setting up parent & Parent user is logged in and can access the quests/rewards of the attached Child user                             &                                     & Log in as child, click `Set up user', enter parent pin and create Parent account \\ \hline
+2            & Check adding quest      & Quest is added to server, Parent is not prompted for PIN, Child user is notified                                  &                                     & Click `Add Quest' and input valid quest                                          \\ \hline
+3            & Check adding reward     & Reward is added to server, Parent is not prompted for PIN, Child user is notified                                 &                                     & Click `Add Reward' and input valid reward                                        \\ \hline
+4            & Check confirming quest  & Quest is confirmed on server, Child is given reward, Quest disappears from Pending Quests, Child user is notified &                                     & Navigate to `Pending Quests' and click `Confirm Quest'                           \\ \hline
+\end{tabularx} 
 
 \end{landscape}
