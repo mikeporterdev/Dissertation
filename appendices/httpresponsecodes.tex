@@ -1,11 +1,20 @@
 %!TEX root = ../main.tex
 \chapter{HTTP Response Codes}
-Response 200 Success
-Used on several
-Request is successful.
-Returns JSON.
 
-Error 401 Not Authorized
-Used on several
-Incorrect email or password, or not authorized to perform actions on that account.
+Upon receiving and processing a request, the server will return a response code to inform the user if the request was accepted or rejected.
+The codes are designed by \cite{rfc7231} to give the sending machine context on what happened to the request.
+For example, a user's phone can send a quest to the server and check for the response code.
+If the code is 201, the phone knows it can show a success message and tell the user the quest was saved.
+A brief explanation of the response codes used in the server are listed below.
 
+\begin{tabularx}{\linewidth}{|p{3cm}|X|}\hline
+\multicolumn{1}{|c|}{\textbf{Response Code}} & \multicolumn{1}{c|}{\textbf{Description}}                                                              \\ \hline
+200 Success                                  & Request has been accepted and is successful.                                                           \\ \hline
+201 Created                                  & Object has successfully been created in the server.                                                    \\ \hline
+400 Bad Request                              & Request contains errors or is attempting to access an object that does not exist.                      \\ \hline
+401 Not Authorized                           & Incorrect email or password, or not authorized to perform actions on that account.                     \\ \hline
+404 Not Found                                & URL does not exist on server.                                                                          \\ \hline
+405 Method Not Allowed                       & Request method (GET/POST/PUT etc.) is not supported on this endpoint.                                  \\ \hline
+409 Conflict                                 & Request could not be processed due to a conflict, e.g. Creating a user with email that already exists. \\ \hline
+500 Internal Server Error                    & An error has occured within the server that means the request could not be processed.                  \\ \hline
+\end{tabularx} 
